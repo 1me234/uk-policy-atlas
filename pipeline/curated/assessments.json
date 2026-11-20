@@ -1,0 +1,26 @@
+{
+ "source": {"name": "Institute for Government, Public Services Performance Tracker 2026 (cross-service analysis, Oct 2026; NHS report, Nov 2026)", "url": "https://www.instituteforgovernment.org.uk/publication/public-services-performance-tracker-2026"},
+ "note": "Ratings and facts summarised from the IfG reports; read the originals for method and caveats.",
+ "services": [
+  {"service": "General practice and community care", "domain": "nhs", "2010_24": "Worse", "2024_26": "Some progress", "outlook_2029": "About the same", "why": "Many more salaried GPs and better access and satisfaction, but GP partner numbers keep falling and children wait far longer for community care than in 2024."},
+  {"service": "Hospitals", "domain": "nhs", "2010_24": "Much worse", "2024_26": "Little progress", "outlook_2029": "Better", "why": "Elective care improving but on course to miss the 2029 target by a wide margin; A&E and diagnostics near 2024 levels; structural reorganisation is a drag."},
+  {"service": "Local government financial sustainability", "domain": "councils", "2010_24": "Much worse", "2024_26": "Some progress", "outlook_2029": "About the same", "why": "Funding formula redesigned towards deprived areas and SEND deficit pressure eased, but more councils rely on one-off fixes; funding per person still about 14% below 2010-11 in real terms by 2028-29."},
+  {"service": "Adult social care", "domain": "councils", "2010_24": "Worse", "2024_26": "Decisions made have exacerbated challenges", "outlook_2029": "Worse", "why": "Tighter overseas recruitment may store up workforce shortages; reforms unlikely to bite before 2029."},
+  {"service": "Children's social care", "domain": "councils", "2010_24": "Worse", "2024_26": "Good progress", "outlook_2029": "About the same", "why": "Clear reform vision, but changes are upstream and slow, and compete for council capacity."},
+  {"service": "Schools", "domain": "education", "2010_24": "About the same", "2024_26": "Some progress", "outlook_2029": "Better", "why": "Absence falling from record highs and teacher recruitment on track; SEND reform details unclear and unlikely to change much before 2030."},
+  {"service": "Police", "domain": "justice", "2010_24": "Worse", "2024_26": "Good progress", "outlook_2029": "Better", "why": "More neighbourhood officers and PCSOs; continued progress depends on further funding."},
+  {"service": "Criminal courts", "domain": "justice", "2010_24": "Much worse", "2024_26": "Little progress", "outlook_2029": "About the same", "why": "More activity and capacity, but not enough to meet demand; backlogs will take years to fall."},
+  {"service": "Prisons and probation", "domain": "justice", "2010_24": "Much worse", "2024_26": "Some progress", "outlook_2029": "About the same", "why": "Capacity freed up and some progress on violence and conditions, at risk from later policy changes."}
+ ],
+ "nhs_facts": [
+  "Elective waiting list fell by about 250,000 cases (3.3%) between June 2024 and August 2026; the March 2026 target was met but performance has since worsened.",
+  "IfG central estimate: 79% of elective cases waiting under 18 weeks by March 2029 against a 92% target.",
+  "Long A&E waits barely moved: 10.3% waited over 12 hours in the year before July 2024, 10.2% in the latest year.",
+  "Hospitals cut more than 12,000 non-clinical staff (-1.6%) since March 2025, partly to reach financial balance.",
+  "Salaried GPs up almost a third (32.9%, about 3,500 more) since June 2024, but GP partners down 945 (-5.9%).",
+  "27.0% of children wait more than a year for community care, up from 14.4% in mid-2024.",
+  "Only 29.5% of DHSC civil servants agreed senior leaders had a clear vision in 2025 (49.9% across the civil service).",
+  "Hospital clinical workforce grew faster (5.2%) than primary and community clinical workforce (4.0%), June 2024 to June 2026, despite the aim to shift care into the community.",
+  "NHS England is being abolished and integrated care boards reorganised, with 50% headcount cuts targeted in those organisations."
+ ]
+}
