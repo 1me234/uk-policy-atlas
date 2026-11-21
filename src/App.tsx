@@ -14,11 +14,15 @@ import Foreign from "./pages/Foreign";
 import History from "./pages/History";
 import Findings from "./pages/Findings";
 import Sources from "./pages/Sources";
+import Simulate from "./pages/Simulate";
+import Lab from "./pages/Lab";
 
 const NAV: [string, string, string, React.FC][] = [
   ["Explore", "overview", "Overview", Overview],
   ["Explore", "findings", "Findings & plan", Findings],
   ["Explore", "history", "Policy history", History],
+  ["Simulate", "simulate", "Policy simulator", Simulate],
+  ["Simulate", "lab", "Model lab", Lab],
   ["Money", "spending", "Spending & fiscal", Spending],
   ["Money", "contracts", "Contracts & suppliers", Contracts],
   ["Machinery", "departments", "Departments & civil service", Departments],
@@ -48,7 +52,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<string>(() => { try { return localStorage.getItem("theme") || ""; } catch { return ""; } });
   useEffect(() => { if (theme) document.documentElement.dataset.theme = theme; else delete document.documentElement.dataset.theme; try { localStorage.setItem("theme", theme); } catch {} }, [theme]);
-  const key = route.split("/")[0];
+  const key = route.split(/[/?]/)[0];
   const P = (NAV.find((n) => n[1] === key) ?? NAV[0])[3];
   let group = "";
   return <div className="app">

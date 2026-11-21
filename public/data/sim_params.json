@@ -1,0 +1,690 @@
+{
+ "source": {
+  "name": "HMRC, Direct effects of illustrative tax changes (2025-06)",
+  "url": "https://www.gov.uk/government/statistics/direct-effects-of-illustrative-tax-changes",
+  "file": "https://assets.publishing.service.gov.uk/media/68552862b46781eacfd71d71/June_2025_TRR_ODS__1_.ods",
+  "note": "Yield of each illustrative change in \u00a3 million (positive = more revenue for a rise). Later years in the simulator grow these in line with nominal GDP."
+ },
+ "years": [
+  "2026-27",
+  "2027-28",
+  "2028-29"
+ ],
+ "lines": [
+  {
+   "section": "Income Tax rates",
+   "label": "Change starting rate for savings income by 1p",
+   "m": [
+    0.0,
+    10.0,
+    5.0
+   ]
+  },
+  {
+   "section": "Income Tax rates",
+   "label": "Change basic rate by 1p",
+   "m": [
+    6900.0,
+    8250.0,
+    8200.0
+   ]
+  },
+  {
+   "section": "Income Tax rates",
+   "label": "Change higher rate by 1p",
+   "m": [
+    1600.0,
+    2150.0,
+    2100.0
+   ]
+  },
+  {
+   "section": "Income Tax rates",
+   "label": "Increase additional rate by 1p (yield)",
+   "m": [
+    145.0,
+    265.0,
+    230.0
+   ]
+  },
+  {
+   "section": "Income Tax rates",
+   "label": "Decrease additional rate by 1p (cost)",
+   "m": [
+    175.0,
+    335.0,
+    300.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances and reliefs",
+   "label": "Change personal allowance by \u00a3100",
+   "m": [
+    810.0,
+    1050.0,
+    1000.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances and reliefs",
+   "label": "Change personal allowance by 1%",
+   "m": [
+    1000.0,
+    1200.0,
+    1100.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances and reliefs",
+   "label": "Change personal allowance by 10%",
+   "m": [
+    10000.0,
+    11650.0,
+    11500.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances and reliefs",
+   "label": "Change Savings allowance by \u00a3100 for BR and \u00a350 for HR taxpayers",
+   "m": [
+    0.0,
+    30.0,
+    25.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances and reliefs",
+   "label": "Change dividend allowance by \u00a3100",
+   "m": [
+    0.0,
+    70.0,
+    65.0
+   ]
+  },
+  {
+   "section": "Income Tax limits",
+   "label": "Change starting rate limit for savings income by \u00a3100",
+   "m": [
+    0.0,
+    5.0,
+    5.0
+   ]
+  },
+  {
+   "section": "Income Tax limits",
+   "label": "Change basic rate limit by 1%",
+   "m": [
+    495.0,
+    665.0,
+    670.0
+   ]
+  },
+  {
+   "section": "Income Tax limits",
+   "label": "Increase basic rate limit by 10% (cost)",
+   "m": [
+    4600.0,
+    6250.0,
+    6000.0
+   ]
+  },
+  {
+   "section": "Income Tax limits",
+   "label": "Decrease basic rate limit by 10% (yield)",
+   "m": [
+    5400.0,
+    7200.0,
+    6950.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances, starting and basic rate limits",
+   "label": "Change all main allowances, starting and basic rate limits by 1%",
+   "m": [
+    1450.0,
+    1850.0,
+    1800.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances, starting and basic rate limits",
+   "label": "Increase all main allowances, starting and basic rate limits by 10% (cost)",
+   "m": [
+    14400.0,
+    17700.0,
+    17300.0
+   ]
+  },
+  {
+   "section": "Income Tax allowances, starting and basic rate limits",
+   "label": "Decrease all main allowances, starting and basic rate limits by 10% (yield)",
+   "m": [
+    16100.0,
+    19700.0,
+    19350.0
+   ]
+  },
+  {
+   "section": "National Insurance contributions rates",
+   "label": "Change Class 1 employee main rate by 1 percentage point",
+   "m": [
+    5350.0,
+    5300.0,
+    5400.0
+   ]
+  },
+  {
+   "section": "National Insurance contributions rates",
+   "label": "Change Class 1 employee additional rate by 1 percentage point",
+   "m": [
+    2000.0,
+    2000.0,
+    2050.0
+   ]
+  },
+  {
+   "section": "National Insurance contributions rates",
+   "label": "Change Class 1 employer rate by 1 percentage point",
+   "m": [
+    11150.0,
+    11250.0,
+    11550.0
+   ]
+  },
+  {
+   "section": "National Insurance contributions rates",
+   "label": "Change Class 4 main rate by 1 percentage point",
+   "m": [
+    440.0,
+    525.0,
+    445.0
+   ]
+  },
+  {
+   "section": "National Insurance contributions rates",
+   "label": "Change Class 4 additional rate by 1 percentage point",
+   "m": [
+    295.0,
+    355.0,
+    320.0
+   ]
+  },
+  {
+   "section": "National Insurance Contribution Limits",
+   "label": "Change employee entry threshold by \u00a32 per week",
+   "m": [
+    210.0,
+    230.0,
+    250.0
+   ]
+  },
+  {
+   "section": "National Insurance Contribution Limits",
+   "label": "Change employer threshold by \u00a32 per week",
+   "m": [
+    420.0,
+    430.0,
+    470.0
+   ]
+  },
+  {
+   "section": "National Insurance Contribution Limits",
+   "label": "Change lower profits limit by \u00a3104 per year",
+   "m": [
+    15.0,
+    15.0,
+    20.0
+   ]
+  },
+  {
+   "section": "National Insurance Contribution Limits",
+   "label": "Change upper profits limit by \u00a3520 per year",
+   "m": [
+    10.0,
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "section": "National Insurance Contribution Limits",
+   "label": "Change upper earnings limit by \u00a310 per week",
+   "m": [
+    220.0,
+    220.0,
+    200.0
+   ]
+  },
+  {
+   "section": "Child Benefit",
+   "label": "Increase first child rate by \u00a31 per week (cost)",
+   "m": [
+    335.0,
+    335.0,
+    330.0
+   ]
+  },
+  {
+   "section": "Child Benefit",
+   "label": "Decrease first child rate by \u00a31 per week (yield)",
+   "m": [
+    335.0,
+    355.0,
+    345.0
+   ]
+  },
+  {
+   "section": "Child Benefit",
+   "label": "Increase subsequent child rate by \u00a31 per week (cost)",
+   "m": [
+    230.0,
+    240.0,
+    245.0
+   ]
+  },
+  {
+   "section": "Child Benefit",
+   "label": "Decrease subsequent child rate by \u00a31 per week (yield)",
+   "m": [
+    230.0,
+    225.0,
+    220.0
+   ]
+  },
+  {
+   "section": "Corporation tax",
+   "label": "Increase Corporation tax by 1 percentage point",
+   "m": [
+    3600.0,
+    3900.0,
+    4000.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase Business Asset Disposal Relief rate by 1 percentage point",
+   "m": [
+    10.0,
+    135.0,
+    180.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase Business Asset Disposal Relief rate by 5 percentage points",
+   "m": [
+    40.0,
+    635.0,
+    840.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase lower Capital Gains Tax rate by 1 percentage point",
+   "m": [
+    -5.0,
+    10.0,
+    5.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase lower Capital Gains Tax rate by 5 percentage points",
+   "m": [
+    -40.0,
+    20.0,
+    -10.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase lower Capital Gains Tax rate by 10 percentage points",
+   "m": [
+    -130.0,
+    -55.0,
+    -135.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase higher Capital Gains Tax rate by 1 percentage point",
+   "m": [
+    -15.0,
+    80.0,
+    -30.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase higher Capital Gains Tax rate by 5 percentage points",
+   "m": [
+    -170.0,
+    -235.0,
+    -870.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase higher Capital Gains Tax rate by 10 percentage points",
+   "m": [
+    -540.0,
+    -2060.0,
+    -3565.0
+   ]
+  },
+  {
+   "section": "Capital Gains Tax",
+   "label": "Increase Annual Exempt Amount by \u00a3500 for individuals and \u00a3250 for trusts",
+   "m": [
+    0.0,
+    -35.0,
+    -30.0
+   ]
+  },
+  {
+   "section": "Inheritance tax",
+   "label": "Increase standard rate for estates left on death by 1 percentage point",
+   "m": [
+    105.0,
+    240.0,
+    290.0
+   ]
+  },
+  {
+   "section": "Inheritance tax",
+   "label": "Increase Nil Rate Band by \u00a35,000 (cost)",
+   "m": [
+    60.0,
+    140.0,
+    165.0
+   ]
+  },
+  {
+   "section": "Inheritance tax",
+   "label": "Increase Residence Nil Rate Band by \u00a35,000 (cost)",
+   "m": [
+    25.0,
+    55.0,
+    65.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Beer and cider duties",
+   "m": [
+    25.0,
+    30.0,
+    30.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Wine and other fermented product duties",
+   "m": [
+    40.0,
+    40.0,
+    40.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Spirits duties",
+   "m": [
+    40.0,
+    40.0,
+    45.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Tobacco Duties",
+   "m": [
+    5.0,
+    10.0,
+    15.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Petrol",
+   "m": [
+    100.0,
+    100.0,
+    100.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Diesel",
+   "m": [
+    140.0,
+    135.0,
+    130.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Rebated oil",
+   "m": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Climate change levy",
+   "m": [
+    15.0,
+    15.0,
+    15.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Carbon price support",
+   "m": [
+    5.0,
+    5.0,
+    0.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Aggregates levy",
+   "m": [
+    5.0,
+    5.0,
+    5.0
+   ]
+  },
+  {
+   "section": "1% change in various duties",
+   "label": "Landfill tax",
+   "m": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "section": "Vehicle excise duty",
+   "label": "Increase rates by \u00a31 for motorbikes and \u00a35 for all other vehicles",
+   "m": [
+    205.0,
+    210.0,
+    215.0
+   ]
+  },
+  {
+   "section": "Air passenger duty",
+   "label": "Increase reduced rate by \u00a31",
+   "m": [
+    115.0,
+    125.0,
+    130.0
+   ]
+  },
+  {
+   "section": "VAT",
+   "label": "Change reduced rate by 1 percentage point",
+   "m": [
+    490.0,
+    480.0,
+    480.0
+   ]
+  },
+  {
+   "section": "VAT",
+   "label": "Change standard rate by 1 percentage point",
+   "m": [
+    8800.0,
+    9200.0,
+    9550.0
+   ]
+  },
+  {
+   "section": "Insurance premium tax",
+   "label": "Change standard rate by 1 percentage point",
+   "m": [
+    630.0,
+    640.0,
+    660.0
+   ]
+  },
+  {
+   "section": "Insurance premium tax",
+   "label": "Change higher rate by 1 percentage point",
+   "m": [
+    20.0,
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Cut residential 2% marginal rate by 1 percentage point (Cost)",
+   "m": [
+    450.0,
+    460.0,
+    525.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Raise residential 2% marginal rate by 1 percentage point (Yield)",
+   "m": [
+    420.0,
+    425.0,
+    490.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Cut residential 5% marginal rate by 1 percentage point (Cost)",
+   "m": [
+    775.0,
+    795.0,
+    940.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Raise residential 5% marginal rate by 1 percentage point (Yield)",
+   "m": [
+    685.0,
+    680.0,
+    815.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Cut residential 10% marginal rate by 1 percentage point (Cost)",
+   "m": [
+    40.0,
+    25.0,
+    35.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Raise residential 10% marginal rate by 1 percentage point (Yield)",
+   "m": [
+    35.0,
+    15.0,
+    25.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Cut residential 12% marginal rate by 1 percentage point (Cost)",
+   "m": [
+    -10.0,
+    -40.0,
+    -35.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Raise residential 12% marginal rate by 1 percentage point (Yield)",
+   "m": [
+    -25.0,
+    -60.0,
+    -60.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Decrease Higher Rates of Duty on Additional Dwellings by 1 percentage point (Cost)",
+   "m": [
+    90.0,
+    5.0,
+    100.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Increase Higher Rates of Duty on Additional Dwellings by 1 percentage point (Yield)",
+   "m": [
+    -45.0,
+    -130.0,
+    -50.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Decrease NRSDLT by 1 percentage point (Cost)",
+   "m": [
+    10.0,
+    -5.0,
+    25.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Increase NRSDLT by 1 percentage point (Yield)",
+   "m": [
+    -10.0,
+    -25.0,
+    0.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Decrease non-residential 5% marginal rate by 1 percentage point (Cost)",
+   "m": [
+    305.0,
+    355.0,
+    410.0
+   ]
+  },
+  {
+   "section": "Stamp duty land tax",
+   "label": "Increase non-residential 5% marginal rate by 1 percentage point (Yield)",
+   "m": [
+    150.0,
+    185.0,
+    230.0
+   ]
+  }
+ ]
+}
