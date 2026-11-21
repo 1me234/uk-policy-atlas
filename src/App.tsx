@@ -16,6 +16,8 @@ import Findings from "./pages/Findings";
 import Sources from "./pages/Sources";
 import Simulate from "./pages/Simulate";
 import Lab from "./pages/Lab";
+import Laws from "./pages/Laws";
+import Draft from "./pages/Draft";
 
 const NAV: [string, string, string, React.FC][] = [
   ["Explore", "overview", "Overview", Overview],
@@ -23,6 +25,8 @@ const NAV: [string, string, string, React.FC][] = [
   ["Explore", "history", "Policy history", History],
   ["Simulate", "simulate", "Policy simulator", Simulate],
   ["Simulate", "lab", "Model lab", Lab],
+  ["Law", "laws", "Laws & legislation", Laws],
+  ["Law", "draft", "Drafting workspace", Draft],
   ["Money", "spending", "Spending & fiscal", Spending],
   ["Money", "contracts", "Contracts & suppliers", Contracts],
   ["Machinery", "departments", "Departments & civil service", Departments],
