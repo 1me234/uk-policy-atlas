@@ -1,0 +1,790 @@
+{
+"source": {
+"name": "MHCLG, Exceptional Financial Support for local authorities (yearly decisions, 2020-21 to 2026-27)",
+"url": "https://www.gov.uk/government/collections/exceptional-financial-support-for-local-authorities",
+"note": "Figure shown is the first amount stated for each year (capitalisation agreed or agreed in principle). Later revisions noted in the text. Councils use this permission to fund day-to-day costs from borrowing or asset sales."
+},
+"years": [
+"2020-21",
+"2021-22",
+"2022-23",
+"2023-24",
+"2024-25",
+"2025-26",
+"2026-27"
+],
+"councils": {
+"Croydon": {
+"name": "Croydon",
+"code": "E09000008",
+"years": {
+"2020-21": {
+"m": 70.0,
+"text": "\u00a370.0m"
+},
+"2021-22": {
+"m": 50.0,
+"text": "\u00a350.0m"
+},
+"2022-23": {
+"m": 25.0,
+"text": "\u00a325.0m (support agreed in-principle)"
+},
+"2023-24": {
+"m": 63.0,
+"text": "\u00a363.0m (support agreed in-principle) This was subsequently revised to: \u00a350.0m (support agreed in-principle for 2023-24) \u00a3126m for 2019-20 \u00a310m for 2020-21 \u00a314.4m for 2021-22 \u00a311.2m agreed in-principle for 2022-23"
+},
+"2024-25": {
+"m": 38.0,
+"text": "\u00a338.0m (support agreed in-principle) This was subsequently revised to: \u00a351.0m (support agreed in-principle for 2024-25) \u00a39.4m for 2019-20"
+},
+"2025-26": {
+"m": 136.0,
+"text": "\u00a3136.0m (support agreed in-principle) This was subsequently revised to \u00a3110.3m (support agreed in-principle) Note: For support agreed in-principle for 2023-24, this has been revised to \u00a350.0m (from \u00a363.0m), and for support agreed in-principle for 2024-25, this has been revised to \u00a351m (from \u00a338m)"
+},
+"2026-27": {
+"m": 119.0,
+"text": "\u00a3119.0m (support agreed in-principle) Note: For support agreed in-principle for 2025-26, this has been revised to \u00a3110.3m (from \u00a3136.0m)"
+}
+}
+},
+"Eastbourne": {
+"name": "Eastbourne",
+"code": "E07000061",
+"years": {
+"2020-21": {
+"m": 6.8,
+"text": "\u00a36.8m"
+},
+"2021-22": {
+"m": 4.4,
+"text": "\u00a34.4m"
+},
+"2024-25": {
+"m": 3.0,
+"text": "\u00a33.0m \u00a33.0m for 2023-24"
+},
+"2025-26": {
+"m": 2.0,
+"text": "\u00a32.0m (support agreed in-principle)"
+}
+}
+},
+"Lambeth": {
+"name": "Lambeth",
+"code": "E09000022",
+"years": {
+"2020-21": {
+"m": 125.0,
+"text": "\u00a3125m (original capitalisation of \u00a3100m in 2017-18 was extended by \u00a325m)"
+},
+"2023-24": {
+"m": 50.0,
+"text": "\u00a350.0m (covering 2023-24 to 2024-25)"
+},
+"2025-26": {
+"m": 40.0,
+"text": "\u00a340.0m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 20.0,
+"text": "\u00a320.0m (support agreed in-principle) \u00a346.0m (support agreed in-principle for 2025-26) \u00a350.0m (support agreed in-principle for 2024-25)"
+}
+}
+},
+"Luton": {
+"name": "Luton",
+"code": "E06000032",
+"years": {
+"2020-21": {
+"m": 35.0,
+"text": "\u00a335.0m"
+}
+}
+},
+"Nottingham": {
+"name": "Nottingham",
+"code": "E06000018",
+"years": {
+"2020-21": {
+"m": 20.0,
+"text": "\u00a320.0m"
+},
+"2024-25": {
+"m": 7.737,
+"text": "\u00a37.737m \u00a317.6m for 2023-24"
+},
+"2025-26": {
+"m": 25.0,
+"text": "\u00a325.0m (support agreed in-principle)"
+}
+}
+},
+"Redcar & Cleveland": {
+"name": "Redcar & Cleveland",
+"code": "E06000003",
+"years": {
+"2020-21": {
+"m": 3.7,
+"text": "\u00a33.7m (in the form of grant)"
+},
+"2026-27": {
+"m": 18.451,
+"text": "\u00a318.451m (support agreed in-principle)"
+}
+}
+},
+"Wirral": {
+"name": "Wirral",
+"code": "E08000015",
+"years": {
+"2020-21": {
+"m": 9.0,
+"text": "\u00a39.0m"
+},
+"2021-22": {
+"m": 6.4,
+"text": "\u00a36.4m"
+},
+"2025-26": {
+"m": 7.5,
+"text": "\u00a37.5m (support agreed in-principle) \u00a318.641m for 2024-25"
+},
+"2026-27": {
+"m": 6.0,
+"text": "\u00a36.0m (support agreed in-principle)"
+}
+}
+},
+"Copeland": {
+"name": "Copeland",
+"code": null,
+"years": {
+"2021-22": {
+"m": 1.5,
+"text": "\u00a31.5m"
+},
+"2022-23": {
+"m": 1.5,
+"text": "\u00a31.5m"
+}
+}
+},
+"Kensington and Chelsea": {
+"name": "Kensington and Chelsea",
+"code": "E09000020",
+"years": {
+"2022-23": {
+"m": 23.2,
+"text": "\u00a323.2m"
+},
+"2023-24": {
+"m": 51.8,
+"text": "\u00a351.8m"
+}
+}
+},
+"Slough": {
+"name": "Slough",
+"code": "E06000039",
+"years": {
+"2022-23": {
+"m": 56.614,
+"text": "\u00a356.614m \u00a3210.458m covering: 2018-19: \u00a378.015m 2019-20: \u00a347.536m 2020-21: \u00a324.941m 2021-22: \u00a359.966m"
+},
+"2023-24": {
+"m": 46.325,
+"text": "\u00a346.325m"
+},
+"2024-25": {
+"m": 23.078,
+"text": "\u00a323.078m"
+},
+"2025-26": {
+"m": 15.709,
+"text": "\u00a315.709m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 42.899,
+"text": "\u00a342.899m (support agreed in-principle)"
+}
+}
+},
+"Cumberland": {
+"name": "Cumberland",
+"code": "E06000063",
+"years": {
+"2023-24": {
+"m": 10.636,
+"text": "\u00a310.636m"
+},
+"2024-25": {
+"m": 22.582,
+"text": "\u00a322.582m"
+},
+"2025-26": {
+"m": 23.439,
+"text": "\u00a323.439m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 11.834,
+"text": "\u00a311.834m (support agreed in-principle)"
+}
+}
+},
+"Thurrock": {
+"name": "Thurrock",
+"code": "E06000034",
+"years": {
+"2023-24": {
+"m": 180.17,
+"text": "\u00a3180.17m (support agreed in-principle) \u00a3452.491m agreed in-principle for 2022-23 This was reprofiled to: \u00a340.0m agreed in-principle for 2022-23 (February 2024), then subsequently reprofiled to \u00a3130m agreed in-principle for 2022-23 (February 2025) \u00a3234.5m agreed in-principle for 2023-24 (February 202"
+},
+"2024-25": {
+"m": 68.6,
+"text": "\u00a368.6m (support agreed in-principle) This was subsequently revised to: \u00a373.02m (support agreed in-principle)"
+},
+"2025-26": {
+"m": 72.0,
+"text": "\u00a372.0m (support agreed in-principle) This was subsequently revised to \u00a362.11m (support agreed in-principle) Note: For support agreed in-principle for 2022-23, this has been revised to \u00a3130.0m (from \u00a340.0m agreed in February 2024), for 2023-24, this has been revised to \u00a3184.0m (from \u00a3234.5m agreed in"
+},
+"2026-27": {
+"m": 68.91,
+"text": "\u00a368.91m (support agreed in-principle) Note: For support agreed in-principle for 2024-25, this has been revised to \u00a373.02m (from \u00a396m), for 2025-26, this has been revised to \u00a362.11m (from \u00a372m)"
+}
+}
+},
+"Westmorland and Furness": {
+"name": "Westmorland and Furness",
+"code": "E06000064",
+"years": {
+"2023-24": {
+"m": 11.0,
+"text": "\u00a311.0m"
+}
+}
+},
+"West Northamptonshire": {
+"name": "West Northamptonshire",
+"code": "E06000062",
+"years": {
+"2023-24": {
+"m": 6.6,
+"text": "\u00a36.6m agreed in-principle for 2023-24, then subsequently reprofiled to \u00a36.52m for 2024-25"
+},
+"2024-25": {
+"m": 6.52,
+"text": "\u00a36.52m"
+}
+}
+},
+"Birmingham": {
+"name": "Birmingham",
+"code": "E08000025",
+"years": {
+"2024-25": {
+"m": 685.0,
+"text": "\u00a3685.0m (support agreed in-principle) This was subsequently revised to: \u00a3490.0m (support agreed in-principle for 2024-25) \u00a3570.1m agreed in-principle covering: 2020-21: \u00a3288.4m 2021-22: \u00a3109.5m 2022-23: \u00a3172.2m"
+},
+"2025-26": {
+"m": 180.0,
+"text": "\u00a3180.0m (support agreed in-principle) Note: For support agreed in-principle for 2024-25, this has been revised to \u00a3490.0m (from \u00a3685.0m)"
+}
+}
+},
+"Bradford": {
+"name": "Bradford",
+"code": "E08000032",
+"years": {
+"2024-25": {
+"m": 120.0,
+"text": "\u00a3120m \u00a380.0m for 2023-24"
+},
+"2025-26": {
+"m": 113.0,
+"text": "\u00a3113.0m"
+},
+"2026-27": {
+"m": 78.0,
+"text": "\u00a378.0m (support agreed in-principle)"
+}
+}
+},
+"Cheshire East": {
+"name": "Cheshire East",
+"code": "E06000049",
+"years": {
+"2024-25": {
+"m": 17.6,
+"text": "\u00a317.6m"
+},
+"2025-26": {
+"m": 25.3,
+"text": "\u00a325.3m (support agreed in-principle) Note: For support agreed in principle for 2024-25, this has been revised to \u00a317.6m (from \u00a36m)"
+},
+"2026-27": {
+"m": 35.0,
+"text": "\u00a335.0m (support agreed in-principle)"
+}
+}
+},
+"Havering": {
+"name": "Havering",
+"code": "E09000016",
+"years": {
+"2024-25": {
+"m": 30.4,
+"text": "\u00a330.4m \u00a318.14m for 2023-24"
+},
+"2025-26": {
+"m": 88.0,
+"text": "\u00a388.0m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 77.0,
+"text": "\u00a377.0m (support agreed in-principle)"
+}
+}
+},
+"Medway": {
+"name": "Medway",
+"code": "E06000035",
+"years": {
+"2024-25": {
+"m": 20.239,
+"text": "\u00a320.239m"
+},
+"2025-26": {
+"m": 18.484,
+"text": "\u00a318.484m (support agreed in-principle) This was subsequently revised to \u00a328.469m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 10.126,
+"text": "\u00a310.126m (support agreed in-principle) Note: For support agreed in-principle for 2025-26, this has been revised to \u00a328.469m (from \u00a318.484m)"
+}
+}
+},
+"Middlesbrough": {
+"name": "Middlesbrough",
+"code": "E06000002",
+"years": {
+"2024-25": {
+"m": 2.443,
+"text": "\u00a32.443m"
+}
+}
+},
+"Plymouth": {
+"name": "Plymouth",
+"code": "E06000026",
+"years": {
+"2024-25": {
+"m": 72.0,
+"text": "\u00a372.0m for 2025-26"
+}
+}
+},
+"Somerset": {
+"name": "Somerset",
+"code": "E06000066",
+"years": {
+"2024-25": {
+"m": 44.766,
+"text": "\u00a344.766m"
+},
+"2025-26": {
+"m": 63.0,
+"text": "\u00a363.0m (support agreed in-principle) This was subsequently revised to \u00a345.118m (support agreed in-principle) Note: Provisionally includes revised support agreed in 2024-25, subject to final confirmation"
+},
+"2026-27": {
+"m": 30.0,
+"text": "\u00a330m (support agreed in-principle) Note: For support agreed in-principle for 2025-26, this has been revised to \u00a345.118m (from \u00a363.0m)"
+}
+}
+},
+"Southampton": {
+"name": "Southampton",
+"code": "E06000045",
+"years": {
+"2024-25": {
+"m": 121.58,
+"text": "\u00a3121.58m (support agreed in-principle)"
+},
+"2025-26": {
+"m": 89.9,
+"text": "\u00a389.9m (support agreed in-principle) Note: Provisionally incudes revised support agreed in 2024-25, subject to final confirmation"
+}
+}
+},
+"Stoke-on-Trent": {
+"name": "Stoke-on-Trent",
+"code": "E06000021",
+"years": {
+"2024-25": {
+"m": 21.371,
+"text": "\u00a321.371m \u00a320.5m for 2023-24"
+},
+"2025-26": {
+"m": 16.8,
+"text": "\u00a316.8m"
+},
+"2026-27": {
+"m": 10.5,
+"text": "\u00a310.5m (support agreed in-principle)"
+}
+}
+},
+"Woking": {
+"name": "Woking",
+"code": "E07000217",
+"years": {
+"2024-25": {
+"m": 95.6,
+"text": "\u00a395.6m (support agreed in-principle) This was subsequently revised to: \u00a393.6m (support agreed in-principle for 2024-25) \u00a3235.1m agreed in-principle for 2023-24"
+},
+"2025-26": {
+"m": 74.6,
+"text": "\u00a374.6m (support agreed in-principle) Note: For support agreed in-principle for 2024-25, this has been revised to \u00a393.6m (from \u00a395.6m)"
+},
+"2026-27": {
+"m": 58.1,
+"text": "\u00a358.1m (support agreed in-principle)"
+}
+}
+},
+"Norfolk": {
+"name": "Norfolk",
+"code": "E10000020",
+"years": {
+"2024-25": {
+"m": 36.063,
+"text": "\u00a336.063m (support agreed in February 2026)"
+}
+}
+},
+"Barnet": {
+"name": "Barnet",
+"code": "E09000003",
+"years": {
+"2025-26": {
+"m": 55.7,
+"text": "\u00a355.7m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 79.6,
+"text": "\u00a379.6m (support agreed in-principle)"
+}
+}
+},
+"Enfield": {
+"name": "Enfield",
+"code": "E09000010",
+"years": {
+"2025-26": {
+"m": 10.0,
+"text": "\u00a310.0m \u00a320.0m for 2024-25"
+}
+}
+},
+"Halton": {
+"name": "Halton",
+"code": "E06000006",
+"years": {
+"2025-26": {
+"m": 32.0,
+"text": "\u00a332.0m (support agreed in-principle) \u00a310m for 2024-25"
+},
+"2026-27": {
+"m": 35.0,
+"text": "\u00a335.0m (support agreed in-principle)"
+}
+}
+},
+"Haringey": {
+"name": "Haringey",
+"code": "E09000014",
+"years": {
+"2025-26": {
+"m": 40.6,
+"text": "\u00a340.6m \u00a310m for 2024-25"
+},
+"2026-27": {
+"m": 84.0,
+"text": "\u00a384.0m (support agreed in-principle)"
+}
+}
+},
+"Newham": {
+"name": "Newham",
+"code": "E09000025",
+"years": {
+"2025-26": {
+"m": 51.2,
+"text": "\u00a351.2m (support agreed in-principle) \u00a315.969m for 2024-25"
+}
+}
+},
+"Shropshire": {
+"name": "Shropshire",
+"code": "E06000051",
+"years": {
+"2025-26": {
+"m": 26.9,
+"text": "\u00a326.9m for 2024-25"
+},
+"2026-27": {
+"m": 121.0,
+"text": "\u00a3121.0m (support agreed in-principle) \u00a371.4m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"Solihull": {
+"name": "Solihull",
+"code": "E08000029",
+"years": {
+"2025-26": {
+"m": 32.658,
+"text": "\u00a332.658m \u00a315.615m for 2024-25"
+}
+}
+},
+"Swindon": {
+"name": "Swindon",
+"code": "E06000030",
+"years": {
+"2025-26": {
+"m": 14.7,
+"text": "\u00a314.7m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 22.3,
+"text": "\u00a322.3m (support agreed in-principle)"
+}
+}
+},
+"Trafford": {
+"name": "Trafford",
+"code": "E08000009",
+"years": {
+"2025-26": {
+"m": 9.6,
+"text": "\u00a39.6m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 12.65,
+"text": "\u00a312.65m (support agreed in-principle)"
+}
+}
+},
+"West Berkshire": {
+"name": "West Berkshire",
+"code": "E06000037",
+"years": {
+"2025-26": {
+"m": 3.0,
+"text": "\u00a33.0m (support agreed in-principle) This was subsequently revised to \u00a320.0m (support agreed in-principle) \u00a313.0m for 2024-25"
+},
+"2026-27": {
+"m": 30.0,
+"text": "\u00a330.0m (support agreed in-principle) Note: For support agreed in-principle for 2025-26, this has been revised to \u00a320.0m (from \u00a33.0m)"
+}
+}
+},
+"Windsor & Maidenhead": {
+"name": "Windsor & Maidenhead",
+"code": "E06000040",
+"years": {
+"2025-26": {
+"m": 41.0,
+"text": "\u00a341.0m (support agreed in-principle) \u00a362.0m for 2024-25"
+},
+"2026-27": {
+"m": 48.754,
+"text": "\u00a348.754m (support agreed in-principle)"
+}
+}
+},
+"Worcestershire": {
+"name": "Worcestershire",
+"code": "E10000034",
+"years": {
+"2025-26": {
+"m": 33.6,
+"text": "\u00a333.6m"
+},
+"2026-27": {
+"m": 59.933,
+"text": "\u00a359.933m (support agreed in-principle)"
+}
+}
+},
+"Worthing": {
+"name": "Worthing",
+"code": "E07000229",
+"years": {
+"2025-26": {
+"m": 2.0,
+"text": "\u00a32.0m (support agreed in-principle) This was subsequently revised to \u00a34.75m (support agreed in-principle)"
+},
+"2026-27": {
+"m": 5.0,
+"text": "\u00a35.0m (support agreed in-principle) Note: For support agreed in-principle for 2025-26, this has been revised to \u00a34.75m (from \u00a32.0m)"
+}
+}
+},
+"South Yorkshire Mayoral Combined Authority": {
+"name": "South Yorkshire Mayoral Combined Authority",
+"code": null,
+"years": {
+"2025-26": {
+"m": 17.0,
+"text": "\u00a317.0m (support agreed for 2024-25)"
+},
+"2026-27": {
+"m": 6.6,
+"text": "\u00a36.6m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"Bedford": {
+"name": "Bedford",
+"code": "E06000055",
+"years": {
+"2026-27": {
+"m": 58.0,
+"text": "\u00a358.0m (support agreed in-principle) \u00a322.0m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"Brighton and Hove": {
+"name": "Brighton and Hove",
+"code": "E06000043",
+"years": {
+"2026-27": {
+"m": 15.0,
+"text": "\u00a315.0m (support agreed in-principle)"
+}
+}
+},
+"East Sussex": {
+"name": "East Sussex",
+"code": "E10000011",
+"years": {
+"2026-27": {
+"m": 70.0,
+"text": "\u00a370.0m (support agreed in-principle)"
+}
+}
+},
+"Gloucester": {
+"name": "Gloucester",
+"code": "E07000081",
+"years": {
+"2026-27": {
+"m": 9.05,
+"text": "\u00a39.05m (support agreed in-principle) \u00a32.56m (support agreed in-principle for 2025-26) \u00a33.89m (support agreed in-principle for 2024-25)"
+}
+}
+},
+"Hillingdon": {
+"name": "Hillingdon",
+"code": "E09000017",
+"years": {
+"2026-27": {
+"m": 62.0,
+"text": "\u00a362.0m (support agreed in-principle) \u00a388.0m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"Isle of Wight": {
+"name": "Isle of Wight",
+"code": "E06000046",
+"years": {
+"2026-27": {
+"m": 12.9,
+"text": "\u00a312.9m (support agreed in-principle)"
+}
+}
+},
+"Isles of Scilly": {
+"name": "Isles of Scilly",
+"code": "E06000053",
+"years": {
+"2026-27": {
+"m": 0.926,
+"text": "\u00a30.926m (support agreed in-principle) \u00a31.195m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"Peterborough": {
+"name": "Peterborough",
+"code": "E06000031",
+"years": {
+"2026-27": {
+"m": 5.68,
+"text": "\u00a35.68m (support agreed in-principle) \u00a34.039m for 2025-26"
+}
+}
+},
+"Redbridge": {
+"name": "Redbridge",
+"code": "E09000026",
+"years": {
+"2026-27": {
+"m": 70.0,
+"text": "\u00a370.0m (support agreed in-principle)"
+}
+}
+},
+"Sefton": {
+"name": "Sefton",
+"code": "E08000014",
+"years": {
+"2026-27": {
+"m": 12.0,
+"text": "\u00a312.0m (support agreed in-principle)"
+}
+}
+},
+"Waltham Forest": {
+"name": "Waltham Forest",
+"code": "E09000031",
+"years": {
+"2026-27": {
+"m": 19.0,
+"text": "\u00a319.0m (support agreed in-principle)"
+}
+}
+},
+"Warrington": {
+"name": "Warrington",
+"code": "E06000007",
+"years": {
+"2026-27": {
+"m": 92.047,
+"text": "\u00a392.047m (support agreed in-principle) \u00a387.029m (support agreed in-principle for 2025-26)"
+}
+}
+},
+"City of London": {
+"name": "City of London",
+"code": "E09000001",
+"years": {
+"2026-27": {
+"m": 2.65,
+"text": "\u00a32.65m (support agreed in-principle)"
+}
+}
+},
+"Kent Police and Crime Commissioner": {
+"name": "Kent Police and Crime Commissioner",
+"code": null,
+"years": {
+"2026-27": {
+"m": 29.0,
+"text": "\u00a329.0m for 2025-26"
+}
+}
+}
+}
+}

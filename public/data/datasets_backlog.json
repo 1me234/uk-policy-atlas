@@ -78,7 +78,7 @@
    "name": "Ofsted state-funded school inspection outcomes",
    "publisher": "Ofsted",
    "url": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes",
-   "status": "todo"
+   "status": "done"
   },
   {
    "domain": "welfare",
@@ -113,7 +113,8 @@
    "name": "Section 114 notices and exceptional financial support list",
    "publisher": "MHCLG / IfG",
    "url": "https://www.instituteforgovernment.org.uk/explainer/local-authority-section-114-notices",
-   "status": "todo"
+   "status": "partial",
+   "note": "Exceptional financial support decisions 2020-21 to 2026-27 ingested; no official central list of section 114 notices."
   },
   {
    "domain": "infrastructure",
@@ -127,7 +128,8 @@
    "name": "Rail: ORR station usage, performance and finance",
    "publisher": "ORR",
    "url": "https://dataportal.orr.gov.uk/",
-   "status": "todo"
+   "status": "partial",
+   "note": "Station usage 1997-2026 ingested; performance and finance still to do."
   },
   {
    "domain": "infrastructure",

@@ -5,13 +5,13 @@ import { Card, Loading, Page } from "../ui";
 type Note = { id: number; area: string; problem: string; evidence: string; idea: string; status: string };
 const RANK: Record<string, number> = { GREEN: 1, AMBER: 2, RED: 3 };
 export default function Findings() {
-  const d = useData("major_projects", "councils", "civil_service", "schools", "welfare", "charities", "infrastructure", "contracts", "assessments", "population", "send", "nhs_performance", "oda");
+  const d = useData("major_projects", "councils", "civil_service", "schools", "welfare", "charities", "infrastructure", "contracts", "assessments", "population", "send", "nhs_performance", "oda", "efs");
   const [notes, setNotes] = useState<Note[]>(() => { try { return JSON.parse(localStorage.getItem("atlas-notes") || "[]"); } catch { return []; } });
   const [draft, setDraft] = useState<Note>({ id: 0, area: "", problem: "", evidence: "", idea: "", status: "Investigating" });
   useEffect(() => { try { localStorage.setItem("atlas-notes", JSON.stringify(notes)); } catch {} }, [notes]);
   const f = useMemo(() => {
     if (!d) return null;
-    const [mp, c, cs, sc, w, ch, inf, ct, , , send, nhs, oda] = d as any[];
+    const [mp, c, cs, sc, w, ch, inf, ct, , , send, nhs, oda, efs] = d as any[];
     const out: { area: string; kind: "bad" | "good" | "gap"; text: string; link: string }[] = [];
     const P = mp.projects;
     const red = P.filter((p: any) => (p.dca_nista || p.dca_sro) === "RED");
@@ -37,6 +37,8 @@ export default function Findings() {
     out.push({ area: "NHS", kind: "good", link: "#/nhs", text: `Year-long waits fell from ${fmt.n(n0.over52)} to ${fmt.n(nl.over52)} between ${n0.month} and ${nl.month}, and the share seen within 18 weeks rose from ${fmt.pct(n0.within18_pct)} to ${fmt.pct(nl.within18_pct)}.` });
     const idrc = oda.by_sector.find((r: any) => r.label === "Refugees in Donor Countries"), L = oda.years.length - 1;
     out.push({ area: "Aid", kind: "bad", link: "#/foreign", text: `${fmt.gbp(idrc.values[L], "m")} of UK aid in ${oda.years[L]} (${fmt.pct((idrc.values[L] / oda.headline.total_m) * 100, 0)}) was spent in the UK on asylum accommodation and support, up from ${fmt.gbp(idrc.values[0], "m")} in ${oda.years[0]}, while aid for health, education and infrastructure abroad fell.` });
+    const E = Object.values(efs.councils) as any[]; const ey = (y: string) => E.reduce((t: number, e: any) => t + (e.years[y]?.m || 0), 0);
+    out.push({ area: "Councils", kind: "bad", link: "#/councils", text: `${E.length} councils have needed exceptional financial support (permission to pay day-to-day costs from borrowing or asset sales) since 2020-21. The amount agreed rose from ${fmt.gbp(ey("2022-23"), "m")} for 2022-23 to ${fmt.gbp(ey("2026-27"), "m")} for 2026-27.` });
     const tot = cs.organisations.find((o: any) => o.name === "Overall Civil Service");
     out.push({ area: "Civil service", kind: "gap", link: "#/departments", text: `${fmt.pct((tot.by_region.London / tot.headcount) * 100, 0)} of civil servants (${fmt.n(tot.by_region.London)}) are based in London, where pay and property costs are highest.` });
     const S = sc.schools.map((r: any[]) => Object.fromEntries(sc.fields.map((k: string, i: number) => [k, r[i]])));

@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useData } from "../lib";
 import { Card, Loading, Page, Table } from "../ui";
 
-const INGESTED = ["spending", "fiscal", "organisations", "civil_service", "major_projects", "councils", "population", "lookup", "geo_lad", "geo_icb", "geo_region", "schools", "welfare", "charities", "contracts", "infrastructure", "assessments", "nhs_performance", "oda", "send"];
+const INGESTED = ["spending", "fiscal", "organisations", "civil_service", "major_projects", "councils", "population", "lookup", "geo_lad", "geo_icb", "geo_region", "schools", "welfare", "charities", "contracts", "infrastructure", "assessments", "nhs_performance", "oda", "send", "welfare_la", "stations", "efs"];
 export default function Sources() {
   const d = useData(...INGESTED, "organisations_catalogue", "datasets_backlog");
   const [dom, setDom] = useState("");
   if (!d) return <Loading />;
   const files = d.slice(0, INGESTED.length) as any[];
   const cat = d[INGESTED.length] as any, back = d[INGESTED.length + 1] as any;
-  const srcs = files.flatMap((f: any, i: number) => [f.source, f.source_ks4].filter(Boolean).map((s: any) => ({ key: INGESTED[i], ...s })));
+  const srcs = files.flatMap((f: any, i: number) => [f.source, f.source_ks4, f.source_ofsted].filter(Boolean).map((s: any) => ({ key: INGESTED[i], ...s })));
   const doms = [...new Set(cat.organisations.flatMap((o: any) => o.domains))].sort() as string[];
   return <Page title="Sources & catalogue" lede="Everything in this atlas comes from the files below, rebuilt by the scripts in the repository's pipeline folder. The catalogue lists outside organisations that publish analysis on the same questions, and the backlog lists the official data still to wire in.">
     <Card title={`Ingested datasets (${srcs.length})`}>

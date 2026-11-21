@@ -4,7 +4,7 @@ import { COLORS, fmt, useData } from "../lib";
 import { Card, Loading, Page, Seg, Stat, Table } from "../ui";
 
 export default function Welfare() {
-  const d = useData("welfare");
+  const d = useData("welfare", "welfare_la", "population");
   const [view, setView] = useState<"real" | "gdp">("real");
   const [pick, setPick] = useState<string>("Universal Credit");
   const m = useMemo(() => {
@@ -25,6 +25,8 @@ export default function Welfare() {
     return { w, real: mk(real), gdp: mk(gdp, 100), firstF, lastOutYear: years[lastOut], rows, t1b, t1c, total: real.find((r: any) => r.label === "Total")?.values[lastOut] };
   }, [d]);
   if (!d || !m) return <Loading />;
+  const [, wla, pop] = d as any[];
+  const laRows = Object.entries(wla.la).map(([code, v]: any) => ({ code, ...v, pop: pop.areas[code]?.all ?? null })).filter((r: any) => r.pop);
   const sel = m.rows.find((r: any) => r.label.startsWith(pick)) || m.rows[0];
   const selSeries = m.t1b.years.map((y: string, i: number) => ({ y, spend: sel.series[i] != null ? sel.series[i] / 1000 : null, cases: sel.cs?.[i] ?? null })).filter((x: any) => x.y >= "1980/81");
   return <Page title="Social security" lede="Benefit spending in Great Britain from 1948 to the latest DWP forecast: who it goes to, which benefits are growing, and how many people claim each. Pensioners take the majority; working-age health and disability benefits are the fastest-growing part.">
@@ -57,5 +59,8 @@ export default function Welfare() {
         <ResponsiveContainer width="100%" height={320}><LineChart data={selSeries}><CartesianGrid vertical={false} /><XAxis dataKey="y" interval={6} /><YAxis yAxisId="a" /><YAxis yAxisId="b" orientation="right" /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} /><ReferenceArea yAxisId="a" x1={m.firstF} x2={selSeries.at(-1).y} fill="var(--soft)" /><Line yAxisId="a" dataKey="spend" name="£bn real" stroke="var(--c1)" dot={false} strokeWidth={2} /><Line yAxisId="b" dataKey="cases" name="Caseload (000s)" stroke="var(--c2)" dot={false} /></LineChart></ResponsiveContainer>
       </Card>
     </div>
+    <Card title="Where benefit money is spent" sub={`DWP benefit spending by council area, ${wla.year}, £ per resident (cash). Sort any column; the Councils map shows the same data geographically.`} style={{ marginTop: 14 }} source={wla.source}>
+      <Table rows={laRows} initial="t" max={400} cols={[{ k: "n", h: "Area", v: (r: any) => r.name }, { k: "t", h: "All benefits £/head", n: true, v: (r: any) => (r.Total * 1e6) / r.pop, f: (r: any) => fmt.n((r.Total * 1e6) / r.pop) }, { k: "uc", h: "Universal Credit £/head", n: true, v: (r: any) => (r["Universal Credit"] * 1e6) / r.pop, f: (r: any) => fmt.n((r["Universal Credit"] * 1e6) / r.pop) }, { k: "pip", h: "PIP £/head", n: true, v: (r: any) => (r["Personal Independence Payment"] * 1e6) / r.pop, f: (r: any) => fmt.n((r["Personal Independence Payment"] * 1e6) / r.pop) }, { k: "sp", h: "State Pension £/head", n: true, v: (r: any) => (r["State Pension"] * 1e6) / r.pop, f: (r: any) => fmt.n((r["State Pension"] * 1e6) / r.pop) }, { k: "g", h: "Growth since 2019-20", n: true, v: (r: any) => r.total_2019 ? (r.Total / r.total_2019 - 1) * 100 : null, f: (r: any) => r.total_2019 ? fmt.pct((r.Total / r.total_2019 - 1) * 100, 0) : "–" }]} />
+    </Card>
   </Page>;
 }
