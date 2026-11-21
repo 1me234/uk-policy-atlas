@@ -1,13 +1,13 @@
 import L from "leaflet";
 import { useEffect, useMemo, useRef } from "react";
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fmt, useData } from "../lib";
 import { esc, useLeaflet } from "../map";
 import { Card, Loading, Page, Pill, Stat, Table } from "../ui";
 
 const isNHS = (b: string) => /NHS|Integrated Care Board|Health|Hospital|Ambulance|Foundation Trust|Primary Care|Commissioning Support/i.test(b);
 export default function NHS() {
-  const d = useData("spending", "geo_icb", "infrastructure", "major_projects", "contracts", "assessments", "civil_service");
+  const d = useData("spending", "geo_icb", "infrastructure", "major_projects", "contracts", "assessments", "civil_service", "nhs_performance");
   const el = useRef<HTMLDivElement>(null);
   const map = useLeaflet(el, !!d);
   useEffect(() => {
@@ -33,10 +33,40 @@ export default function NHS() {
     return { health, sub, delRows, projects, buyers, awards, sup: Object.entries(sup).sort((a, b) => b[1] - a[1]), hospitals: infra.assets.filter((a: any) => a.type === "hospital").length };
   }, [d]);
   if (!d || !m) return <Loading />;
-  const [sp, icb, infra, mp, ct, as, cs] = d as any[];
+  const [sp, icb, infra, mp, ct, as, cs, perf] = d as any[];
+  const last = perf.rtt_monthly.at(-1);
   const dhsc = cs.organisations.find((o: any) => /Health and Social Care Overall/.test(o.name));
-  return <Page title="NHS" lede="Funding, structure, buildings, suppliers and performance of the health service in England. Operational NHS England and NHS Digital statistics (waiting lists, A&E, workforce, ICB allocations) are blocked from automated download, so headline performance below comes from the Institute for Government's 2026 tracker until those feeds are wired up.">
+  return <Page title="NHS" lede="Funding, structure, buildings, suppliers and performance of the health service in England. Waiting times come from NHS England's monthly statistical press notices; trust-level detail and workforce data are still to come because NHS England's data pages block automated download.">
     <div className="grid g4">
+      <Stat v={`${(last.waiting / 1e6).toFixed(1)}m`} l={`Waiting for planned hospital treatment, ${last.month}`} d={`About ${last.unique_patients_m}m individual patients`} />
+      <Stat v={fmt.pct(last.within18_pct)} l="Seen within 18 weeks" color="var(--red)" d="Constitutional standard is 92%, last met in 2016" />
+      <Stat v={fmt.n(last.over52)} l="Waiting more than a year" d={`Down from ${fmt.n(perf.rtt_monthly[0].over52)} in ${perf.rtt_monthly[0].month}`} />
+      <Stat v={fmt.pct(perf.cancer.d62_pct)} l={`Cancer treatment within 62 days, ${perf.cancer.month}`} color="var(--red)" d="Standard is 85%" />
+    </div>
+    <div className="grid g2" style={{ marginTop: 14 }}>
+      <Card title="Waiting within 18 weeks since 2007" sub="% of people on the waiting list waiting up to 18 weeks (March each year, then monthly), against the 92% standard" source={perf.source}>
+        <ResponsiveContainer width="100%" height={260}><LineChart data={perf.rtt_long}><CartesianGrid vertical={false} /><XAxis dataKey="month" minTickGap={30} /><YAxis domain={[50, 100]} unit="%" /><Tooltip /><ReferenceLine y={92} stroke="var(--red)" strokeDasharray="4 3" label={{ value: "92% standard", fontSize: 11, position: "insideTopRight" }} /><Line dataKey="within18_pct" name="% within 18 weeks" stroke="var(--c1)" strokeWidth={2} dot={false} /></LineChart></ResponsiveContainer>
+        <ResponsiveContainer width="100%" height={200}><LineChart data={perf.rtt_long}><CartesianGrid vertical={false} /><XAxis dataKey="month" minTickGap={30} /><YAxis unit="w" /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} /><Line dataKey="median_weeks" name="Median wait (weeks)" stroke="var(--c2)" dot={false} /><Line dataKey="p92_weeks" name="92nd percentile wait (weeks)" stroke="var(--c3)" dot={false} /></LineChart></ResponsiveContainer>
+      </Card>
+      <Card title="People waiting over a year" sub="RTT pathways waiting more than 52 weeks, end of month, including estimates for trusts that did not report" source={perf.source}>
+        <ResponsiveContainer width="100%" height={260}><BarChart data={perf.rtt_monthly}><CartesianGrid vertical={false} /><XAxis dataKey="month" tickFormatter={(v: string) => v.slice(0, 3) + " " + v.slice(-2)} /><YAxis tickFormatter={(v: number) => fmt.n(v)} /><Tooltip formatter={(v: any) => fmt.n(v)} /><Bar dataKey="over52" name="Over 52 weeks" fill="var(--c1)" /></BarChart></ResponsiveContainer>
+        <h3 style={{ marginTop: 10 }}>Against the other standards</h3>
+        <table><thead><tr><th>Measure</th><th className="n">Latest</th><th className="n">Standard</th></tr></thead><tbody>
+          <tr><td>Cancer: told diagnosis within 28 days ({perf.cancer.month})</td><td className="n">{fmt.pct(perf.cancer.fds_pct)}</td><td className="n">80%</td></tr>
+          <tr><td>Cancer: treated within 31 days of decision</td><td className="n">{fmt.pct(perf.cancer.d31_pct)}</td><td className="n">96%</td></tr>
+          <tr><td>Cancer: treated within 62 days of urgent referral</td><td className="n">{fmt.pct(perf.cancer.d62_pct)}</td><td className="n">85%</td></tr>
+          <tr><td>Diagnostic tests: waiting 6+ weeks ({perf.diagnostics.month}, {fmt.n(perf.diagnostics.over6w)} people)</td><td className="n">{fmt.pct(perf.diagnostics.over6w_pct)}</td><td className="n">under 1%</td></tr>
+          <tr><td>Ambulance category 1 (life-threatening) mean response ({perf.ambulance.month})</td><td className="n">{perf.ambulance.c1_mean}</td><td className="n">7:00</td></tr>
+          <tr><td>Ambulance category 2 (e.g. stroke, heart attack) mean response</td><td className="n">{perf.ambulance.c2_mean}</td><td className="n">18:00 (30:00 interim)</td></tr>
+          <tr><td>Ambulance category 3 mean response</td><td className="n">{perf.ambulance.c3_mean}</td><td className="n">–</td></tr>
+        </tbody></table>
+        <p className="muted" style={{ fontSize: 12 }}>Sources: <a href={perf.cancer.file} target="_blank">cancer</a> · <a href={perf.diagnostics.file} target="_blank">diagnostics</a> · <a href={perf.ambulance.file} target="_blank">ambulance</a></p>
+      </Card>
+    </div>
+    <Card title="Waiting lists by specialty" sub={`${last.month}, reporting trusts only. Click a column to sort.`} style={{ marginTop: 14 }} source={perf.source}>
+      <Table rows={perf.rtt_by_specialty.filter((r: any) => r.name !== "Total")} initial="w" cols={[{ k: "n", h: "Specialty", v: (r: any) => r.name }, { k: "w", h: "Waiting", n: true, v: (r: any) => r.waiting, f: (r: any) => fmt.n(r.waiting) }, { k: "p", h: "% within 18 weeks", n: true, v: (r: any) => r.within18_pct, f: (r: any) => fmt.pct(r.within18_pct) }, { k: "new", h: "New referrals in month", n: true, v: (r: any) => r.new, f: (r: any) => fmt.n(r.new) }, { k: "c", h: "Treated or closed in month", n: true, v: (r: any) => r.admitted + r.non_admitted, f: (r: any) => fmt.n(r.admitted + r.non_admitted) }, { k: "g", h: "Net change in month", n: true, v: (r: any) => r.new - r.admitted - r.non_admitted, f: (r: any) => { const g = r.new - r.admitted - r.non_admitted; return <span style={{ color: g > 0 ? "var(--red)" : "var(--green)" }}>{g > 0 ? "+" : ""}{fmt.n(g)}</span>; } }]} />
+    </Card>
+    <div className="grid g4" style={{ marginTop: 14 }}>
       <Stat v={fmt.gbp(m.delRows.find((r: any) => r.y === "2025-26")?.nominal, "m")} l="NHS England day-to-day budget, 2025-26 plans" d={`Rising to ${fmt.gbp(m.delRows.at(-1)?.nominal, "m")} by ${m.delRows.at(-1)?.y}`} />
       <Stat v={icb.features.length} l="Integrated care boards (April 2026 boundaries)" />
       <Stat v={m.projects.length} l="Health-related major projects" d={`${m.projects.filter((p: any) => (p.dca_nista || p.dca_sro) === "RED").length} rated red`} />

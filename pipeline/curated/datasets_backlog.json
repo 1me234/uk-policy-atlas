@@ -1,36 +1,224 @@
 {
  "note": "Official datasets identified but not yet ingested, in rough priority order. 'Blocked' means the publisher's bot protection refused automated download from the cloud; these can be fetched from a normal computer.",
  "datasets": [
-  {"domain": "nhs", "name": "Referral to treatment (RTT) waiting times, monthly by provider and ICB", "publisher": "NHS England", "url": "https://www.england.nhs.uk/statistics/statistical-work-areas/rtt-waiting-times/", "status": "blocked"},
-  {"domain": "nhs", "name": "A&E attendances and emergency admissions, monthly by trust", "publisher": "NHS England", "url": "https://www.england.nhs.uk/statistics/statistical-work-areas/ae-waiting-times-and-activity/", "status": "blocked"},
-  {"domain": "nhs", "name": "ICB allocations 2026-27 onwards", "publisher": "NHS England", "url": "https://www.england.nhs.uk/allocations/", "status": "blocked"},
-  {"domain": "nhs", "name": "NHS Workforce Statistics and vacancy statistics", "publisher": "NHS England (formerly NHS Digital)", "url": "https://digital.nhs.uk/data-and-information/publications/statistical/nhs-workforce-statistics", "status": "blocked"},
-  {"domain": "nhs", "name": "Trust annual accounts consolidation (TAC) data and estates returns (ERIC: backlog maintenance, equipment)", "publisher": "NHS England", "url": "https://digital.nhs.uk/data-and-information/publications/statistical/estates-returns-information-collection", "status": "blocked"},
-  {"domain": "nhs", "name": "Organisation Data Service: every trust, GP practice and site with location", "publisher": "NHS England", "url": "https://digital.nhs.uk/services/organisation-data-service", "status": "todo"},
-  {"domain": "nhs", "name": "Digital maturity assessment and EPR coverage by trust (software)", "publisher": "NHS England", "url": "https://www.england.nhs.uk/digitaltechnology/", "status": "blocked"},
-  {"domain": "education", "name": "School funding: National funding formula allocations and high-needs block", "publisher": "DfE", "url": "https://www.gov.uk/government/collections/national-funding-formula-tables-for-schools-and-high-needs", "status": "todo"},
-  {"domain": "education", "name": "School workforce in England (teacher numbers, vacancies, pay)", "publisher": "DfE (EES API)", "url": "https://explore-education-statistics.service.gov.uk/find-statistics/school-workforce-in-england", "status": "todo"},
-  {"domain": "education", "name": "Special educational needs in England; EHC plans", "publisher": "DfE (EES API)", "url": "https://explore-education-statistics.service.gov.uk/find-statistics/special-educational-needs-in-england", "status": "todo"},
-  {"domain": "education", "name": "Ofsted state-funded school inspection outcomes", "publisher": "Ofsted", "url": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes", "status": "todo"},
-  {"domain": "welfare", "name": "Stat-Xplore: claimants by benefit and local authority", "publisher": "DWP", "url": "https://stat-xplore.dwp.gov.uk/", "status": "needs free API key"},
-  {"domain": "welfare", "name": "Fraud and error in the benefit system", "publisher": "DWP", "url": "https://www.gov.uk/government/collections/fraud-and-error-in-the-benefit-system", "status": "todo"},
-  {"domain": "councils", "name": "Revenue outturn back series (2008-09 onward) for trends per council", "publisher": "MHCLG", "url": "https://www.gov.uk/government/collections/local-authority-revenue-expenditure-and-financing", "status": "todo"},
-  {"domain": "councils", "name": "Capital outturn and borrowing (COR, PWLB loans)", "publisher": "MHCLG / DMO", "url": "https://www.gov.uk/government/collections/local-authority-capital-expenditure-receipts-and-financing", "status": "todo"},
-  {"domain": "councils", "name": "Section 114 notices and exceptional financial support list", "publisher": "MHCLG / IfG", "url": "https://www.instituteforgovernment.org.uk/explainer/local-authority-section-114-notices", "status": "todo"},
-  {"domain": "infrastructure", "name": "UK Infrastructure Pipeline (NISTA)", "publisher": "NISTA", "url": "https://www.gov.uk/government/collections/national-infrastructure-and-construction-pipeline", "status": "todo"},
-  {"domain": "infrastructure", "name": "Rail: ORR station usage, performance and finance", "publisher": "ORR", "url": "https://dataportal.orr.gov.uk/", "status": "todo"},
-  {"domain": "infrastructure", "name": "Road condition, traffic counts and Strategic Road Network", "publisher": "DfT", "url": "https://roadtraffic.dft.gov.uk/", "status": "todo"},
-  {"domain": "infrastructure", "name": "Reservoirs register, flood defences (Asset Information Management System) and water company performance", "publisher": "Environment Agency / Ofwat", "url": "https://environment.data.gov.uk/", "status": "todo"},
-  {"domain": "infrastructure", "name": "OpenStreetMap: full road, rail, power line and pipeline geometry", "publisher": "OpenStreetMap (Overpass)", "url": "https://overpass-api.de/", "status": "todo"},
-  {"domain": "spending", "name": "OSCAR II: departmental spending at segment level", "publisher": "HM Treasury", "url": "https://www.gov.uk/government/collections/hmt-oscar-publishing-data-from-the-database", "status": "todo"},
-  {"domain": "spending", "name": "Departmental spend over £25,000 (monthly transparency returns)", "publisher": "Each department", "url": "https://www.data.gov.uk/search?q=spend+over+25000", "status": "todo"},
-  {"domain": "spending", "name": "Whole of Government Accounts", "publisher": "HM Treasury", "url": "https://www.gov.uk/government/collections/whole-of-government-accounts", "status": "todo"},
-  {"domain": "contracts", "name": "Find a Tender (Procurement Act notices, OCDS)", "publisher": "Cabinet Office", "url": "https://www.find-tender.service.gov.uk/", "status": "todo"},
-  {"domain": "civil-service", "name": "People Survey results by department; workforce management information", "publisher": "Cabinet Office", "url": "https://www.gov.uk/government/collections/civil-service-people-survey-hub", "status": "todo"},
-  {"domain": "civil-service", "name": "Public bodies directory (ALBs: budgets, staff, chairs)", "publisher": "Cabinet Office", "url": "https://www.gov.uk/government/collections/public-bodies", "status": "todo"},
-  {"domain": "foreign", "name": "Statistics on International Development (ODA by country and sector)", "publisher": "FCDO", "url": "https://www.gov.uk/government/collections/statistics-on-international-development", "status": "todo"},
-  {"domain": "foreign", "name": "IATI: UK aid activity register", "publisher": "IATI", "url": "https://d-portal.org/", "status": "todo"},
-  {"domain": "ngo", "name": "360Giving: government and foundation grants", "publisher": "360Giving", "url": "https://www.threesixtygiving.org/", "status": "todo"},
-  {"domain": "audit", "name": "NAO reports index (value-for-money findings by department)", "publisher": "NAO", "url": "https://www.nao.org.uk/reports/", "status": "todo"}
+  {
+   "domain": "nhs",
+   "name": "Referral to treatment (RTT) waiting times, monthly by provider and ICB",
+   "publisher": "NHS England",
+   "url": "https://www.england.nhs.uk/statistics/statistical-work-areas/rtt-waiting-times/",
+   "status": "partial",
+   "note": "National headline series and specialty table ingested from NHS England press notices; provider and ICB tables still blocked."
+  },
+  {
+   "domain": "nhs",
+   "name": "A&E attendances and emergency admissions, monthly by trust",
+   "publisher": "NHS England",
+   "url": "https://www.england.nhs.uk/statistics/statistical-work-areas/ae-waiting-times-and-activity/",
+   "status": "blocked"
+  },
+  {
+   "domain": "nhs",
+   "name": "ICB allocations 2026-27 onwards",
+   "publisher": "NHS England",
+   "url": "https://www.england.nhs.uk/allocations/",
+   "status": "blocked"
+  },
+  {
+   "domain": "nhs",
+   "name": "NHS Workforce Statistics and vacancy statistics",
+   "publisher": "NHS England (formerly NHS Digital)",
+   "url": "https://digital.nhs.uk/data-and-information/publications/statistical/nhs-workforce-statistics",
+   "status": "blocked"
+  },
+  {
+   "domain": "nhs",
+   "name": "Trust annual accounts consolidation (TAC) data and estates returns (ERIC: backlog maintenance, equipment)",
+   "publisher": "NHS England",
+   "url": "https://digital.nhs.uk/data-and-information/publications/statistical/estates-returns-information-collection",
+   "status": "blocked"
+  },
+  {
+   "domain": "nhs",
+   "name": "Organisation Data Service: every trust, GP practice and site with location",
+   "publisher": "NHS England",
+   "url": "https://digital.nhs.uk/services/organisation-data-service",
+   "status": "todo"
+  },
+  {
+   "domain": "nhs",
+   "name": "Digital maturity assessment and EPR coverage by trust (software)",
+   "publisher": "NHS England",
+   "url": "https://www.england.nhs.uk/digitaltechnology/",
+   "status": "blocked"
+  },
+  {
+   "domain": "education",
+   "name": "School funding: National funding formula allocations and high-needs block",
+   "publisher": "DfE",
+   "url": "https://www.gov.uk/government/collections/national-funding-formula-tables-for-schools-and-high-needs",
+   "status": "todo"
+  },
+  {
+   "domain": "education",
+   "name": "School workforce in England (teacher numbers, vacancies, pay)",
+   "publisher": "DfE (EES API)",
+   "url": "https://explore-education-statistics.service.gov.uk/find-statistics/school-workforce-in-england",
+   "status": "todo"
+  },
+  {
+   "domain": "education",
+   "name": "Special educational needs in England; EHC plans",
+   "publisher": "DfE (EES API)",
+   "url": "https://explore-education-statistics.service.gov.uk/find-statistics/special-educational-needs-in-england",
+   "status": "partial",
+   "note": "EHC plans by council and timeliness ingested; SEN support by school still to do."
+  },
+  {
+   "domain": "education",
+   "name": "Ofsted state-funded school inspection outcomes",
+   "publisher": "Ofsted",
+   "url": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes",
+   "status": "todo"
+  },
+  {
+   "domain": "welfare",
+   "name": "Stat-Xplore: claimants by benefit and local authority",
+   "publisher": "DWP",
+   "url": "https://stat-xplore.dwp.gov.uk/",
+   "status": "needs free API key"
+  },
+  {
+   "domain": "welfare",
+   "name": "Fraud and error in the benefit system",
+   "publisher": "DWP",
+   "url": "https://www.gov.uk/government/collections/fraud-and-error-in-the-benefit-system",
+   "status": "todo"
+  },
+  {
+   "domain": "councils",
+   "name": "Revenue outturn back series (2008-09 onward) for trends per council",
+   "publisher": "MHCLG",
+   "url": "https://www.gov.uk/government/collections/local-authority-revenue-expenditure-and-financing",
+   "status": "todo"
+  },
+  {
+   "domain": "councils",
+   "name": "Capital outturn and borrowing (COR, PWLB loans)",
+   "publisher": "MHCLG / DMO",
+   "url": "https://www.gov.uk/government/collections/local-authority-capital-expenditure-receipts-and-financing",
+   "status": "todo"
+  },
+  {
+   "domain": "councils",
+   "name": "Section 114 notices and exceptional financial support list",
+   "publisher": "MHCLG / IfG",
+   "url": "https://www.instituteforgovernment.org.uk/explainer/local-authority-section-114-notices",
+   "status": "todo"
+  },
+  {
+   "domain": "infrastructure",
+   "name": "UK Infrastructure Pipeline (NISTA)",
+   "publisher": "NISTA",
+   "url": "https://www.gov.uk/government/collections/national-infrastructure-and-construction-pipeline",
+   "status": "todo"
+  },
+  {
+   "domain": "infrastructure",
+   "name": "Rail: ORR station usage, performance and finance",
+   "publisher": "ORR",
+   "url": "https://dataportal.orr.gov.uk/",
+   "status": "todo"
+  },
+  {
+   "domain": "infrastructure",
+   "name": "Road condition, traffic counts and Strategic Road Network",
+   "publisher": "DfT",
+   "url": "https://roadtraffic.dft.gov.uk/",
+   "status": "todo"
+  },
+  {
+   "domain": "infrastructure",
+   "name": "Reservoirs register, flood defences (Asset Information Management System) and water company performance",
+   "publisher": "Environment Agency / Ofwat",
+   "url": "https://environment.data.gov.uk/",
+   "status": "todo"
+  },
+  {
+   "domain": "infrastructure",
+   "name": "OpenStreetMap: full road, rail, power line and pipeline geometry",
+   "publisher": "OpenStreetMap (Overpass)",
+   "url": "https://overpass-api.de/",
+   "status": "todo"
+  },
+  {
+   "domain": "spending",
+   "name": "OSCAR II: departmental spending at segment level",
+   "publisher": "HM Treasury",
+   "url": "https://www.gov.uk/government/collections/hmt-oscar-publishing-data-from-the-database",
+   "status": "todo"
+  },
+  {
+   "domain": "spending",
+   "name": "Departmental spend over \u00a325,000 (monthly transparency returns)",
+   "publisher": "Each department",
+   "url": "https://www.data.gov.uk/search?q=spend+over+25000",
+   "status": "todo"
+  },
+  {
+   "domain": "spending",
+   "name": "Whole of Government Accounts",
+   "publisher": "HM Treasury",
+   "url": "https://www.gov.uk/government/collections/whole-of-government-accounts",
+   "status": "todo"
+  },
+  {
+   "domain": "contracts",
+   "name": "Find a Tender (Procurement Act notices, OCDS)",
+   "publisher": "Cabinet Office",
+   "url": "https://www.find-tender.service.gov.uk/",
+   "status": "todo"
+  },
+  {
+   "domain": "civil-service",
+   "name": "People Survey results by department; workforce management information",
+   "publisher": "Cabinet Office",
+   "url": "https://www.gov.uk/government/collections/civil-service-people-survey-hub",
+   "status": "todo"
+  },
+  {
+   "domain": "civil-service",
+   "name": "Public bodies directory (ALBs: budgets, staff, chairs)",
+   "publisher": "Cabinet Office",
+   "url": "https://www.gov.uk/government/collections/public-bodies",
+   "status": "todo"
+  },
+  {
+   "domain": "foreign",
+   "name": "Statistics on International Development (ODA by country and sector)",
+   "publisher": "FCDO",
+   "url": "https://www.gov.uk/government/collections/statistics-on-international-development",
+   "status": "done"
+  },
+  {
+   "domain": "foreign",
+   "name": "IATI: UK aid activity register",
+   "publisher": "IATI",
+   "url": "https://d-portal.org/",
+   "status": "todo"
+  },
+  {
+   "domain": "ngo",
+   "name": "360Giving: government and foundation grants",
+   "publisher": "360Giving",
+   "url": "https://www.threesixtygiving.org/",
+   "status": "todo"
+  },
+  {
+   "domain": "audit",
+   "name": "NAO reports index (value-for-money findings by department)",
+   "publisher": "NAO",
+   "url": "https://www.nao.org.uk/reports/",
+   "status": "todo"
+  }
  ]
 }

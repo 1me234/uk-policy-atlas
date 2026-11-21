@@ -15,12 +15,12 @@ export const fmt = {
   gbp: (v: number | null | undefined, unit: "" | "k" | "m" | "bn" = "") => {
     if (v == null || isNaN(v)) return "–";
     const mult = { "": 1, k: 1e3, m: 1e6, bn: 1e9 }[unit];
-    const x = v * mult, a = Math.abs(x);
-    if (a >= 1e12) return `£${(x / 1e12).toFixed(2)}tn`;
-    if (a >= 1e9) return `£${(x / 1e9).toFixed(a >= 1e11 ? 0 : 1)}bn`;
-    if (a >= 1e6) return `£${(x / 1e6).toFixed(a >= 1e8 ? 0 : 1)}m`;
-    if (a >= 1e3) return `£${(x / 1e3).toFixed(0)}k`;
-    return `£${x.toFixed(0)}`;
+    const x = v * mult, a = Math.abs(x), sg = x < 0 ? "−" : "";
+    if (a >= 1e12) return `${sg}£${(a / 1e12).toFixed(2)}tn`;
+    if (a >= 1e9) return `${sg}£${(a / 1e9).toFixed(a >= 1e11 ? 0 : 1)}bn`;
+    if (a >= 1e6) return `${sg}£${(a / 1e6).toFixed(a >= 1e8 ? 0 : 1)}m`;
+    if (a >= 1e3) return `${sg}£${(a / 1e3).toFixed(0)}k`;
+    return `${sg}£${a.toFixed(0)}`;
   },
   pct: (v: number | null | undefined, dp = 1) => v == null || isNaN(v) ? "–" : `${v.toFixed(dp)}%`,
 };

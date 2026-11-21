@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useData } from "../lib";
 import { Card, Loading, Page, Table } from "../ui";
 
-const INGESTED = ["spending", "fiscal", "organisations", "civil_service", "major_projects", "councils", "population", "lookup", "geo_lad", "geo_icb", "geo_region", "schools", "welfare", "charities", "contracts", "infrastructure", "assessments"];
+const INGESTED = ["spending", "fiscal", "organisations", "civil_service", "major_projects", "councils", "population", "lookup", "geo_lad", "geo_icb", "geo_region", "schools", "welfare", "charities", "contracts", "infrastructure", "assessments", "nhs_performance", "oda", "send"];
 export default function Sources() {
   const d = useData(...INGESTED, "organisations_catalogue", "datasets_backlog");
   const [dom, setDom] = useState("");

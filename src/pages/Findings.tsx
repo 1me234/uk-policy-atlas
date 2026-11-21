@@ -5,13 +5,13 @@ import { Card, Loading, Page } from "../ui";
 type Note = { id: number; area: string; problem: string; evidence: string; idea: string; status: string };
 const RANK: Record<string, number> = { GREEN: 1, AMBER: 2, RED: 3 };
 export default function Findings() {
-  const d = useData("major_projects", "councils", "civil_service", "schools", "welfare", "charities", "infrastructure", "contracts", "assessments", "population");
+  const d = useData("major_projects", "councils", "civil_service", "schools", "welfare", "charities", "infrastructure", "contracts", "assessments", "population", "send", "nhs_performance", "oda");
   const [notes, setNotes] = useState<Note[]>(() => { try { return JSON.parse(localStorage.getItem("atlas-notes") || "[]"); } catch { return []; } });
   const [draft, setDraft] = useState<Note>({ id: 0, area: "", problem: "", evidence: "", idea: "", status: "Investigating" });
   useEffect(() => { try { localStorage.setItem("atlas-notes", JSON.stringify(notes)); } catch {} }, [notes]);
   const f = useMemo(() => {
     if (!d) return null;
-    const [mp, c, cs, sc, w, ch, inf, ct] = d as any[];
+    const [mp, c, cs, sc, w, ch, inf, ct, , , send, nhs, oda] = d as any[];
     const out: { area: string; kind: "bad" | "good" | "gap"; text: string; link: string }[] = [];
     const P = mp.projects;
     const red = P.filter((p: any) => (p.dca_nista || p.dca_sro) === "RED");
@@ -30,6 +30,13 @@ export default function Findings() {
     const resA = ["Estimated other earmarked financial reserves level at 1 April", "Estimated unallocated financial reserves level at 1 April"].map(ri), resB = ["Estimated other earmarked financial reserves level at 31 March", "Estimated unallocated financial reserves level at 31 March"].map(ri);
     const drew = LA.filter((a: any) => { const x = resA.reduce((s, i) => s + (a.values[i] || 0), 0), y = resB.reduce((s, i) => s + (a.values[i] || 0), 0); return x > 0 && y < x * 0.85; });
     out.push({ area: "Councils", kind: "bad", link: "#/councils", text: `${drew.length} councils ran down more than 15% of their usable reserves during 2025-26, a sign of budgets balanced with one-off money.` });
+    const sn = send.national, s0 = sn[0], s1 = sn.at(-1);
+    out.push({ area: "Special needs", kind: "bad", link: "#/councils", text: `EHC plans have doubled, from ${fmt.n(s0.total)} in ${s0.year} to ${fmt.n(s1.total)} in ${s1.year} (+${((s1.total / s0.total - 1) * 100).toFixed(0)}%). Places in independent special schools rose ${((s1.special_independent / s0.special_independent - 1) * 100).toFixed(0)}%, and only ${fmt.pct(send.national_within20_pct.at(-1), 0)} of new plans were issued within the 20-week legal limit in ${send.timeliness_years.at(-1)}. Paying for these plans is what the high-needs (DSG) deficits above are made of.` });
+    const nl = nhs.rtt_monthly.at(-1), n0 = nhs.rtt_monthly[0];
+    out.push({ area: "NHS", kind: "bad", link: "#/nhs", text: `${(nl.waiting / 1e6).toFixed(1)}m waits for planned hospital treatment (${nl.month}); ${fmt.pct(nl.within18_pct)} within 18 weeks against a 92% standard last met in 2016. Cancer 62-day performance is ${fmt.pct(nhs.cancer.d62_pct)} (standard 85%), and ${fmt.pct(nhs.diagnostics.over6w_pct)} of patients wait 6+ weeks for a diagnostic test (standard 1%).` });
+    out.push({ area: "NHS", kind: "good", link: "#/nhs", text: `Year-long waits fell from ${fmt.n(n0.over52)} to ${fmt.n(nl.over52)} between ${n0.month} and ${nl.month}, and the share seen within 18 weeks rose from ${fmt.pct(n0.within18_pct)} to ${fmt.pct(nl.within18_pct)}.` });
+    const idrc = oda.by_sector.find((r: any) => r.label === "Refugees in Donor Countries"), L = oda.years.length - 1;
+    out.push({ area: "Aid", kind: "bad", link: "#/foreign", text: `${fmt.gbp(idrc.values[L], "m")} of UK aid in ${oda.years[L]} (${fmt.pct((idrc.values[L] / oda.headline.total_m) * 100, 0)}) was spent in the UK on asylum accommodation and support, up from ${fmt.gbp(idrc.values[0], "m")} in ${oda.years[0]}, while aid for health, education and infrastructure abroad fell.` });
     const tot = cs.organisations.find((o: any) => o.name === "Overall Civil Service");
     out.push({ area: "Civil service", kind: "gap", link: "#/departments", text: `${fmt.pct((tot.by_region.London / tot.headcount) * 100, 0)} of civil servants (${fmt.n(tot.by_region.London)}) are based in London, where pay and property costs are highest.` });
     const S = sc.schools.map((r: any[]) => Object.fromEntries(sc.fields.map((k: string, i: number) => [k, r[i]])));

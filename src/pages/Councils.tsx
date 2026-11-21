@@ -12,11 +12,14 @@ const METRICS: M[] = [
   { k: "res", label: "Usable reserves as % of net revenue spend", kind: "authority", unit: "%", calc: (g) => { const r = (g("Estimated other earmarked financial reserves level at 31 March") ?? 0) + (g("Estimated unallocated financial reserves level at 31 March") ?? 0), n = g("NET REVENUE EXPENDITURE"); return n ? (r / n) * 100 : null; }, note: "Low reserves mean little cushion against overspends." },
   { k: "resch", label: "Change in usable reserves during 2025-26 (%)", kind: "authority", unit: "%", calc: (g) => { const a = (g("Estimated other earmarked financial reserves level at 1 April") ?? 0) + (g("Estimated unallocated financial reserves level at 1 April") ?? 0), b = (g("Estimated other earmarked financial reserves level at 31 March") ?? 0) + (g("Estimated unallocated financial reserves level at 31 March") ?? 0); return a ? (b / a - 1) * 100 : null; }, note: "Negative means the council ran its reserves down." },
   { k: "dsg", label: "High-needs (DSG) deficit, £ per child", kind: "authority", unit: "£/child", calc: (g) => g("dedicated schools grant adjustment account level at 31 March"), note: "The statutory override lets councils keep special educational needs deficits off their books; negative is a deficit." },
+  { k: "ehc", label: "EHC plans (special needs) per 1,000 under-18s, January 2026", kind: "authority", unit: "per 1,000", calc: (g) => g("__ehc"), note: "Children and young people (0-25) with an education, health and care plan, per 1,000 residents under 18. Source: DfE." },
+  { k: "ehcg", label: "Growth in EHC plans since 2019 (%)", kind: "authority", unit: "%", calc: (g) => g("__ehcg"), note: "Change in the number of EHC plans maintained, January 2019 to January 2026." },
+  { k: "ehc20", label: "New EHC plans issued within the 20-week legal limit, 2025 (%)", kind: "authority", unit: "%", calc: (g) => g("__ehc20"), note: "Excluding exceptions. The law requires plans to be issued within 20 weeks of a request." },
   { k: "int", label: "General fund interest costs as % of net revenue spend", kind: "authority", unit: "%", calc: (g) => { const i = g("General fund: Interest costs"), n = g("NET REVENUE EXPENDITURE"); return i != null && n ? (i / n) * 100 : null; }, note: "High debt-servicing costs crowd out services (several section 114 councils borrowed heavily for commercial investments)." },
   { k: "inv", label: "Commercial property outside own area: income (£m)", kind: "authority", unit: "£m", calc: (g) => { const a = g("Investment properties outside boundary but within LEP area: income"), b = g("Investment properties outside LEP area: income"); return a == null && b == null ? null : -((a ?? 0) + (b ?? 0)) / 1000; } },
 ];
 export default function Councils() {
-  const d = useData("councils", "geo_lad", "population", "lookup");
+  const d = useData("councils", "geo_lad", "population", "lookup", "send");
   const [mk, setMk] = useState("Adult Social Care");
   const [sel, setSel] = useState<any>(null);
   const [q, setQ] = useState("");
@@ -25,11 +28,13 @@ export default function Councils() {
   const layer = useRef<L.GeoJSON | null>(null);
   const model = useMemo(() => {
     if (!d) return null;
-    const [c, geo, pop, lk] = d as any[];
+    const [c, geo, pop, lk, send] = d as any[];
+    const sy = send.years;
     const cols: string[] = c.columns;
     const byCode: Record<string, any> = {};
     for (const a of c.authorities) {
-      const g = (s: string) => { const i = cols.findIndex((x) => x.includes(s)); const v = i >= 0 ? a.values[i] : null; return v == null ? null : v; };
+      const se = send.la[a.code];
+      const g = (s: string) => { if (s.startsWith("__")) { if (!se) return null; if (s === "__ehc") return se.plans[sy.at(-1)] ?? null; if (s === "__ehc20") return se.within20_pct ?? null; const a0 = se.plans[sy[0]], a1 = se.plans[sy.at(-1)]; return a0 && a1 ? (a1 / a0 - 1) * 100 : null; } const i = cols.findIndex((x) => x.includes(s)); const v = i >= 0 ? a.values[i] : null; return v == null ? null : v; };
       const p = pop.areas[a.code]?.all ?? null, kids = pop.areas[a.code]?.u18 ?? null;
       byCode[a.code] = { ...a, g, pop: p, kids };
     }
@@ -40,14 +45,14 @@ export default function Councils() {
     if (!a) return null;
     if (metric.kind === "perhead") { const v = a.g(metric.col!); return v != null && a.pop ? (v * 1000) / a.pop : null; }
     const v = metric.calc!(a.g);
-    if (metric.k === "dsg") return v != null && a.kids ? (v * 1000) / a.kids : null;
+    if (metric.k === "dsg" || metric.k === "ehc") return v != null && a.kids ? (v * 1000) / a.kids : null;
     return v;
   };
   const ladValue = (code: string) => {
     if (!model) return null;
     const own = model.byCode[code]; const up = model.lk.lad[code]?.upper; const upper = up && up !== code ? model.byCode[up] : null;
     if (metric.kind === "perhead") { const a = value(own), b = upper ? value(upper) : null; return a == null && b == null ? null : (a ?? 0) + (b ?? 0); }
-    return upper && ["dsg"].includes(metric.k) ? value(upper) : value(own) ?? (upper ? value(upper) : null);
+    return upper && ["dsg", "ehc", "ehcg", "ehc20"].includes(metric.k) ? value(upper) : value(own) ?? (upper ? value(upper) : null);
   };
   useEffect(() => {
     if (!map.current || !model) return;
@@ -62,7 +67,7 @@ export default function Councils() {
   if (!d || !model) return <Loading />;
   const { c } = model;
   const auths = Object.values(model.byCode).filter((a: any) => a.class !== "O" && a.class !== "Eng" && (!q || a.name.toLowerCase().includes(q.toLowerCase())));
-  const calcAll = (k: string) => { const m = METRICS.find((x) => x.k === k)!; return (a: any) => { const v = m.calc!(a.g); return k === "dsg" ? (v != null && a.kids ? (v * 1000) / a.kids : null) : v; }; };
+  const calcAll = (k: string) => { const m = METRICS.find((x) => x.k === k)!; return (a: any) => { const v = m.calc!(a.g); return k === "dsg" || k === "ehc" ? (v != null && a.kids ? (v * 1000) / a.kids : null) : v; }; };
   const deficits = Object.values(model.byCode).filter((a: any) => a.class !== "O" && a.class !== "Eng").map((a: any) => a.g("dedicated schools grant adjustment account level at 31 March")).filter((v: any) => v != null && v < 0) as number[];
   const lowRes = Object.values(model.byCode).filter((a: any) => a.class !== "O" && (calcAll("res")(a) ?? 999) < 10).length;
   return <Page title="Councils" lede="Every English local authority's 2025-26 revenue outturn: what it spends per resident on each service, how much it holds in reserves, its special-needs deficit, debt costs and exposure to commercial property. Two-tier areas combine the district and the county.">
@@ -86,6 +91,8 @@ export default function Councils() {
         { k: "res", h: "Reserves % of spend", n: true, v: calcAll("res"), f: (a: any) => fmt.pct(calcAll("res")(a), 0) },
         { k: "resch", h: "Reserves change", n: true, v: calcAll("resch"), f: (a: any) => fmt.pct(calcAll("resch")(a), 0) },
         { k: "dsg", h: "DSG deficit £/child", n: true, v: calcAll("dsg"), f: (a: any) => fmt.n(calcAll("dsg")(a)) },
+        { k: "ehc", h: "EHC plans per 1,000 children", n: true, v: calcAll("ehc"), f: (a: any) => fmt.n(calcAll("ehc")(a), 1) },
+        { k: "ehc20", h: "EHC plans on time", n: true, v: calcAll("ehc20"), f: (a: any) => fmt.pct(calcAll("ehc20")(a), 0) },
         { k: "int", h: "Interest % of spend", n: true, v: calcAll("int"), f: (a: any) => fmt.pct(calcAll("int")(a)) },
         { k: "inv", h: "Out-of-area property income £m", n: true, v: calcAll("inv"), f: (a: any) => fmt.n(calcAll("inv")(a), 1) },
       ]} />
