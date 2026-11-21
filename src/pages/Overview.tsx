@@ -9,7 +9,7 @@ export default function Overview() {
   const s = fiscal.since_1900;
   const series = s.years.map((y: string, i: number) => ({ y, receipts: s.series["Total receipts (PSCR)"][i], spending: s.series["Total spending (TME)"][i], debt: s.series["Public sector net debt (PSND)"][i] }));
   const firstForecast = "2026-27";
-  const tme = spend.tables.tme_by_department.rows.find((r: any) => r.label.startsWith("Total Managed Expenditure"));
+  const tme = spend.tables.tme_by_department.rows.find((r: any) => r.values && r.label.startsWith("Total Managed Expenditure"));
   const fn = spend.tables.by_function;
   const last = fn.years.length - 1;
   const fnRows = fn.rows.filter((r: any) => /^\d+\./.test(r.label)).map((r: any) => ({ name: r.label.replace(/^\d+\.\s*/, "").replace(/\(.*\)/, ""), v: r.values[last] })).sort((a: any, b: any) => b.v - a.v);

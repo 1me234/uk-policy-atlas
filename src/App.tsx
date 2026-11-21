@@ -32,6 +32,12 @@ const NAV: [string, string, string, React.FC][] = [
   ["Services", "charities", "Charities & NGOs", Charities],
   ["Reference", "sources", "Sources & catalogue", Sources],
 ];
+class Boundary extends React.Component<{ k: string; children: React.ReactNode }, { err: Error | null }> {
+  state = { err: null as Error | null };
+  static getDerivedStateFromError(err: Error) { return { err }; }
+  componentDidUpdate(p: { k: string }) { if (p.k !== this.props.k && this.state.err) this.setState({ err: null }); }
+  render() { return this.state.err ? <div className="card flag">This section failed to render: {this.state.err.message}</div> : this.props.children; }
+}
 function useHash() {
   const [h, setH] = useState(() => location.hash.slice(2) || "overview");
   useEffect(() => { const f = () => { setH(location.hash.slice(2) || "overview"); window.scrollTo(0, 0); }; addEventListener("hashchange", f); return () => removeEventListener("hashchange", f); }, []);
@@ -53,6 +59,6 @@ export default function App() {
       <div className="nav-group">Theme</div>
       <div style={{ padding: "0 10px" }}><select value={theme} onChange={(e) => setTheme(e.target.value)} onClick={(e) => e.stopPropagation()}><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
     </aside>
-    <main className="main"><button className="seg menu-btn" onClick={() => setOpen(true)}>☰ Menu</button><P /></main>
+    <main className="main"><button className="seg menu-btn" onClick={() => setOpen(true)}>☰ Menu</button><Boundary k={key}><P key={key} /></Boundary></main>
   </div>;
 }

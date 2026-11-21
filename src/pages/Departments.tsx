@@ -3,6 +3,9 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recha
 import { fmt, useData } from "../lib";
 import { Card, Drawer, Loading, Page, Stat, Table } from "../ui";
 
+// Major-projects department codes where GOV.UK acronyms differ or are missing.
+const ACR: Record<string, string> = { "home-office": "HO", "cabinet-office": "CO", "hm-treasury": "HMT", "ministry-of-justice": "MOJ", "ministry-of-defence": "MOD", "department-for-transport": "DFT", "department-for-education": "DFE", "department-of-health-and-social-care": "DHSC", "department-for-work-pensions": "DWP", "hm-revenue-customs": "HMRC", "ministry-of-housing-communities-local-government": "MHCLG", "foreign-commonwealth-development-office": "FCDO" };
+
 // Link Civil Service departmental groups to PESA departmental groups and GOV.UK organisation slugs.
 const LINKS: [RegExp, string, string][] = [
   [/Health and Social Care/, "Health and Social Care", "department-of-health-and-social-care"],
@@ -42,7 +45,7 @@ export default function Departments() {
       const members = cs.organisations.filter((x: any) => x.parent === o.parent && x !== o);
       const london = o.by_region?.London ?? null;
       const scs = o.by_grade?.SCS ?? null;
-      const acr = gov?.acronym || "";
+      const acr = (link && ACR[link[2]]) || gov?.acronym || "";
       return { ...o, pesa, admin, gov, members, acr, londonPct: london != null && o.headcount ? (london / o.headcount) * 100 : null, scsPct: scs != null && o.headcount ? (scs / o.headcount) * 100 : null,
         projects: mp.projects.filter((p: any) => acr && p.department.toUpperCase() === acr.toUpperCase()) };
     });

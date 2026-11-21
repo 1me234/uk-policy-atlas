@@ -63,7 +63,7 @@ export default function Councils() {
   const { c } = model;
   const auths = Object.values(model.byCode).filter((a: any) => a.class !== "O" && a.class !== "Eng" && (!q || a.name.toLowerCase().includes(q.toLowerCase())));
   const calcAll = (k: string) => { const m = METRICS.find((x) => x.k === k)!; return (a: any) => { const v = m.calc!(a.g); return k === "dsg" ? (v != null && a.kids ? (v * 1000) / a.kids : null) : v; }; };
-  const deficits = Object.values(model.byCode).map((a: any) => a.g("dedicated schools grant adjustment account level at 31 March")).filter((v: any) => v != null && v < 0) as number[];
+  const deficits = Object.values(model.byCode).filter((a: any) => a.class !== "O" && a.class !== "Eng").map((a: any) => a.g("dedicated schools grant adjustment account level at 31 March")).filter((v: any) => v != null && v < 0) as number[];
   const lowRes = Object.values(model.byCode).filter((a: any) => a.class !== "O" && (calcAll("res")(a) ?? 999) < 10).length;
   return <Page title="Councils" lede="Every English local authority's 2025-26 revenue outturn: what it spends per resident on each service, how much it holds in reserves, its special-needs deficit, debt costs and exposure to commercial property. Two-tier areas combine the district and the county.">
     <div className="grid g4">
