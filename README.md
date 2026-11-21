@@ -21,6 +21,8 @@ Live site: https://1me234.github.io/uk-policy-atlas/ (deployed from `main` by Gi
 | Education | Every open school: capacity, free school meals, GCSE results, Ofsted outcome; academy trusts | DfE GIAS, KS4 performance (EES API), Ofsted management information |
 | Social security | Benefit spending 1948 to forecast, caseloads, spending by council area | DWP benefit expenditure tables |
 | Charities & NGOs | 172,000 charities, income, government funding dependence | Charity Commission register |
+| Policy simulator | Change taxes, budgets, civil service size, NHS productivity or gilt yields and trace the effects through borrowing, debt, GDP, unemployment, the NHS waiting list, council reserves and the fiscal rules, 2026-27 to 2030-31. Every parameter is sourced and editable; scenarios save and share by link | OBR databank (baseline), HMRC tax ready reckoner, OBR multipliers |
+| Model lab | Mini-simulations. First model: a state-orchestrated bubble, seizure, relocation and reintegration cycle, run 400 times and compared with laissez-faire and directed consolidation, with a sensitivity chart | Stylised; legal routes and historical parallels cited |
 | Sources & catalogue | Every dataset, 54 outside organisations that publish related research, and the backlog of data not yet ingested | |
 
 ## Run it
