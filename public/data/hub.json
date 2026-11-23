@@ -747,25 +747,26 @@
 },
 {
 "file": "law_effects",
-"bytes": 26881,
+"bytes": 43022,
 "source": null,
 "url": null,
 "more_sources": [],
-"note": "Knock-ons of repealing, amending or restoring Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. Effects on the simulator may only move existing fiscal and service levers. No law change creates new powers, and none can unlock measures that strip citizenship or residence by ethnicity or that enable sterilisation or eugenics.",
+"note": "Knock-ons of repealing, amending, restoring or enacting Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. A law change can move any simulator lever and can grant powers, which widen how far levers go. Some Acts lower the UK's democratic standing, which has consequences of its own in a campaign. You can add your own effects and powers to any change. No law in the atlas models stripping citizenship or residence by ethnicity, or sterilisation or eugenics. Under parliamentary sovereignty no court can strike down an Act of Parliament, so the limits on these Acts are political and procedural: the Lords, the Parliament Acts, devolved consent, treaties, markets and the public.",
 "tables": [
 {
 "name": "generic",
-"n": 3,
+"n": 4,
 "fields": [
 "repeal",
 "amend",
-"restore"
+"restore",
+"enact"
 ],
 "keyed": true
 },
 {
 "name": "acts",
-"n": 28,
+"n": 38,
 "fields": [
 "title",
 "summary",

@@ -5,6 +5,7 @@ import { buildBaseline, LEVERS, Levers, simulate, YEARS, ZERO, RULE_YEAR } from 
 import { defaultParams } from "../sim/params";
 import { scenarioLink } from "./Simulate";
 import { useActs } from "./Laws";
+import { FORBIDDEN_NOTE, forbiddenText, LeverMove, useBook, withChange } from "../law/statute";
 
 type Clause = { id: number; heading: string; text: string; lever?: keyof Levers | ""; value?: number };
 type Draft = { id: number; title: string; kind: string; stage: string; area: string; problem: string; objectives: string; evidence: string[]; amends: string[]; clauses: Clause[]; checks: Record<string, boolean>; notes: string; start: number; updated: string };
@@ -47,6 +48,11 @@ export default function DraftPage() {
   const levers = useMemo<Levers>(() => { const L = { ...ZERO, start: D?.start ?? 1 } as Levers; for (const c of D?.clauses || []) if (c.lever && c.value) (L as any)[c.lever] += c.value; return L; }, [D]);
   const result = useMemo(() => { if (!sim || !D) return null; const B = buildBaseline(...(sim as [any, any, any, any, any, any, any])); return { B, R: simulate(B, levers, defaultParams()) }; }, [sim, levers]);
   const anyLever = LEVERS.some((l) => levers[l.k]);
+  const [book, setBook] = useBook();
+  const passed = D ? book.find((c) => c.act === D.title && c.action === "enact") : undefined;
+  const lawBlocked = D ? forbiddenText([D.title, D.objectives, ...D.clauses.map((c) => `${c.heading} ${c.text}`)].join(" ")) : false;
+  const pass = () => { if (!D) return; const custom: LeverMove[] = D.clauses.filter((c) => c.lever && c.value).map((c) => ({ k: c.lever as LeverMove["k"], v: c.value! }));
+    setBook((b) => withChange(b, { act: D.title, action: "enact", t: D.start, text: D.objectives || D.problem || undefined, custom: custom.length ? custom : undefined })); };
   const fiscalSig = result ? result.R.dPsnb.some((x, t) => Math.abs(x) > 0.01 * result.B.gdp[t]) : false;
 
   return <Page title="Drafting workspace" lede="Write policy papers, bills and reforms. Link each one to the evidence and to the laws it changes. Give clauses a measurable effect, and see the effect in the simulator as you write. Drafts are saved in this browser."
@@ -110,6 +116,11 @@ export default function DraftPage() {
               <tr><td>Stability rule, {RULE_YEAR}</td><td className="n" style={{ color: result.R.rules.stability.met ? "var(--green)" : "var(--red)" }}>{result.R.rules.stability.met ? "Met" : "Broken"}</td></tr>
             </tbody></table>
               <a className="seg on" style={{ display: "inline-block", marginTop: 10, textDecoration: "none" }} href={scenarioLink({ name: D.title, levers, params: {} })}>Open in the simulator</a></>}
+            <div style={{ marginTop: 10, fontSize: 13 }}>
+              {lawBlocked ? <div className="flag" style={{ fontSize: 12.5 }}>{FORBIDDEN_NOTE}</div>
+                : <><button className="seg" onClick={pass}>{passed ? "Pass again (updates your statute book)" : "Pass into my statute book"}</button>
+                  <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>{passed ? <>In force from {YEARS[passed.t]}. <a href="#/laws?tab=book">See your statute book</a>.</> : "Enacts this draft as an Act from its start year, with its clause effects, so it runs in the simulator. Add powers on the Laws page."}</div></>}
+            </div>
           </Card>
           <Card title="Legal and procedural checks">
             {CHECKS.map(([k, l, help]) => <label key={k} className="check" title={help}><input type="checkbox" checked={!!D.checks[k]} onChange={(e) => up((d) => { d.checks[k] = e.target.checked; })} /> <span>{l}{k === "fiscal" && anyLever && <b style={{ color: fiscalSig ? "var(--red)" : "var(--green)" }}> {fiscalSig ? " (above 1% of GDP: OBR assessment needed)" : " (below the 1% threshold)"}</b>}<div className="muted" style={{ fontSize: 11.5 }}>{help}</div></span></label>)}

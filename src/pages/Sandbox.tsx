@@ -6,8 +6,8 @@ import { simulateSchedule, Turn } from "../sim/campaign";
 import { defaultParams, ParamValues } from "../sim/params";
 import { Charts, ProjectPicker } from "./Simulate";
 import { actUrl, useActs } from "./Laws";
-import { ACTION_LABEL, effectOf, LawChange, runWithLaws, useLawEffects } from "../law/statute";
-import { ActSearch, LawChanges, LawEditor } from "../law/LawUI";
+import { ACTION_LABEL, boundsAt, democracyAt, effectOf, LawChange, runWithLaws, useLawEffects } from "../law/statute";
+import { ActSearch, DemocracyMeter, LawChanges, LawEditor, NewLaw } from "../law/LawUI";
 
 // ---------- Saved games ----------
 type News = { t: number; tone: Event["tone"]; text: string };
@@ -31,15 +31,23 @@ const SHOCK_KEYS: NumKey[] = ["demandShock", "giltShock", "netMigration"];
 // the baseline, which is the channel by which markets discipline fiscal policy.
 const rng = (seed: number) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 const q = (x: number, s: number) => Math.round(x / s) * s;
-function rollWorld(g: Game, t: number, R: Result, B: Baseline): { shocks: Partial<Levers>; news: News[] } {
+// Democratic backsliding (from the game's statute book) raises the chance of a sell-off and, lower down, brings
+// protest, strikes and sanctions. Also illustrative: the sizes and odds are game mechanics chosen for the atlas.
+type Dem = { score: number; band: string; prevBand: string };
+function rollWorld(g: Game, t: number, R: Result, B: Baseline, dem?: Dem): { shocks: Partial<Levers>; news: News[] } {
   const r = rng(g.seed * 1009 + t * 7919), prev = { ...(g.shocks[t - 1] ?? {}) } as Partial<Levers>, news: News[] = [];
   const add = (k: NumKey, v: number) => { const def = LEVERS.find((l) => l.k === k)!; prev[k] = Math.max(def.min, Math.min(def.max, ((prev[k] as number) ?? 0) + v)) as any; };
   const debtGap = R.psndPct[t] - (B.psnd[t] / B.gdp[t]) * 100, stressed = !R.rules.stability.met || debtGap > 3;
   const pr = r(), pg = r(), pm = r(), a = r(), b = r();
   if (pr < 0.1) { const v = -q(1.5 + 1.5 * a, 0.25); add("demandShock", v); news.push({ t, tone: "bad", text: `A recession hits: demand falls by ${(-v).toFixed(2)}% of GDP. Tax receipts fall and unemployment rises unless you respond.` }); }
   else if (pr > 0.95) { const v = q(0.5 + a, 0.25); add("demandShock", v); news.push({ t, tone: "good", text: `A demand boom adds ${v.toFixed(2)}% to GDP for a while. Receipts beat forecast.` }); }
-  if (pg < 0.05 + (stressed ? 0.2 : 0)) { const v = q(0.5 + 0.75 * b, 0.25); add("giltShock", v); news.push({ t, tone: "bad", text: `Gilt markets sell off: yields up ${v.toFixed(2)}pp${stressed ? ", after investors question the fiscal plan" : ""}. Debt interest climbs as debt is refinanced.` }); }
+  const dm = dem?.score ?? 100, demRisk = dm < 40 ? 0.2 : dm < 65 ? 0.12 : dm < 85 ? 0.05 : 0;
+  if (pg < 0.05 + (stressed ? 0.2 : 0) + demRisk) { const v = q(0.5 + 0.75 * b, 0.25); add("giltShock", v); news.push({ t, tone: "bad", text: `Gilt markets sell off: yields up ${v.toFixed(2)}pp${stressed ? ", after investors question the fiscal plan" : demRisk ? ", as investors price in political risk" : ""}. Debt interest climbs as debt is refinanced.` }); }
   if (pm < 0.1) { const v = q((a > 0.5 ? 1 : -1) * (50 + 100 * b), 10); add("netMigration", v); news.push({ t, tone: "info", text: `Net migration comes in ${Math.abs(v)}k a year ${v > 0 ? "above" : "below"} the OBR forecast, changing the labour force and demand for services.` }); }
+  if (dem && dem.band !== dem.prevBand) news.push({ t, tone: dm < 85 ? "bad" : "good", text: `Democracy monitors now rate the UK a "${dem.band}" (standing ${dm} of 100).${dm < 65 ? " Allies downgrade intelligence sharing and the Council of Europe opens proceedings." : ""}` });
+  const c = r(), d = r();
+  if (dm < 65 && c < 0.25) { add("demandShock", -0.5); news.push({ t, tone: "bad", text: "Mass protests and a wave of strikes against the government disrupt the economy: demand falls by 0.5% of GDP." }); }
+  if (dm < 40 && d < 0.3) { add("demandShock", -1); news.push({ t, tone: "bad", text: "Trading partners impose targeted sanctions and firms move investment abroad: demand falls by 1% of GDP." }); }
   return { shocks: prev, news };
 }
 
@@ -127,6 +135,8 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
   const Rstay = useMemo(() => run([...turnsBefore, { t, levers: levers(prev) }], laws.filter((c) => c.t < t)), [g, LE]);
   const now = useMemo(() => assess(B, R, t), [R, t]);
   const lawsNow = laws.filter((c) => c.t === t);
+  const bnd = useMemo(() => boundsAt(laws, t, LE?.E, LE?.find), [laws, t, LE]);
+  const myActs = useMemo(() => [...new Set([...(LE?.E.acts.filter((a) => a.new).map((a) => a.title) ?? []), ...laws.filter((c) => c.action === "enact").map((c) => c.act)])], [laws, LE]);
   const changes = [...describe(prev, levers(draft), B, g.world), ...(LE ? lawsNow.map((c) => `${ACTION_LABEL[c.action]}: ${c.act}${c.action === "amend" ? ` (${effectOf(c, LE.E, LE.find(c.act)).label})` : ""}`) : [])];
   const set = (k: keyof Levers, v: number) => setDraft((x) => ({ ...x, [k]: v }));
 
@@ -134,7 +144,7 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
     const turns = [...turnsBefore, { t, levers: levers(draft), note: changes.length ? undefined : "No change" }];
     const x: Game = { ...g, turns, draft: undefined };
     if (t >= YEARS.length - 1) { save({ ...x, done: true }); return; }
-    if (g.world) { const Rn = run(turns, laws); const w = rollWorld(x, t + 1, Rn, B); x.shocks = { ...g.shocks, [t + 1]: w.shocks }; x.news = [...g.news.filter((n) => n.t <= t), ...w.news]; }
+    if (g.world) { const Rn = run(turns, laws); const dem = LE ? { ...democracyAt(laws, t + 1, LE.E, LE.find), prevBand: democracyAt(laws.filter((c) => c.t < t), t, LE.E, LE.find).band } : undefined; const w = rollWorld(x, t + 1, Rn, B, dem); x.shocks = { ...g.shocks, [t + 1]: w.shocks }; x.news = [...g.news.filter((n) => n.t <= t), ...w.news]; }
     save({ ...x, t: t + 1 });
   };
   const undo = () => {
@@ -161,16 +171,19 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
             {head && <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, [gr]: !o[gr] }))} aria-expanded={!!open[gr]}><span>{open[gr] ? "▾" : "▸"} {gr.replace(" and population", g.world ? "" : " and population")}</span>{n > 0 && <span className="pill">{n}</span>}</button>}
             {open[gr] && <div className={`lever ${draft[l.k] !== prev[l.k] ? "on" : ""}`} title={l.help}>
               <div className="lever-head"><span>{l.label}</span><span className="lever-v">{lv(l, draft[l.k])}{draft[l.k] !== prev[l.k] && <span className="muted"> (was {lv(l, prev[l.k])})</span>}</span></div>
-              <input type="range" min={l.min} max={l.max} step={l.step} value={draft[l.k]} onChange={(e) => set(l.k, +e.target.value)} onDoubleClick={() => set(l.k, prev[l.k])} aria-label={l.label} />
+              <input type="range" min={bnd(l).min} max={bnd(l).max} step={l.step} value={draft[l.k]} onChange={(e) => set(l.k, +e.target.value)} onDoubleClick={() => set(l.k, prev[l.k])} aria-label={l.label} />
             </div>}
           </React.Fragment>; })}
         <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, projects: !o.projects }))} aria-expanded={!!open.projects}><span>{open.projects ? "▾" : "▸"} Major projects</span>{Object.keys(draft.projects ?? {}).length > 0 && <span className="pill">{Object.keys(draft.projects ?? {}).length}</span>}</button>
         {open.projects && <ProjectPicker B={B} L={draft} setL={setDraft} />}
-        <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, laws: !o.laws }))} aria-expanded={!!open.laws}><span>{open.laws ? "▾" : "▸"} Laws: repeal, amend, restore</span>{lawsNow.length > 0 && <span className="pill">{lawsNow.length}</span>}</button>
+        <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, laws: !o.laws }))} aria-expanded={!!open.laws}><span>{open.laws ? "▾" : "▸"} Laws and powers</span>{lawsNow.length > 0 && <span className="pill">{lawsNow.length}</span>}</button>
         {open.laws && LE && actsD && <div style={{ fontSize: 12.5 }}>
-          <div className="muted" style={{ margin: "4px 0 6px" }}>Change any Act of Parliament from {YEARS[t]}. Each change shows its legal, fiscal, diplomatic and social knock-ons. A few Acts with a clear fiscal channel also move levers.</div>
-          <ActSearch acts={actsD.acts} onPick={setLawSel} />
+          <div className="muted" style={{ margin: "4px 0 6px" }}>Change any Act of Parliament from {YEARS[t]}, or pass a new one. Each change shows its legal, fiscal, diplomatic and social knock-ons. Laws can move any lever and grant powers that let levers go further than normal; you can give any change effects of your own.</div>
+          <DemocracyMeter book={laws} t={t} E={LE.E} find={LE.find} compact />
+          <ActSearch acts={actsD.acts} onPick={setLawSel} extra={myActs} />
           {["Equality Act 2010", "Human Rights Act 1998", "Climate Change Act 2008", "Bank of England Act 1998"].map((x) => <button key={x} className="seg" style={{ fontSize: 11.5, padding: "2px 7px", margin: "4px 4px 0 0" }} onClick={() => setLawSel(x)}>{x}</button>)}
+          <button className="lever-group" style={{ marginTop: 6 }} onClick={() => setOpen((o) => ({ ...o, newlaw: !o.newlaw }))} aria-expanded={!!open.newlaw}><span>{open.newlaw ? "▾" : "▸"} Pass a new Act</span></button>
+          {open.newlaw && <NewLaw E={LE.E} book={laws} setBook={setLaws} fixedYear={t} onTemplate={setLawSel} />}
           {laws.length > 0 && <div style={{ marginTop: 8 }}><LawChanges book={laws} E={LE.E} find={LE.find} setBook={setLaws} editable={(c) => c.t === t} /></div>}
         </div>}
         <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>Levers are levels relative to today's plans, not changes on last year. Double-click a slider to put it back where it was last year.{g.world ? " Shocks are set by world events, not by you." : ""}</div>
