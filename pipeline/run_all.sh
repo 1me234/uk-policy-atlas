@@ -4,7 +4,7 @@
 # and LibreOffice (soffice) for .ods files. Wikidata is rate-limited, so infrastructure runs last and is slow.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-for s in spending orgs civil_service projects boundaries lookup councils population schools ks4 ofsted welfare welfare_la charities contracts fiscal nhs_performance oda send efs stations sim_params infrastructure; do
+for s in spending orgs civil_service projects boundaries lookup councils population schools ks4 ofsted welfare welfare_la charities contracts fiscal nhs_performance oda send efs stations sim_params legislation infrastructure; do
   echo "== $s"; python3 pipeline/build_$s.py
 done
 cp pipeline/curated/*.json public/data/

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fmt } from "../lib";
 import { Card, Page, Seg } from "../ui";
+import { ReorgLab, StructureLab } from "./LabReorg";
 import { CP, CycleParams, defaultCycleParams, Dist, monteCarlo, Route, sensitivity, STAGES } from "../lab/cycle";
 
 const PRESETS: { name: string; note: string; p: Partial<CycleParams>; route?: Route }[] = [
@@ -18,7 +19,7 @@ const gbp = (v: number) => `${v < 0 ? "−" : ""}£${Math.abs(v).toFixed(1)}bn`;
 const show = (m: Metric, v: number) => m === "jobs" ? fmt.n(v) : m === "net" ? gbp(v) : v.toFixed(0);
 const D = ({ d, m }: { d: Dist; m: Metric }) => <><b>{show(m, d.p50)}</b><div className="muted" style={{ fontSize: 11.5 }}>{show(m, d.p10)} to {show(m, d.p90)}</div></>;
 
-export default function Lab() {
+function CycleLab() {
   const [P, setP] = useState<CycleParams>(defaultCycleParams);
   const [route, setRoute] = useState<Route>("statute");
   const [stage, setStage] = useState("seize");
@@ -36,7 +37,7 @@ export default function Lab() {
   };
   const per = cyc.perCycle.map((c, i) => ({ c: `Sector ${c.c}`, invest: +c.invest.p50.toFixed(2), investLf: +lf.perCycle[i].invest.p50.toFixed(2), net: +c.net.p50.toFixed(2), premium: +(c.premium.p50 * 100).toFixed(0), offshored: +c.offshored.p50.toFixed(2), cap: +c.natCap.p50.toFixed(1), capLf: +lf.perCycle[i].natCap.p50.toFixed(1), capDir: +dir.perCycle[i].natCap.p50.toFixed(1) }));
 
-  return <Page title="Model lab" lede="Mini-simulations for narrower questions. Each one makes every assumption a parameter, runs many times with random shocks, and sets the idea against alternatives, so you can find the conditions under which it works and where it breaks.">
+  return <>
     <Card title="Bubble, seizure and reintegration cycle" sub="Your proposal: let private capital race in a new sector until one champion dominates and the rest fail, take the failed firms' assets, sell the non-strategic part abroad, move the rest to a lagging region, repurpose it for a narrow state use, hand it to the champion, and repeat in the next sector. The legal, talent-flight, retaliation and anticipation risks raised against it are all variables here.">
       <div className="stages">{STAGES.map((s) => <button key={s.id} className={`stage ${stage === s.id ? "on" : ""}`} onClick={() => setStage(s.id)} title={s.d}>
         <span className="stage-n">{s.n}</span><span className="stage-t">{s.t}</span><span className="stage-v">{stageVal[s.id]}</span></button>)}</div>
@@ -125,5 +126,14 @@ export default function Lab() {
         <p>This is a stylised model of mechanisms, not a forecast of any real sector. Capital and capability are single numbers, and "capability" counts productive capital, not innovation quality. It does not model consumer harm from monopoly pricing, the political economy of who decides what counts as strategic, the domestic financial-stability cost of a crash beyond the contagion parameter, or whether foreign states copy the strategy. The laissez-faire arm leaves out a competition authority. Use it to find which assumptions the idea stands or falls on, then look for evidence on those.</p>
       </div>
     </Card>
+  </>;
+}
+
+export default function Lab() {
+  const init = (location.hash.match(/[?&]m=(\w+)/) || [])[1];
+  const [m, setM] = useState<"cycle" | "reorg" | "structure">(init === "reorg" || init === "structure" ? init : "cycle");
+  return <Page title="Model lab" lede="Mini-simulations for narrower questions. Each one makes every assumption a parameter, runs many times with random shocks where the evidence is uncertain, and sets the idea against alternatives, so you can find the conditions under which it works and where it breaks.">
+    <div className="controls"><Seg v={m} set={setM} opts={[["cycle", "Bubble, seizure and reintegration cycle"], ["reorg", "Civil service reorganisation"], ["structure", "Management structure"]]} /></div>
+    {m === "cycle" && <CycleLab />}{m === "reorg" && <ReorgLab />}{m === "structure" && <StructureLab />}
   </Page>;
 }
