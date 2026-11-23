@@ -24,9 +24,11 @@ export function useActs() {
 
 export default function Laws() {
   const D = useActs();
-  const [tab, setTab] = useState<"landmarks" | "all" | "bills" | "volume">("landmarks");
+  // Deep links from the data hub: #/laws?tab=all&q=Housing%20Act%201988
+  const hp = (k: string) => decodeURIComponent((location.hash.match(new RegExp(`[?&]${k}=([^&]+)`)) || [])[1] || "");
+  const [tab, setTab] = useState<"landmarks" | "all" | "bills" | "volume">(() => (["landmarks", "all", "bills", "volume"].includes(hp("tab")) ? hp("tab") : "landmarks") as any);
   const [area, setArea] = useState("");
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(() => hp("q"));
   const [from, setFrom] = useState(1945);
   if (!D) return <Loading />;
   const { L, acts, landmarks, bills } = D;

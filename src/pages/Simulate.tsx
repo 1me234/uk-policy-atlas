@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { CartesianGrid, Legend, Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Legend, Line, LineChart, ReferenceArea, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fmt, useData } from "../lib";
 import { Card, Loading, Page, Seg, Source } from "../ui";
 import { Baseline, buildBaseline, LAST_FORECAST, LEVERS, Levers, PRESETS, Result, RULE_YEAR, simulate, YEARS, ZERO } from "../sim/engine";
@@ -109,7 +109,7 @@ function Headline({ R, B }: { R: Result; B: Baseline; yr: number }) {
   return <div className="grid g3">{items.map((x) => <div key={x.l} className="card stat"><div className="v" style={{ color: x.c, fontSize: 22 }}>{x.v}</div><div className="l">{x.l}</div><div className="d muted">{x.d}</div></div>)}</div>;
 }
 
-function ProjectPicker({ B, L, setL }: { B: Baseline; L: Levers; setL: (f: (l: Levers) => Levers) => void }) {
+export function ProjectPicker({ B, L, setL }: { B: Baseline; L: Levers; setL: (f: (l: Levers) => Levers) => void }) {
   const [q, setQ] = useState("");
   const P = L.projects ?? {};
   const setP = (id: string, v: number) => setL((l) => { const p = { ...(l.projects ?? {}) }; if (v) p[id] = v; else delete p[id]; return { ...l, projects: p }; });
@@ -221,7 +221,7 @@ function Trace({ R, t }: { R: Result; t: number }) {
   </div>;
 }
 
-function Charts({ R, B }: { R: Result; B: Baseline }) {
+export function Charts({ R, B, now }: { R: Result; B: Baseline; now?: number }) {
   const S = R.S, SB = R.SB, f = (v: number, d = 2) => +v.toFixed(d);
   const rows = YEARS.map((y, t) => ({ y, psnb: f(R.psnb[t], 1), psnbB: f(B.psnb[t], 1), debt: f(R.psndPct[t]), debtB: f((B.psnd[t] / B.gdp[t]) * 100), gdp: f(R.gdpPct[t], 3), dem: f(R.demand[t], 3), sup: f(R.supply[t], 3),
     w: f(R.waiting[t] / 1e6, 3), wB: f(R.waitingBase[t] / 1e6, 3), la: f(R.laReserves[t]), laB: f(R.laReservesBase[t]), dsg: f(R.dsgDeficit[t]), dsgB: f(R.dsgDeficitBase[t]),
@@ -230,6 +230,7 @@ function Charts({ R, B }: { R: Result; B: Baseline }) {
   const C = ({ title, sub, lines }: { title: string; sub: string; lines: [string, string, string, boolean?][] }) => <Card title={title} sub={sub}>
     <ResponsiveContainer width="100%" height={230}><LineChart data={rows} margin={{ left: -12, right: 8 }}><CartesianGrid vertical={false} /><XAxis dataKey="y" interval={1} tick={{ fontSize: 11 }} /><YAxis domain={["auto", "auto"]} /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
       <ReferenceArea x1={YEARS[LAST_FORECAST]} x2={YEARS.at(-1)} fill="var(--soft)" />
+      {now != null && <ReferenceLine x={YEARS[now]} stroke="var(--accent)" strokeDasharray="3 3" label={{ value: "Now", position: "insideTopLeft", fontSize: 10, fill: "var(--accent)" }} />}
       {lines.map(([k, n, c, dash]) => <Line key={k} dataKey={k} name={n} stroke={c} strokeDasharray={dash ? "4 4" : undefined} dot={false} strokeWidth={2} />)}</LineChart></ResponsiveContainer></Card>;
   return <>
     <div className="muted" style={{ fontSize: 12.5, marginBottom: 8 }}>The shaded years extend the OBR forecast at constant shares of GDP. Treat them as illustrations of direction, not forecasts.</div>

@@ -1,0 +1,1915 @@
+{
+"note": "Index of every data file in the atlas, built by pipeline/build_hub.py.",
+"datasets": [
+{
+"file": "assessments",
+"bytes": 4047,
+"source": "Institute for Government, Public Services Performance Tracker 2026 (cross-service analysis, Oct 2026; NHS report, Nov 2026)",
+"url": "https://www.instituteforgovernment.org.uk/publication/public-services-performance-tracker-2026",
+"more_sources": [],
+"note": "Ratings and facts summarised from the IfG reports; read the originals for method and caveats.",
+"tables": [
+{
+"name": "services",
+"n": 9,
+"fields": [
+"service",
+"domain",
+"2010_24",
+"2024_26",
+"outlook_2029",
+"why"
+]
+},
+{
+"name": "nhs_facts",
+"n": 9,
+"fields": []
+}
+],
+"domains": [
+"nhs",
+"education",
+"justice",
+"councils",
+"welfare"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "education",
+"label": "Education",
+"group": "Services"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "charities",
+"bytes": 6214104,
+"source": "Charity Commission for England and Wales, register of charities data extract, 20 November 2026 (main charities, not linked subsidiaries)",
+"url": "https://register-of-charities.charitycommission.gov.uk/en/register/full-register-download",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "by_cause",
+"n": 18,
+"fields": [
+"General Charitable Purposes",
+"Education/training",
+"The Advancement Of Health Or Saving Of Lives",
+"Disability",
+"The Prevention Or Relief Of Poverty",
+"Religious Activities",
+"Amateur Sport",
+"Arts/culture/heritage/science",
+"Economic/community Development/employment",
+"Recreation",
+"Accommodation/housing",
+"Environment/conservation/heritage",
+"Human Rights/religious Or Racial Harmony/equality Or Diversity",
+"Other Charitable Purposes",
+"Animals",
+"Overseas Aid/famine Relief",
+"Armed Forces/emergency Service Efficiency",
+"Unclassified"
+],
+"keyed": true
+},
+{
+"name": "charities",
+"n": 9383,
+"fields": [
+"num",
+"name",
+"income",
+"spend",
+"postcode",
+"web",
+"registered",
+"activities",
+"type",
+"causes",
+"gov_contracts",
+"gov_grants",
+"staff_over_60k",
+"volunteers",
+"employees",
+"reserves",
+"assets"
+]
+}
+],
+"domains": [
+"charities"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "charities",
+"label": "Charities & NGOs",
+"group": "Services"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "civil_service",
+"bytes": 77592,
+"source": "Cabinet Office, Civil Service Statistics 2025 (snapshot at 31 March 2025)",
+"url": "https://www.gov.uk/government/statistics/civil-service-statistics-2025",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "grades",
+"n": 6,
+"fields": []
+},
+{
+"name": "regions",
+"n": 14,
+"fields": []
+},
+{
+"name": "organisations",
+"n": 152,
+"fields": [
+"parent",
+"name",
+"is_total",
+"headcount",
+"by_grade",
+"by_region",
+"median_salary"
+]
+}
+],
+"domains": [
+"civil-service"
+],
+"pages": [
+{
+"key": "lab",
+"label": "Model lab",
+"group": "Simulate"
+},
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "departments",
+"label": "Departments & civil service",
+"group": "Machinery"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "contracts",
+"bytes": 2207273,
+"source": "Contracts Finder OCDS API, award notices published 2025-11-20 to 2026-11-20",
+"url": "https://www.contractsfinder.service.gov.uk/",
+"more_sources": [],
+"note": "Since the Procurement Act 2023 took effect (24 Feb 2025) many above-threshold notices appear only on Find a Tender; values are as published and can include framework ceilings.",
+"tables": [
+{
+"name": "large_awards",
+"n": 4677,
+"fields": [
+"id",
+"title",
+"buyer",
+"suppliers",
+"value",
+"date",
+"cpv",
+"category",
+"method",
+"sme",
+"postcode",
+"start",
+"end"
+]
+},
+{
+"name": "buyers",
+"n": 1500,
+"fields": []
+},
+{
+"name": "suppliers",
+"n": 3000,
+"fields": []
+}
+],
+"domains": [
+"spending",
+"procurement"
+],
+"pages": [
+{
+"key": "contracts",
+"label": "Contracts & suppliers",
+"group": "Money"
+},
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "councils",
+"bytes": 305896,
+"source": "MHCLG, Local authority revenue expenditure and financing England: 2025 to 2026 outturn (RS), \u00a3 thousand",
+"url": "https://www.gov.uk/government/statistics/local-authority-revenue-expenditure-and-financing-england-2025-to-2026-individual-local-authority-data-outturn",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "columns",
+"n": 155,
+"fields": []
+},
+{
+"name": "authorities",
+"n": 425,
+"fields": [
+"ecode",
+"code",
+"name",
+"class",
+"detailed_class",
+"values"
+]
+}
+],
+"domains": [
+"councils"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "datasets_backlog",
+"bytes": 8068,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Official datasets identified but not yet ingested, in rough priority order. 'Blocked' means the publisher's bot protection refused automated download from the cloud; these can be fetched from a normal computer.",
+"tables": [
+{
+"name": "datasets",
+"n": 31,
+"fields": [
+"domain",
+"name",
+"publisher",
+"url",
+"status",
+"note"
+]
+}
+],
+"domains": [
+"meta"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "efs",
+"bytes": 16711,
+"source": "MHCLG, Exceptional Financial Support for local authorities (yearly decisions, 2020-21 to 2026-27)",
+"url": "https://www.gov.uk/government/collections/exceptional-financial-support-for-local-authorities",
+"more_sources": [],
+"note": "Figure shown is the first amount stated for each year (capitalisation agreed or agreed in principle). Later revisions noted in the text. Councils use this permission to fund day-to-day costs from borrowing or asset sales.",
+"tables": [
+{
+"name": "years",
+"n": 7,
+"fields": []
+},
+{
+"name": "councils",
+"n": 54,
+"fields": [
+"Croydon",
+"Eastbourne",
+"Lambeth",
+"Luton",
+"Nottingham",
+"Redcar & Cleveland",
+"Wirral",
+"Copeland",
+"Kensington and Chelsea",
+"Slough",
+"Cumberland",
+"Thurrock",
+"Westmorland and Furness",
+"West Northamptonshire",
+"Birmingham",
+"Bradford",
+"Cheshire East",
+"Havering",
+"Medway",
+"Middlesbrough",
+"Plymouth",
+"Somerset",
+"Southampton",
+"Stoke-on-Trent"
+],
+"keyed": true
+}
+],
+"domains": [
+"councils"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "fiscal",
+"bytes": 46429,
+"source": "Office for Budget Responsibility, Public finances databank (October 2026 Economic and fiscal outlook)",
+"url": "https://obr.uk/public-finances-databank-2026-27/",
+"more_sources": [],
+"note": "Years from 2026-27 onward are OBR forecasts.",
+"tables": [],
+"domains": [
+"spending",
+"economy"
+],
+"pages": [
+{
+"key": "spending",
+"label": "Spending & fiscal",
+"group": "Money"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "geo_icb",
+"bytes": 115936,
+"source": "ONS Open Geography Portal: Integrated Care Boards, April 2026 (super generalised)",
+"url": "https://geoportal.statistics.gov.uk/",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "features",
+"n": 36,
+"fields": [
+"type",
+"id",
+"geometry",
+"properties"
+]
+}
+],
+"domains": [
+"geography",
+"nhs"
+],
+"pages": [
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "geo_lad",
+"bytes": 495799,
+"source": "ONS Open Geography Portal: Local authority districts, December 2024 (ultra generalised)",
+"url": "https://geoportal.statistics.gov.uk/",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "features",
+"n": 361,
+"fields": [
+"type",
+"id",
+"geometry",
+"properties"
+]
+}
+],
+"domains": [
+"geography",
+"councils"
+],
+"pages": [
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "geo_region",
+"bytes": 57767,
+"source": "ONS Open Geography Portal: English regions, December 2024 (ultra generalised)",
+"url": "https://geoportal.statistics.gov.uk/",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "features",
+"n": 9,
+"fields": [
+"type",
+"id",
+"geometry",
+"properties"
+]
+}
+],
+"domains": [
+"geography"
+],
+"pages": [
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "infrastructure",
+"bytes": 6662883,
+"source": "Wikidata (CC0) via SPARQL: UK items with coordinates, by type",
+"url": "https://query.wikidata.org/",
+"more_sources": [],
+"note": "Community-maintained; build dates and costs are patchy. Treat as a starting index, not an authoritative register.",
+"tables": [
+{
+"name": "assets",
+"n": 25778,
+"fields": [
+"id",
+"name",
+"type",
+"lat",
+"lon",
+"built",
+"opened",
+"cost",
+"cost_unit",
+"part_of",
+"operator",
+"length_m",
+"wikipedia"
+]
+}
+],
+"domains": [
+"infrastructure",
+"geography"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "map",
+"label": "Infrastructure map",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "legislation",
+"bytes": 1353351,
+"source": "legislation.gov.uk (The National Archives) and UK Parliament Bills API",
+"url": "https://www.legislation.gov.uk/ukpga",
+"more_sources": [],
+"note": "Acts listed with their long titles. Policy areas are assigned by keyword rules, not by the official subject index, so a few will be misfiled.",
+"tables": [
+{
+"name": "areas",
+"n": 14,
+"fields": []
+},
+{
+"name": "acts",
+"n": 4426,
+"fields": [
+"u",
+"t",
+"y",
+"n",
+"d",
+"s",
+"a"
+]
+},
+{
+"name": "volume",
+"n": 7,
+"fields": [
+"ukpga",
+"uksi",
+"asp",
+"asc",
+"nia",
+"ssi",
+"wsi"
+],
+"keyed": true
+},
+{
+"name": "bills",
+"n": 203,
+"fields": [
+"id",
+"t",
+"house",
+"stage",
+"updated",
+"type",
+"a"
+]
+}
+],
+"domains": [
+"law"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "laws",
+"label": "Laws & legislation",
+"group": "Law"
+}
+]
+},
+{
+"file": "legislation_landmarks",
+"bytes": 22079,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "(root)",
+"n": 51,
+"fields": [
+"t",
+"area",
+"era",
+"context",
+"did",
+"effects",
+"links"
+]
+}
+],
+"domains": [
+"law"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "laws",
+"label": "Laws & legislation",
+"group": "Law"
+}
+]
+},
+{
+"file": "lookup",
+"bytes": 37908,
+"source": "ONS Open Geography Portal: Ward to LAD to county/unitary to region lookup, December 2024",
+"url": "https://geoportal.statistics.gov.uk/",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "lad",
+"n": 361,
+"fields": [
+"E06000001",
+"E06000002",
+"E06000003",
+"E06000004",
+"E06000005",
+"E06000006",
+"E06000007",
+"E06000008",
+"E06000009",
+"E06000010",
+"E06000011",
+"E06000012",
+"E06000013",
+"E06000014",
+"E06000015",
+"E06000016",
+"E06000017",
+"E06000018",
+"E06000019",
+"E06000020",
+"E06000021",
+"E06000022",
+"E06000023",
+"E06000024"
+],
+"keyed": true
+}
+],
+"domains": [
+"geography"
+],
+"pages": [
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "major_projects",
+"bytes": 572551,
+"source": "NISTA Major Projects Annual Report 2025-26 (Government Major Projects Portfolio), data at 31 March 2026, \u00a3m in 2024-25 real prices",
+"url": "https://www.gov.uk/government/publications/nista-major-projects-annual-report-2025-26",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "projects",
+"n": 189,
+"fields": [
+"id",
+"name",
+"department",
+"category",
+"description",
+"dca_nista",
+"dca_sro",
+"dca_commentary",
+"start",
+"end",
+"schedule_narrative",
+"fy_baseline_m",
+"fy_forecast_m",
+"fy_variance_pct",
+"variance_narrative",
+"whole_life_cost_m",
+"costs_narrative",
+"benefits_m",
+"benefits_narrative",
+"evaluation",
+"sro"
+]
+}
+],
+"domains": [
+"projects",
+"infrastructure"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "departments",
+"label": "Departments & civil service",
+"group": "Machinery"
+},
+{
+"key": "projects",
+"label": "Major projects",
+"group": "Machinery"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "nhs_performance",
+"bytes": 14323,
+"source": "NHS England statistical press notices: RTT waiting times (Sep 2025 to Sep 2026), cancer waiting times, diagnostic waiting times, ambulance quality indicators",
+"url": "https://www.england.nhs.uk/statistics/",
+"more_sources": [],
+"note": "Headline figures parsed from the PDF press notices. Full trust-level data sits on NHS England pages that block automated access.",
+"tables": [
+{
+"name": "rtt_monthly",
+"n": 11,
+"fields": [
+"month",
+"file",
+"waiting",
+"over52",
+"over65",
+"over78",
+"over104",
+"within18_pct",
+"clock_starts",
+"admitted",
+"non_admitted",
+"median_weeks",
+"p92_weeks",
+"unique_patients_m"
+]
+},
+{
+"name": "rtt_by_specialty",
+"n": 24,
+"fields": [
+"name",
+"waiting",
+"within18_pct",
+"admitted",
+"non_admitted",
+"new"
+]
+},
+{
+"name": "rtt_long",
+"n": 37,
+"fields": [
+"month",
+"median_weeks",
+"p92_weeks",
+"within18_pct"
+]
+}
+],
+"domains": [
+"nhs"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "oda",
+"bytes": 57172,
+"source": "FCDO, Statistics on International Development: final UK ODA spend 2024 (data underlying the publication, 2017-2024)",
+"url": "https://www.gov.uk/government/statistics/statistics-on-international-development-final-uk-oda-spend-2024",
+"more_sources": [],
+"note": "\u00a3 million, cash, net of amounts received. Calendar years.",
+"tables": [
+{
+"name": "years",
+"n": 8,
+"fields": []
+},
+{
+"name": "total",
+"n": 8,
+"fields": []
+},
+{
+"name": "by_department",
+"n": 30,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "by_country",
+"n": 80,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "by_region",
+"n": 6,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "by_sector",
+"n": 15,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "by_income",
+"n": 5,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "by_channel",
+"n": 40,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "bi_multi",
+"n": 3,
+"fields": [
+"label",
+"values"
+]
+},
+{
+"name": "top_projects",
+"n": 150,
+"fields": [
+"id",
+"department",
+"value_m",
+"title",
+"country",
+"sector"
+]
+}
+],
+"domains": [
+"foreign",
+"spending"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "organisations",
+"bytes": 439047,
+"source": "GOV.UK Organisations API",
+"url": "https://www.gov.uk/api/organisations",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "organisations",
+"n": 1273,
+"fields": [
+"id",
+"name",
+"acronym",
+"format",
+"status",
+"closed_at",
+"url",
+"parents",
+"children",
+"superseded_by"
+]
+}
+],
+"domains": [
+"civil-service"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "departments",
+"label": "Departments & civil service",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "organisations_catalogue",
+"bytes": 13090,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Outside bodies that publish UK policy analysis, trackers or datasets relevant to each domain. Compiled 20 Nov 2026 from web search and known publishers; 'verified' means a page on that site was returned by a search on that date. Type: watchdog = statutory/independent public scrutiny body; thinktank; academic; ngo; data = data/transparency project; industry; parliament.",
+"tables": [
+{
+"name": "organisations",
+"n": 54,
+"fields": [
+"name",
+"type",
+"domains",
+"url",
+"publishes",
+"verified"
+]
+}
+],
+"domains": [
+"meta",
+"research"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "charities",
+"label": "Charities & NGOs",
+"group": "Services"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "policy_history",
+"bytes": 15215,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Curated summaries of landmark UK policies. Each entry gives context, what changed, the evidence on effects, and the datasets in this atlas that let you track it. Summaries are short and conservative; follow the sources for detail and contested points.",
+"tables": [
+{
+"name": "policies",
+"n": 20,
+"fields": [
+"year",
+"title",
+"domain",
+"context",
+"change",
+"effects",
+"track",
+"sources"
+]
+}
+],
+"domains": [
+"history"
+],
+"pages": [
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+}
+]
+},
+{
+"file": "population",
+"bytes": 43752,
+"source": "ONS, Population estimates for the UK, mid-2025",
+"url": "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "areas",
+"n": 404,
+"fields": [
+"K02000001",
+"K03000001",
+"K04000001",
+"E92000001",
+"E12000001",
+"E06000047",
+"E06000005",
+"E06000001",
+"E06000002",
+"E06000057",
+"E06000003",
+"E06000004",
+"E11000007",
+"E08000037",
+"E08000021",
+"E08000022",
+"E08000023",
+"E08000024",
+"E12000002",
+"E06000008",
+"E06000009",
+"E06000049",
+"E06000050",
+"E06000063"
+],
+"keyed": true
+}
+],
+"domains": [
+"population",
+"geography"
+],
+"pages": [
+{
+"key": "welfare",
+"label": "Social security",
+"group": "Services"
+},
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "schools",
+"bytes": 6531874,
+"source": "DfE, Get Information about Schools (GIAS) all-establishment extract, 20 November 2026",
+"url": "https://get-information-schools.service.gov.uk/Downloads",
+"more_sources": [
+{
+"name": "DfE, Key stage 4 performance: performance tables schools data (latest year per school)",
+"url": "https://explore-education-statistics.service.gov.uk/find-statistics/key-stage-4-performance"
+},
+{
+"name": "Ofsted, State-funded school inspections and outcomes: management information, latest inspections as at 31 October 2026",
+"url": "https://www.gov.uk/government/statistical-data-sets/monthly-management-information-ofsteds-school-inspections-outcomes"
+}
+],
+"note": null,
+"tables": [
+{
+"name": "fields",
+"n": 19,
+"fields": []
+},
+{
+"name": "schools",
+"n": 26532,
+"fields": []
+}
+],
+"domains": [
+"education"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "education",
+"label": "Education",
+"group": "Services"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "send",
+"bytes": 42960,
+"source": "DfE, Education, health and care plans (Explore Education Statistics), January 2019 to January 2026",
+"url": "https://explore-education-statistics.service.gov.uk/find-statistics/education-health-and-care-plans",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "years",
+"n": 8,
+"fields": []
+},
+{
+"name": "national",
+"n": 8,
+"fields": [
+"year",
+"total",
+"mainstream",
+"special_independent",
+"special_nonmaintained",
+"special",
+"ap",
+"fe",
+"ehe"
+]
+},
+{
+"name": "timeliness_years",
+"n": 3,
+"fields": []
+},
+{
+"name": "national_within20_pct",
+"n": 3,
+"fields": []
+},
+{
+"name": "la",
+"n": 159,
+"fields": [
+"E08000037",
+"E08000021",
+"E08000022",
+"E08000023",
+"E08000024",
+"E06000001",
+"E06000002",
+"E06000003",
+"E06000004",
+"E06000047",
+"E06000005",
+"E06000057",
+"E08000011",
+"E08000012",
+"E08000013",
+"E08000014",
+"E08000015",
+"E08000001",
+"E08000002",
+"E08000003",
+"E08000004",
+"E08000005",
+"E08000006",
+"E08000007"
+],
+"keyed": true
+}
+],
+"domains": [
+"education",
+"councils"
+],
+"pages": [
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "sim_params",
+"bytes": 12645,
+"source": "HMRC, Direct effects of illustrative tax changes (2025-06)",
+"url": "https://www.gov.uk/government/statistics/direct-effects-of-illustrative-tax-changes",
+"more_sources": [],
+"note": "Yield of each illustrative change in \u00a3 million (positive = more revenue for a rise). Later years in the simulator grow these in line with nominal GDP.",
+"tables": [
+{
+"name": "years",
+"n": 3,
+"fields": []
+},
+{
+"name": "lines",
+"n": 75,
+"fields": [
+"section",
+"label",
+"m"
+]
+}
+],
+"domains": [
+"spending",
+"tax",
+"model"
+],
+"pages": [
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "spending",
+"bytes": 52600,
+"source": "HM Treasury, Public Expenditure Statistical Analyses (PESA) 2025",
+"url": "https://www.gov.uk/government/statistics/public-expenditure-statistical-analyses-2025",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "tables",
+"n": 13,
+"fields": [
+"tme_by_department",
+"tme_by_department_real",
+"rdel_plans",
+"cdel_plans",
+"admin_budgets",
+"by_function",
+"by_function_real",
+"by_function_pct_gdp",
+"by_subfunction",
+"by_economic_category",
+"procurement_by_function",
+"nhs_england_del",
+"aggregates_long_run"
+],
+"keyed": true
+}
+],
+"domains": [
+"spending"
+],
+"pages": [
+{
+"key": "spending",
+"label": "Spending & fiscal",
+"group": "Money"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "departments",
+"label": "Departments & civil service",
+"group": "Machinery"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "education",
+"label": "Education",
+"group": "Services"
+},
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "stations",
+"bytes": 901642,
+"source": "ORR, Estimates of station usage, April 2025 to March 2026 (tables 1410 and 1415); station locations from Wikidata",
+"url": "https://dataportal.orr.gov.uk/station-usage",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "fields",
+"n": 12,
+"fields": []
+},
+{
+"name": "series_years",
+"n": 29,
+"fields": []
+},
+{
+"name": "stations",
+"n": 2583,
+"fields": []
+}
+],
+"domains": [
+"transport",
+"infrastructure"
+],
+"pages": [
+{
+"key": "map",
+"label": "Infrastructure map",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+},
+{
+"file": "welfare",
+"bytes": 1331151,
+"source": "DWP, Benefit expenditure and caseload tables 2026 (Spring Forecast 2026)",
+"url": "https://www.gov.uk/government/publications/benefit-expenditure-and-caseload-tables-2026",
+"more_sources": [],
+"note": "Expenditure in \u00a3 billion nominal and real terms, caseloads in thousands; years after the latest outturn are DWP/OBR forecasts.",
+"tables": [
+{
+"name": "sheets",
+"n": 32,
+"fields": [
+"UK welfare",
+"GB welfare",
+"Benefit summary table",
+"Table 1a",
+"Table 1b",
+"Table 1c",
+"Table 2a",
+"Table 2b",
+"Table 2c",
+"Table 3a",
+"Table 3b",
+"Table 3c",
+"Table 4",
+"Table 4 (i)",
+"Table 4 (ii)",
+"Non-DWP Welfare",
+"Bereavement benefits",
+"Carers Allowance",
+"Cost of Living",
+"Disability benefits",
+"Incapacity benefits",
+"Industrial injuries benefits",
+"Council Tax Benefit",
+"Housing benefits"
+],
+"keyed": true
+}
+],
+"domains": [
+"welfare"
+],
+"pages": [
+{
+"key": "welfare",
+"label": "Social security",
+"group": "Services"
+},
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+}
+]
+},
+{
+"file": "welfare_la",
+"bytes": 164477,
+"source": "DWP, Benefit expenditure by local authority, 2002/03 to 2024/25 (Benefit expenditure and caseload tables 2025)",
+"url": "https://www.gov.uk/government/publications/benefit-expenditure-and-caseload-tables-2025",
+"more_sources": [],
+"note": "\u00a3 million, nominal. Some benefits (e.g. Child Benefit, tax credits) are not allocated to local authorities.",
+"tables": [
+{
+"name": "benefits",
+"n": 11,
+"fields": []
+},
+{
+"name": "la",
+"n": 392,
+"fields": [
+"E06000047",
+"E06000005",
+"E06000001",
+"E06000002",
+"E06000057",
+"E06000003",
+"E06000004",
+"E08000037",
+"E08000021",
+"E08000022",
+"E08000023",
+"E08000024",
+"E06000008",
+"E06000009",
+"E06000049",
+"E06000050",
+"E06000006",
+"E06000007",
+"E06000063",
+"E06000064",
+"E07000026",
+"E07000027",
+"E07000028",
+"E07000029"
+],
+"keyed": true
+}
+],
+"domains": [
+"welfare",
+"councils"
+],
+"pages": [
+{
+"key": "welfare",
+"label": "Social security",
+"group": "Services"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+}
+],
+"pages": [
+{
+"key": "overview",
+"label": "Overview",
+"group": "Explore"
+},
+{
+"key": "findings",
+"label": "Findings & plan",
+"group": "Explore"
+},
+{
+"key": "hub",
+"label": "Data hub",
+"group": "Explore"
+},
+{
+"key": "history",
+"label": "Policy history",
+"group": "Explore"
+},
+{
+"key": "simulate",
+"label": "Policy simulator",
+"group": "Simulate"
+},
+{
+"key": "sandbox",
+"label": "Sandbox campaign",
+"group": "Simulate"
+},
+{
+"key": "lab",
+"label": "Model lab",
+"group": "Simulate"
+},
+{
+"key": "laws",
+"label": "Laws & legislation",
+"group": "Law"
+},
+{
+"key": "draft",
+"label": "Drafting workspace",
+"group": "Law"
+},
+{
+"key": "spending",
+"label": "Spending & fiscal",
+"group": "Money"
+},
+{
+"key": "contracts",
+"label": "Contracts & suppliers",
+"group": "Money"
+},
+{
+"key": "departments",
+"label": "Departments & civil service",
+"group": "Machinery"
+},
+{
+"key": "projects",
+"label": "Major projects",
+"group": "Machinery"
+},
+{
+"key": "foreign",
+"label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "map",
+"label": "Infrastructure map",
+"group": "Places"
+},
+{
+"key": "councils",
+"label": "Councils",
+"group": "Places"
+},
+{
+"key": "nhs",
+"label": "NHS",
+"group": "Services"
+},
+{
+"key": "education",
+"label": "Education",
+"group": "Services"
+},
+{
+"key": "welfare",
+"label": "Social security",
+"group": "Services"
+},
+{
+"key": "charities",
+"label": "Charities & NGOs",
+"group": "Services"
+},
+{
+"key": "sources",
+"label": "Sources & catalogue",
+"group": "Reference"
+}
+]
+}

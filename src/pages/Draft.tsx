@@ -33,6 +33,8 @@ export default function DraftPage() {
   useEffect(() => { try { localStorage.setItem(LS, JSON.stringify(drafts)); } catch {} }, [drafts]);
   // "Draft an amendment" links from the laws page
   useEffect(() => {
+    const o = location.hash.match(/[?&]open=(\d+)/);
+    if (o && drafts.some((d) => d.id === +o[1])) { setCur(+o[1]); history.replaceState(null, "", "#/draft"); return; }
     const m = location.hash.match(/[?&]amend=([^&]+)/);
     if (!m) return;
     const t = decodeURIComponent(m[1]); const id = Date.now();

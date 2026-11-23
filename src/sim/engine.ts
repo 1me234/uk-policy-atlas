@@ -50,7 +50,7 @@ export const ZERO: Levers = { start: 1, basicRate: 0, higherRate: 0, addRate: 0,
   prisonCapital: 0, sentencingPct: 0, defence: 0, otherDept: 0, capital: 0, civilServicePct: 0, hmrcStaff: 0,
   giltShock: 0, demandShock: 0, netMigration: 0 };
 
-type NumKey = Exclude<keyof Levers, "projects">;
+export type NumKey = Exclude<keyof Levers, "projects">;
 export type LeverDef = { k: NumKey; group: string; label: string; unit: string; min: number; max: number; step: number; help?: string };
 const G = { tax: "Tax", dept: "Departments (real % change in day-to-day budget)", health: "Health and care", kids: "Schools and children", ss: "Social security",
   places: "Councils and housing", justice: "Justice", other: "Defence, investment and other spending", mog: "Machinery of government", shock: "Shocks and population" };
@@ -173,7 +173,7 @@ export function buildBaseline(fiscal: any, spending: any, nhs: any, welfare: any
 export type Channel = { id: string; label: string; v: number[] };
 export type Event = { t: number; tone: "good" | "bad" | "info"; area: string; text: string };
 export type Score = { area: string; label: string; unit: string; base: number; scen: number; higherIsBetter: boolean | null; d?: number };
-type Paths = {
+export type Paths = {
   waiting: number[]; delayed: number[]; teachers: number[]; police: number[]; childPov: number[]; penPov: number[];
   homes: number[]; homesExtraCum: number[]; homesPrivateExtra: number[]; housePricePct: number[]; ta: number[];
   prisonPop: number[]; prisonCap: number[]; labour: number[]; residents: number[];
@@ -186,7 +186,7 @@ export type Result = {
   psnb: number[]; psnd: number[]; psndPct: number[]; cbd: number[]; psnflPct: number[]; gdp: number[];
   unemploymentPp: number[]; unemploymentK: number[]; employmentK: number[];
   waiting: number[]; waitingBase: number[]; csHeadcount: number[];
-  laReserves: number[]; laReservesBase: number[]; dsgDeficit: number[]; dsgDeficitBase: number[];
+  laReserves: number[]; laReservesBase: number[]; dsgDeficit: number[]; dsgDeficitBase: number[]; dsgRaw: number[];
   welfarePct: number[]; welfareBasePct: number[]; schoolsRealPct: number[]; defencePct: number[];
   S: Paths; SB: Paths;
   rules: { stability: { base: number; scen: number; met: boolean; baseMet: boolean }; investment: { base: number; scen: number; met: boolean; baseMet: boolean } };
@@ -351,20 +351,44 @@ export function simulate(B: Baseline, Lin: Levers, P: ParamValues): Result {
   const employmentK = idx.map((t) => -unemploymentK[t] + S.labour[t]);
 
   // Councils: reserves absorb the social-care gap; grant, council tax, social care money and lower TA costs relieve it
-  const laReservesBase: number[] = [], laReserves: number[] = [], dsgDeficitBase: number[] = [], dsgDeficit: number[] = [];
+  const laReservesBase: number[] = [], laReserves: number[] = [], dsgDeficitBase: number[] = [], dsgDeficit: number[] = [], dsgRaw: number[] = [];
   let rb = B.la.usableReserves, r = rb, db = B.la.dsgDeficit, d = db, gap = 0;
   const ctax = get(dReceipts, "ctax"), taCost = get(dSpend, "ta");
   for (const t of idx) {
     gap += (P.la_gap / 100) * B.la.socialCare;
     rb -= gap; r -= gap - on(t) * (L.councils + L.socialCare * (1 - P.sc_capacity_share)) - ctax[t] + taCost[t];
     db += P.la_dsg_growth; d += P.la_dsg_growth - on(t) * L.highNeeds;
-    laReservesBase.push(rb); laReserves.push(r); dsgDeficitBase.push(db); dsgDeficit.push(Math.max(0, d));
+    laReservesBase.push(rb); laReserves.push(r); dsgDeficitBase.push(db); dsgDeficit.push(Math.max(0, d)); dsgRaw.push(d);
   }
   const waitingBase = SB.waiting, waiting = S.waiting;
-  const ri = YEARS.indexOf(RULE_YEAR);
-  const basePsnflPct = idx.map((t) => (B.psnfl[t] / B.gdp[t]) * 100);
   const psndPct = idx.map((t) => (psnd[t] / gdp[t]) * 100);
   const csHeadcount = idx.map((t) => B.csHeadcount * (1 + (on(t) * L.civilServicePct) / 100));
+  const { rules, events, scores } = assess(B, { psnb, psndPct, cbd, psnflPct, gdpPct, employmentK, unemploymentK, waiting, waitingBase, laReserves, laReservesBase, dsgDeficit, dsgDeficitBase, csHeadcount, S, SB });
+  const cancelled = B.projects.filter((p) => proj[p.id] === -100);
+  if (cancelled.length) events.push({ t: L.start, tone: "info", area: "Infrastructure", text: `Cancelled: ${cancelled.map((p) => p.name).join(", ")}. Break costs of £${cancelled.reduce((s, p) => s + P.cancel_cost * p.fy, 0).toFixed(1)}bn in the first year.` });
+  if (L.giltShock >= 1) events.push({ t: L.start, tone: "bad", area: "Public finances", text: `Gilt yields jump ${L.giltShock.toFixed(2)}pp. Debt interest rises by £${interest[Math.min(n - 1, L.start + 2)].toFixed(1)}bn within three years.` });
+  events.sort((a, b) => a.t - b.t);
+
+  return {
+    years: YEARS, dReceipts, dSpend, demand, supply, supplyParts, gdpPct, stabiliser, interest, dPsnb, dPsnd, psnb, psnd,
+    psndPct, cbd, psnflPct, gdp, unemploymentPp, unemploymentK, employmentK,
+    waiting, waitingBase, csHeadcount, laReserves, laReservesBase, dsgDeficit, dsgDeficitBase, dsgRaw,
+    welfarePct: idx.map((t) => ((B.welfare[t] + WELFARE.reduce((s, id) => s + get(dSpend, id)[t], 0)) / gdp[t]) * 100), welfareBasePct: idx.map((t) => (B.welfare[t] / B.gdp[t]) * 100),
+    schoolsRealPct: idx.map((t) => (on(t) * L.schools / P.schools_core) * 100),
+    defencePct: idx.map((t) => P.defence_base_pct + (on(t) * L.defence * priceIdx(t) / gdp[t]) * 100),
+    S, SB, rules, events, scores,
+  };
+}
+
+/** The parts of a run that the fiscal rules, events and scorecard are judged on. */
+export type Core = Pick<Result, "psnb" | "psndPct" | "cbd" | "psnflPct" | "gdpPct" | "employmentK" | "unemploymentK" | "waiting" | "waitingBase" | "laReserves" | "laReservesBase" | "dsgDeficit" | "dsgDeficitBase" | "csHeadcount" | "S" | "SB">;
+
+/** Fiscal rules, threshold events and the scorecard (at year index T), judged against the baseline. */
+export function assess(B: Baseline, X: Core, T = YEARS.length - 1): Pick<Result, "rules" | "events" | "scores"> {
+  const n = YEARS.length, idx = [...Array(n).keys()];
+  const { psnb, psndPct, cbd, psnflPct, gdpPct, employmentK, unemploymentK, waiting, waitingBase, laReserves, laReservesBase, dsgDeficit, dsgDeficitBase, csHeadcount, S, SB } = X;
+  const ri = YEARS.indexOf(RULE_YEAR);
+  const basePsnflPct = idx.map((t) => (B.psnfl[t] / B.gdp[t]) * 100);
   const rules = {
     stability: { base: -B.cbd[ri], scen: -cbd[ri], baseMet: B.cbd[ri] <= 0, met: cbd[ri] <= 0 },
     investment: { base: basePsnflPct[ri] - basePsnflPct[ri - 1], scen: psnflPct[ri] - psnflPct[ri - 1], baseMet: basePsnflPct[ri] < basePsnflPct[ri - 1], met: psnflPct[ri] < psnflPct[ri - 1] },
@@ -394,13 +418,9 @@ export function simulate(B: Baseline, Lin: Levers, P: ParamValues): Result {
   if (Math.abs(peakU) >= 50) events.push({ t: tU, tone: peakU > 0 ? "bad" : "good", area: "Economy", text: `Unemployment ${peakU > 0 ? "rises" : "falls"} by about ${Math.abs(peakU).toFixed(0)}k at its peak in ${YEARS[tU]}.` });
   const dPov = S.childPov.map((x, t) => x - SB.childPov[t]), tp = dPov.findIndex((x) => Math.abs(x) >= 0.1);
   if (tp >= 0) events.push({ t: tp, tone: dPov[tp] < 0 ? "good" : "bad", area: "Poverty", text: `About ${Math.abs(dPov[tp] * 1000).toFixed(0)}k ${dPov[tp] < 0 ? "fewer" : "more"} children in relative poverty from ${YEARS[tp]}.` });
-  const cancelled = B.projects.filter((p) => proj[p.id] === -100);
-  if (cancelled.length) events.push({ t: L.start, tone: "info", area: "Infrastructure", text: `Cancelled: ${cancelled.map((p) => p.name).join(", ")}. Break costs of £${cancelled.reduce((s, p) => s + P.cancel_cost * p.fy, 0).toFixed(1)}bn in the first year.` });
-  if (L.giltShock >= 1) events.push({ t: L.start, tone: "bad", area: "Public finances", text: `Gilt yields jump ${L.giltShock.toFixed(2)}pp. Debt interest rises by £${interest[Math.min(n - 1, L.start + 2)].toFixed(1)}bn within three years.` });
   events.sort((a, b) => a.t - b.t);
 
   // ---------- Scorecard at the horizon ----------
-  const T = n - 1;
   const scores: Score[] = [
     { area: "Public finances", label: `Borrowing ${YEARS[T]}`, unit: "£bn", base: B.psnb[T], scen: psnb[T], higherIsBetter: false },
     { area: "Public finances", label: `Debt ${YEARS[T]}`, unit: "% GDP", base: (B.psnd[T] / B.gdp[T]) * 100, scen: psndPct[T], higherIsBetter: false },
@@ -421,15 +441,7 @@ export function simulate(B: Baseline, Lin: Levers, P: ParamValues): Result {
     { area: "State", label: "Civil servants", unit: "k", base: B.csHeadcount / 1000, scen: csHeadcount[T] / 1000, higherIsBetter: null },
   ];
 
-  return {
-    years: YEARS, dReceipts, dSpend, demand, supply, supplyParts, gdpPct, stabiliser, interest, dPsnb, dPsnd, psnb, psnd,
-    psndPct, cbd, psnflPct, gdp, unemploymentPp, unemploymentK, employmentK,
-    waiting, waitingBase, csHeadcount, laReserves, laReservesBase, dsgDeficit, dsgDeficitBase,
-    welfarePct: idx.map((t) => ((B.welfare[t] + WELFARE.reduce((s, id) => s + get(dSpend, id)[t], 0)) / gdp[t]) * 100), welfareBasePct: idx.map((t) => (B.welfare[t] / B.gdp[t]) * 100),
-    schoolsRealPct: idx.map((t) => (on(t) * L.schools / P.schools_core) * 100),
-    defencePct: idx.map((t) => P.defence_base_pct + (on(t) * L.defence * priceIdx(t) / gdp[t]) * 100),
-    S, SB, rules, events, scores,
-  };
+  return { rules, events, scores };
 }
 
 export const PRESETS: { name: string; note: string; levers: Partial<Levers> }[] = [
