@@ -1,286 +1,1064 @@
 {
-  "note": "Knock-ons of repealing, amending or restoring Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. Effects on the simulator may only move existing fiscal and service levers. No law change creates new powers, and none can unlock measures that strip citizenship or residence by ethnicity or that enable sterilisation or eugenics.",
-  "generic": {
-    "repeal": [
-      { "dim": "legal", "text": "Repeal removes the powers and duties the Act created. Bodies it set up, and secondary legislation made under it, fall unless a saving provision keeps them. Section 16 of the Interpretation Act 1978 preserves rights and liabilities that had already accrued." },
-      { "dim": "fiscal", "text": "No modelled fiscal effect. Use the simulator's levers for any spending or tax change that would follow." }
-    ],
-    "amend": [
-      { "dim": "legal", "text": "An amendment changes only the provisions it names. Draft it in the drafting workspace to set out exactly which sections change." }
-    ],
-    "restore": [
-      { "dim": "legal", "text": "Re-enacting a repealed Act revives it only as far as the new Act says. Later legislation that replaced it would also need amending to avoid two regimes covering the same ground." }
-    ]
-  },
-  "acts": [
-    {
-      "title": "Equality Act 2010",
-      "summary": "The main anti-discrimination law in Great Britain. It covers nine protected characteristics in work, services, education and public functions, sets the public sector equality duty (s.149), and requires gender pay gap reporting. It replaced the Race Relations, Sex Discrimination, Equal Pay and Disability Discrimination Acts.",
-      "repeal": {
-        "knock": [
-          { "dim": "legal", "text": "Statutory protection against discrimination in employment, goods and services, housing and education would end in Great Britain. There would be no equal pay claims, no duty to make reasonable adjustments for disabled people, and no public sector equality duty. Public authorities would still be bound by Article 14 of the ECHR through the Human Rights Act, but only when another Convention right is engaged, and only against the state, not private employers or traders." },
-          { "dim": "legal", "text": "Repeal does not authorise discrimination by the state. Removing anyone's citizenship or residence because of race or ethnicity would still breach the Human Rights Act and the UK's obligations under ICERD, which the UK ratified in 1969." },
-          { "dim": "diplomatic", "text": "The UK–EU Trade and Cooperation Agreement commits the UK not to weaken labour and social protections in a way that affects trade or investment. Repeal would invite EU 'rebalancing' measures and dispute settlement. In Northern Ireland, Article 2 of the Windsor Framework bars any diminution of rights protected by the 1998 Agreement, which keeps several EU anti-discrimination directives in force there." },
-          { "dim": "diplomatic", "text": "The UN CERD and CEDAW committees review UK compliance periodically. Repeal would be reported as a regression." },
-          { "dim": "fiscal", "text": "Small direct savings: the Equality and Human Rights Commission's grant (about £17m a year) and public bodies' equality duty work. Discrimination claims would fall, but employers would face uncertainty while courts worked out what remained. No lever is moved." },
-          { "dim": "social", "text": "Disabled people would lose the right to reasonable adjustments. Women would lose the statutory route to equal pay. Ethnic minority, LGBT and older workers would lose protection from dismissal or refusal of service on those grounds. Evidence from before 1965, when discrimination in housing and work was lawful and widespread, suggests outcomes would worsen most for groups with the least bargaining power." }
-        ]
-      },
-      "amend": [
-        {
-          "id": "psed", "label": "Remove the public sector equality duty (s.149)",
-          "knock": [
-            { "dim": "legal", "text": "Public bodies would no longer have to have 'due regard' to equality when they make decisions. Judicial reviews based on the duty would end. Discrimination itself would stay unlawful." },
-            { "dim": "fiscal", "text": "Saves some officer time on equality impact assessments. No official estimate exists, and the saving is likely small next to departmental budgets." },
-            { "dim": "social", "text": "Less systematic attention to how cuts or reforms fall on disabled people and other groups. The 2013 government review found the duty's costs and benefits hard to measure." }
-          ]
-        },
-        {
-          "id": "socioeconomic", "label": "Commence the socio-economic duty (s.1) in England",
-          "knock": [
-            { "dim": "legal", "text": "Section 1 requires public bodies to consider how to reduce inequalities from socio-economic disadvantage. It is in force in Scotland (since 2018) and Wales (since 2021), but has never been commenced in England." },
-            { "dim": "social", "text": "This is a process duty: its effect depends on how bodies apply it. Reviews in Scotland found mixed implementation." }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Race Relations Act 1965",
-      "summary": "The first British law against racial discrimination, covering public places. It was repealed and replaced by the Race Relations Act 1976, which the Equality Act 2010 in turn replaced.",
-      "status": "repealed", "supersededBy": "Equality Act 2010",
-      "restore": { "knock": [ { "dim": "legal", "text": "Already superseded. Its protections exist, in wider form, in the Equality Act 2010. Restoring it would add nothing unless the Equality Act were repealed, and even then it covered only public places and had no enforcement through the courts." } ] }
-    },
-    {
-      "title": "Race Relations Act 1968",
-      "summary": "Extended the ban on racial discrimination to housing, employment and services. It was repealed by the Race Relations Act 1976.",
-      "status": "repealed", "supersededBy": "Equality Act 2010",
-      "restore": { "knock": [ { "dim": "legal", "text": "Already superseded, in wider form, by the Equality Act 2010. Restoring it would only matter if the Equality Act were repealed." } ] }
-    },
-    {
-      "title": "Race Relations Act 1976",
-      "summary": "Made direct and indirect racial discrimination unlawful and set up the Commission for Racial Equality. It was repealed by the Equality Act 2010, which restated its protections.",
-      "status": "repealed", "supersededBy": "Equality Act 2010",
-      "restore": { "knock": [ { "dim": "legal", "text": "Its content lives on in the Equality Act 2010. Restoring it alongside that Act would create two overlapping regimes. Restoring it after repealing the Equality Act would bring back race protection only." } ] }
-    },
-    {
-      "title": "Race Relations (Amendment) Act 2000",
-      "summary": "Passed after the Macpherson report into Stephen Lawrence's murder. It brought the police within race discrimination law and created a race equality duty for public authorities, later folded into the public sector equality duty.",
-      "supersededBy": "Equality Act 2010",
-      "repeal": { "knock": [ { "dim": "legal", "text": "Its substance is now in the Equality Act 2010, including the duties on the police and the public sector equality duty. Repealing this Act alone changes little." } ] }
-    },
-    {
-      "title": "Race Relations (Remedies) Act 1994",
-      "summary": "Removed the cap on compensation for race discrimination. It was repealed in 2010, and the Equality Act keeps compensation uncapped.",
-      "status": "repealed", "supersededBy": "Equality Act 2010"
-    },
-    {
-      "title": "Sex Discrimination Act 1975",
-      "summary": "Outlawed sex discrimination in employment, education and services. It was replaced by the Equality Act 2010.",
-      "status": "repealed", "supersededBy": "Equality Act 2010",
-      "restore": { "knock": [ { "dim": "legal", "text": "Superseded by the Equality Act 2010." } ] }
-    },
-    {
-      "title": "Equal Pay Act 1970",
-      "summary": "Gave women the right to equal pay for equal work. It was replaced by the equality of terms provisions in the Equality Act 2010.",
-      "status": "repealed", "supersededBy": "Equality Act 2010",
-      "restore": { "knock": [ { "dim": "legal", "text": "Superseded by the Equality Act 2010." } ] }
-    },
-    {
-      "title": "Disability Discrimination Act 1995",
-      "summary": "Introduced disability discrimination law and the duty to make reasonable adjustments. In Great Britain it was replaced by the Equality Act 2010, but it still applies in Northern Ireland.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "In Great Britain it is already replaced. In Northern Ireland it is still the main disability discrimination law, so repeal would remove that protection there." },
-        { "dim": "diplomatic", "text": "In Northern Ireland, Article 2 of the Windsor Framework bars any diminution of rights under the 1998 Agreement. Repeal there would be open to challenge." }
-      ] }
-    },
-    {
-      "title": "Human Rights Act 1998",
-      "summary": "Makes the rights in the European Convention on Human Rights enforceable in UK courts. It requires public authorities to act compatibly and courts to read legislation compatibly where possible, and lets higher courts declare an Act incompatible.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The UK would remain bound by the Convention under international law. People would have to take cases to Strasbourg, as before 2000, which takes years. UK courts would lose the duty to read laws compatibly and the power to make declarations of incompatibility." },
-        { "dim": "legal", "text": "The devolution Acts separately require devolved law and ministers to comply with Convention rights: Scotland Act 1998 s.29 and s.57, Government of Wales Act 2006 s.108A, and Northern Ireland Act 1998 s.6 and s.24. Repealing the Human Rights Act does not remove those limits, and changing them would engage the Sewel convention." },
-        { "dim": "diplomatic", "text": "Under the 1998 Belfast/Good Friday Agreement, the UK committed to incorporate the Convention into Northern Ireland law. The Trade and Cooperation Agreement's law-enforcement cooperation rests on respect for the Convention and can be terminated if the UK denounces it. Repealing the Human Rights Act is not denunciation, but the EU and Irish governments would treat it as a signal." },
-        { "dim": "fiscal", "text": "No material direct effect. There might be more Strasbourg judgments and compensation awards, which are small sums." },
-        { "dim": "social", "text": "Fewer quick domestic remedies, for example in care homes, mental health detention, inquests (Article 2) and immigration cases (Article 8)." }
-      ] },
-      "amend": [ { "id": "bor", "label": "Replace with a domestic bill of rights", "knock": [
-        { "dim": "legal", "text": "Depends on the drafting. The 2022 Bill of Rights Bill would have weakened the duty to read laws compatibly and limited positive obligations. It was withdrawn in 2023." },
-        { "dim": "diplomatic", "text": "Smaller than outright repeal if the Convention is still given effect, but the Northern Ireland commitments still apply." }
-      ] } ]
-    },
-    {
-      "title": "Climate Change Act 2008",
-      "summary": "Sets the legally binding target of net zero emissions by 2050 (amended in 2019), five-year carbon budgets, and the Climate Change Committee.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The net zero target, the carbon budgets and the Climate Change Committee would end. Judicial reviews of the government's delivery plans, such as the successful challenges in 2022 and 2024, would lose their basis." },
-        { "dim": "diplomatic", "text": "The UK's Paris Agreement pledge would remain an international commitment, but the domestic legal backing for it would go. The UK wrote the first climate framework law, and repealing it would damage its standing in COP negotiations." },
-        { "dim": "fiscal", "text": "No direct saving, because net zero spending is set by policy, not by the Act. Investors would face more policy uncertainty, which can raise the cost of capital for low-carbon projects." },
-        { "dim": "social", "text": "The impact depends on what replaces the policies the Act drives." }
-      ] },
-      "amend": [ { "id": "2060", "label": "Move the net zero target to 2060", "knock": [
-        { "dim": "legal", "text": "Carbon budgets would be reset. The Climate Change Committee would advise on the new path." },
-        { "dim": "diplomatic", "text": "The UK would be seen as backsliding on its Paris commitments, and ambition levels are reviewed at every COP." }
-      ] } ]
-    },
-    {
-      "title": "Bank of England Act 1998",
-      "summary": "Gives the Bank of England operational independence over interest rates to meet the inflation target the Chancellor sets, through the Monetary Policy Committee.",
-      "repeal": {
-        "knock": [
-          { "dim": "legal", "text": "Monetary policy would return to the Treasury. The Monetary Policy Committee's statutory basis would end." },
-          { "dim": "fiscal", "text": "Investors would expect higher inflation and demand a premium to hold gilts. After the September 2022 mini-budget, long gilt yields rose by more than one percentage point within days. The model assumes a lasting 0.5 point rise in yields." },
-          { "dim": "diplomatic", "text": "Central bank independence is standard among G7 economies and expected by the IMF. Ending it would be read as a move towards fiscal dominance." }
-        ],
-        "levers": [ { "k": "giltShock", "v": 0.5, "basis": "assumption" } ]
-      }
-    },
-    {
-      "title": "Budget Responsibility and National Audit Act 2011",
-      "summary": "Created the Office for Budget Responsibility, which produces the official economic and fiscal forecasts, and reformed the National Audit Office.",
-      "repeal": {
-        "knock": [
-          { "dim": "legal", "text": "Official forecasting would go back to the Treasury. The National Audit Office's governance provisions would also need re-enacting." },
-          { "dim": "fiscal", "text": "Markets would treat the loss of independent forecasts as weaker discipline. The model assumes a lasting 0.25 point rise in gilt yields. Bypassing the OBR was part of the September 2022 market reaction." }
-        ],
-        "levers": [ { "k": "giltShock", "v": 0.25, "basis": "assumption" } ]
-      }
-    },
-    {
-      "title": "Localism Act 2011",
-      "summary": "Among other things, it inserted the council tax referendum rules: councils must hold a local referendum to raise council tax above the government's limit.",
-      "amend": [ { "id": "ctaxref", "label": "Abolish council tax referendum limits", "knock": [
-        { "dim": "fiscal", "text": "Councils could raise council tax freely. The model assumes, on average, 2 points a year more than the limit allows, with the money staying with councils." },
-        { "dim": "social", "text": "Council tax is regressive against property values, which are still based on 1991 bands. Larger rises fall hardest on lower-income households in areas with low property values." }
-      ], "levers": [ { "k": "councilTaxPp", "v": 2, "basis": "assumption" } ] } ]
-    },
-    {
-      "title": "Health and Care Act 2022",
-      "summary": "Abolished clinical commissioning groups, created 42 integrated care boards, merged NHS Improvement into NHS England, and loosened competition rules.",
-      "repeal": {
-        "knock": [
-          { "dim": "legal", "text": "Without replacement, commissioning would revert to the 2012 structures, which no longer exist on the ground. In practice a new reorganisation Act would be needed." },
-          { "dim": "fiscal", "text": "The Department of Health estimated the transition costs of the 2012 reorganisation at about £1.5bn. The model assumes £0.75bn a year for two years." },
-          { "dim": "social", "text": "Reorganisations distract management for years. The evidence on the 2012 reforms finds disruption and little benefit." }
-        ],
-        "levers": [ { "k": "otherDept", "v": 0.75, "years": 2, "basis": "assumption" } ]
-      }
-    },
-    {
-      "title": "Health and Social Care Act 2012",
-      "summary": "The Lansley reforms. They created clinical commissioning groups and NHS England, and moved public health to councils. Much of the commissioning structure was replaced in 2022.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Much of it was already replaced by the Health and Care Act 2022. Repealing what remains, including the public health functions moved to councils, would need replacement provisions." },
-        { "dim": "fiscal", "text": "No modelled effect beyond the reorganisation itself." }
-      ] }
-    },
-    {
-      "title": "Children and Families Act 2014",
-      "summary": "Part 3 created education, health and care plans (EHCPs) for children and young people with special educational needs up to age 25. Councils have a legal duty to secure the provision in a plan.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The legal entitlement to the provision in an EHCP would end, and tribunal appeals would end with it. Over 600,000 children and young people have plans." },
-        { "dim": "fiscal", "text": "Demand-led high-needs costs, which drive council deficits, would become discretionary. The atlas models the deficit's growth as a parameter, so no lever moves. Change 'Growth in high-needs (SEND) deficits' in the simulator's Parameters to test it." },
-        { "dim": "social", "text": "Families would lose an enforceable right. Councils would ration support, and parents with fewer resources would be least able to secure it." }
-      ] },
-      "amend": [ { "id": "ehcp25", "label": "End EHCPs at 19 rather than 25", "knock": [
-        { "dim": "fiscal", "text": "Reduces post-19 placement costs. Over-19s are a small share of plans but some of the most expensive placements." },
-        { "dim": "social", "text": "Young people aged 19 to 25 would lose support at the transition to adulthood." }
-      ] } ]
-    },
-    {
-      "title": "Housing Act 1996",
-      "summary": "Part 7 sets councils' homelessness duties. The main duty (s.193) requires them to secure accommodation for eligible households in priority need who are unintentionally homeless.",
-      "amend": [ { "id": "part7", "label": "Remove the main homelessness duty (Part 7)", "knock": [
-        { "dim": "legal", "text": "Councils would no longer have to house families in priority need. Section 17 of the Children Act 1989 would still require them to support children in need." },
-        { "dim": "fiscal", "text": "Temporary accommodation costs over £2bn a year would fall, but social services and NHS costs would rise. The model does not move temporary accommodation numbers for a legal change." },
-        { "dim": "social", "text": "More families and children in unsafe accommodation or on the street, as in the period before 1977, when the statutory duty was created." }
-      ] } ]
-    },
-    {
-      "title": "National Minimum Wage Act 1998",
-      "summary": "Sets the national minimum wage (and the National Living Wage), with rates recommended by the Low Pay Commission.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "No statutory wage floor. HMRC enforcement of the minimum wage would end." },
-        { "dim": "fiscal", "text": "Lower wages raise Universal Credit costs and cut income tax and NICs receipts. The net fiscal effect is likely negative, but it is not modelled here." },
-        { "dim": "diplomatic", "text": "The labour standards commitments in the Trade and Cooperation Agreement apply." },
-        { "dim": "social", "text": "The Low Pay Commission found no significant job losses from minimum wage rises up to now, and large pay gains for the lowest paid. Repeal would reverse those gains." }
-      ] }
-    },
-    {
-      "title": "European Union (Withdrawal) Act 2018",
-      "summary": "Repealed the European Communities Act 1972 and converted EU law into domestic law, now called assimilated law after the Retained EU Law (Revocation and Reform) Act 2023.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Thousands of rules converted at exit (on product standards, aviation, data, the environment and employment) would lose their legal basis. This is one of the largest legal gaps a single repeal could create." },
-        { "dim": "diplomatic", "text": "The Withdrawal Agreement, including the Windsor Framework, is given domestic effect partly through this Act. Repeal would breach the UK's obligations under the Withdrawal Agreement." },
-        { "dim": "fiscal", "text": "Not modelled. Trade would be disrupted at once." }
-      ] }
-    },
-    {
-      "title": "Scotland Act 1998",
-      "summary": "Created the Scottish Parliament and Government. Since 2016, s.63A has said they are a permanent part of the UK's constitution and will not be abolished except after a referendum in Scotland.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Parliament is sovereign and could legally repeal the Act. But s.63A commits to a referendum first, and the Sewel convention (s.28(8)) expects the Scottish Parliament's consent." },
-        { "dim": "diplomatic", "text": "This would be a constitutional crisis and would sharply raise support for independence." },
-        { "dim": "fiscal", "text": "Devolved spending of more than £50bn would return to Whitehall, along with the Barnett mechanism. Not modelled." }
-      ] }
-    },
-    {
-      "title": "Freedom of Information Act 2000",
-      "summary": "Gives a right of access to information held by public authorities, overseen by the Information Commissioner.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The right to request information would end. Environmental information requests would continue under the Environmental Information Regulations 2004, which implement the Aarhus Convention." },
-        { "dim": "fiscal", "text": "There would be modest savings in handling time. No reliable central estimate exists." },
-        { "dim": "social", "text": "Less public scrutiny. Several major disclosures, including the 2009 MPs' expenses scandal, began with freedom of information requests." }
-      ] }
-    },
-    {
-      "title": "Modern Slavery Act 2015",
-      "summary": "Consolidates slavery and trafficking offences, creates the Independent Anti-slavery Commissioner, and requires large companies to publish supply chain statements (s.54).",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The consolidated offences would go, although some older offences may revive only if the repeal says so. Victim protections would end, including the statutory defence in s.45." },
-        { "dim": "diplomatic", "text": "The UK is party to the Council of Europe Convention on Action against Trafficking, which requires victim identification and support." }
-      ] }
-    },
-    {
-      "title": "Town and Country Planning Act 1990",
-      "summary": "The core of the planning system. Most development needs planning permission (s.57), decided by local planning authorities against the development plan.",
-      "amend": [ { "id": "zoning", "label": "Move to zoning: permission in principle on allocated land", "knock": [
-        { "dim": "legal", "text": "Planning would become rules-based for allocated sites, as in much of Europe and the US." },
-        { "dim": "fiscal", "text": "More homes and higher residential investment. The model assumes private housebuilding rises 10%, at the low end of estimates for zoning reforms." },
-        { "dim": "social", "text": "Less local say over individual schemes, and faster delivery." }
-      ], "levers": [ { "k": "planningPct", "v": 10, "basis": "assumption" } ] } ]
-    },
-    {
-      "title": "Immigration Act 1971",
-      "summary": "The framework for immigration control: leave to enter and remain, the right of abode, and powers of removal.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Without a replacement there would be no statutory basis for granting or refusing leave, for border control, or for removal. Repeal on its own would not help either restrict or open migration. It would leave a legal vacuum." },
-        { "dim": "fiscal", "text": "Not modelled. Use the migration levers to model changes in flows." }
-      ] }
-    },
-    {
-      "title": "British Nationality Act 1981",
-      "summary": "Defines British citizenship and the other forms of British nationality, how they are acquired, and the limited grounds for deprivation (s.40).",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Existing citizens would keep citizenship already acquired, under Interpretation Act savings, but the rules for acquiring it, by birth, descent or naturalisation, would have no basis until replaced." },
-        { "dim": "legal", "text": "International law limits deprivation. It must not be arbitrary or discriminatory (Universal Declaration of Human Rights, Article 15; ICERD, Article 5) and must not leave people stateless (1961 Convention on the Reduction of Statelessness). No change in this atlas allows deprivation of citizenship or residence by ethnicity." },
-        { "dim": "diplomatic", "text": "Repeal would raise questions for the overseas territories and Crown dependencies, whose people's status rests on this Act." }
-      ] }
-    },
-    {
-      "title": "Welfare Reform Act 2012",
-      "summary": "Created Universal Credit and Personal Independence Payment (PIP) and capped household benefits.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "Universal Credit and PIP would lose their basis. Legacy benefits have mostly been closed, so this would need a replacement Act." },
-        { "dim": "fiscal", "text": "Not modelled as a repeal. Use the social security levers to change benefit levels." }
-      ] }
-    },
-    {
-      "title": "Homelessness Reduction Act 2017",
-      "summary": "Added prevention and relief duties to Part 7 of the Housing Act 1996, which apply to all eligible households and not just those in priority need.",
-      "repeal": { "knock": [
-        { "dim": "legal", "text": "The prevention and relief duties would end. The main homelessness duty under the 1996 Act would remain." },
-        { "dim": "social", "text": "Single homeless people would lose most statutory help." }
-      ] }
-    }
+ "note": "Knock-ons of repealing, amending, restoring or enacting Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. A law change can move any simulator lever and can grant powers, which widen how far levers go. Some Acts lower the UK's democratic standing, which has consequences of its own in a campaign. You can add your own effects and powers to any change. No law in the atlas models stripping citizenship or residence by ethnicity, or sterilisation or eugenics. Under parliamentary sovereignty no court can strike down an Act of Parliament, so the limits on these Acts are political and procedural: the Lords, the Parliament Acts, devolved consent, treaties, markets and the public.",
+ "generic": {
+  "repeal": [
+   {
+    "dim": "legal",
+    "text": "Repeal removes the powers and duties the Act created. Bodies it set up, and secondary legislation made under it, fall unless a saving provision keeps them. Section 16 of the Interpretation Act 1978 preserves rights and liabilities that had already accrued."
+   },
+   {
+    "dim": "fiscal",
+    "text": "No modelled fiscal effect. Use the simulator's levers for any spending or tax change that would follow."
+   }
+  ],
+  "amend": [
+   {
+    "dim": "legal",
+    "text": "An amendment changes only the provisions it names. Draft it in the drafting workspace to set out exactly which sections change."
+   }
+  ],
+  "restore": [
+   {
+    "dim": "legal",
+    "text": "Re-enacting a repealed Act revives it only as far as the new Act says. Later legislation that replaced it would also need amending to avoid two regimes covering the same ground."
+   }
+  ],
+  "enact": [
+   {
+    "dim": "legal",
+    "text": "A new Act takes effect as far as its commencement provisions say. Courts read it alongside existing law: where it conflicts with an earlier Act, the later Act wins (implied repeal), except for 'constitutional statutes' such as the Human Rights Act, which need express words."
+   },
+   {
+    "dim": "fiscal",
+    "text": "No modelled fiscal effect unless you give the Act effects of its own below."
+   }
   ]
+ },
+ "acts": [
+  {
+   "title": "Equality Act 2010",
+   "summary": "The main anti-discrimination law in Great Britain. It covers nine protected characteristics in work, services, education and public functions, sets the public sector equality duty (s.149), and requires gender pay gap reporting. It replaced the Race Relations, Sex Discrimination, Equal Pay and Disability Discrimination Acts.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Statutory protection against discrimination in employment, goods and services, housing and education would end in Great Britain. There would be no equal pay claims, no duty to make reasonable adjustments for disabled people, and no public sector equality duty. Public authorities would still be bound by Article 14 of the ECHR through the Human Rights Act, but only when another Convention right is engaged, and only against the state, not private employers or traders."
+     },
+     {
+      "dim": "legal",
+      "text": "Repeal does not authorise discrimination by the state. Removing anyone's citizenship or residence because of race or ethnicity would still breach the Human Rights Act and the UK's obligations under ICERD, which the UK ratified in 1969."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The UK–EU Trade and Cooperation Agreement commits the UK not to weaken labour and social protections in a way that affects trade or investment. Repeal would invite EU 'rebalancing' measures and dispute settlement. In Northern Ireland, Article 2 of the Windsor Framework bars any diminution of rights protected by the 1998 Agreement, which keeps several EU anti-discrimination directives in force there."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The UN CERD and CEDAW committees review UK compliance periodically. Repeal would be reported as a regression."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Small direct savings: the Equality and Human Rights Commission's grant (about £17m a year) and public bodies' equality duty work. Discrimination claims would fall, but employers would face uncertainty while courts worked out what remained. No lever is moved."
+     },
+     {
+      "dim": "social",
+      "text": "Disabled people would lose the right to reasonable adjustments. Women would lose the statutory route to equal pay. Ethnic minority, LGBT and older workers would lose protection from dismissal or refusal of service on those grounds. Evidence from before 1965, when discrimination in housing and work was lawful and widespread, suggests outcomes would worsen most for groups with the least bargaining power."
+     }
+    ]
+   },
+   "amend": [
+    {
+     "id": "psed",
+     "label": "Remove the public sector equality duty (s.149)",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Public bodies would no longer have to have 'due regard' to equality when they make decisions. Judicial reviews based on the duty would end. Discrimination itself would stay unlawful."
+      },
+      {
+       "dim": "fiscal",
+       "text": "Saves some officer time on equality impact assessments. No official estimate exists, and the saving is likely small next to departmental budgets."
+      },
+      {
+       "dim": "social",
+       "text": "Less systematic attention to how cuts or reforms fall on disabled people and other groups. The 2013 government review found the duty's costs and benefits hard to measure."
+      }
+     ]
+    },
+    {
+     "id": "socioeconomic",
+     "label": "Commence the socio-economic duty (s.1) in England",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Section 1 requires public bodies to consider how to reduce inequalities from socio-economic disadvantage. It is in force in Scotland (since 2018) and Wales (since 2021), but has never been commenced in England."
+      },
+      {
+       "dim": "social",
+       "text": "This is a process duty: its effect depends on how bodies apply it. Reviews in Scotland found mixed implementation."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Race Relations Act 1965",
+   "summary": "The first British law against racial discrimination, covering public places. It was repealed and replaced by the Race Relations Act 1976, which the Equality Act 2010 in turn replaced.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010",
+   "restore": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Already superseded. Its protections exist, in wider form, in the Equality Act 2010. Restoring it would add nothing unless the Equality Act were repealed, and even then it covered only public places and had no enforcement through the courts."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Race Relations Act 1968",
+   "summary": "Extended the ban on racial discrimination to housing, employment and services. It was repealed by the Race Relations Act 1976.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010",
+   "restore": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Already superseded, in wider form, by the Equality Act 2010. Restoring it would only matter if the Equality Act were repealed."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Race Relations Act 1976",
+   "summary": "Made direct and indirect racial discrimination unlawful and set up the Commission for Racial Equality. It was repealed by the Equality Act 2010, which restated its protections.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010",
+   "restore": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Its content lives on in the Equality Act 2010. Restoring it alongside that Act would create two overlapping regimes. Restoring it after repealing the Equality Act would bring back race protection only."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Race Relations (Amendment) Act 2000",
+   "summary": "Passed after the Macpherson report into Stephen Lawrence's murder. It brought the police within race discrimination law and created a race equality duty for public authorities, later folded into the public sector equality duty.",
+   "supersededBy": "Equality Act 2010",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Its substance is now in the Equality Act 2010, including the duties on the police and the public sector equality duty. Repealing this Act alone changes little."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Race Relations (Remedies) Act 1994",
+   "summary": "Removed the cap on compensation for race discrimination. It was repealed in 2010, and the Equality Act keeps compensation uncapped.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010"
+  },
+  {
+   "title": "Sex Discrimination Act 1975",
+   "summary": "Outlawed sex discrimination in employment, education and services. It was replaced by the Equality Act 2010.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010",
+   "restore": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Superseded by the Equality Act 2010."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Equal Pay Act 1970",
+   "summary": "Gave women the right to equal pay for equal work. It was replaced by the equality of terms provisions in the Equality Act 2010.",
+   "status": "repealed",
+   "supersededBy": "Equality Act 2010",
+   "restore": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Superseded by the Equality Act 2010."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Disability Discrimination Act 1995",
+   "summary": "Introduced disability discrimination law and the duty to make reasonable adjustments. In Great Britain it was replaced by the Equality Act 2010, but it still applies in Northern Ireland.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "In Great Britain it is already replaced. In Northern Ireland it is still the main disability discrimination law, so repeal would remove that protection there."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "In Northern Ireland, Article 2 of the Windsor Framework bars any diminution of rights under the 1998 Agreement. Repeal there would be open to challenge."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Human Rights Act 1998",
+   "summary": "Makes the rights in the European Convention on Human Rights enforceable in UK courts. It requires public authorities to act compatibly and courts to read legislation compatibly where possible, and lets higher courts declare an Act incompatible.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The UK would remain bound by the Convention under international law. People would have to take cases to Strasbourg, as before 2000, which takes years. UK courts would lose the duty to read laws compatibly and the power to make declarations of incompatibility."
+     },
+     {
+      "dim": "legal",
+      "text": "The devolution Acts separately require devolved law and ministers to comply with Convention rights: Scotland Act 1998 s.29 and s.57, Government of Wales Act 2006 s.108A, and Northern Ireland Act 1998 s.6 and s.24. Repealing the Human Rights Act does not remove those limits, and changing them would engage the Sewel convention."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Under the 1998 Belfast/Good Friday Agreement, the UK committed to incorporate the Convention into Northern Ireland law. The Trade and Cooperation Agreement's law-enforcement cooperation rests on respect for the Convention and can be terminated if the UK denounces it. Repealing the Human Rights Act is not denunciation, but the EU and Irish governments would treat it as a signal."
+     },
+     {
+      "dim": "fiscal",
+      "text": "No material direct effect. There might be more Strasbourg judgments and compensation awards, which are small sums."
+     },
+     {
+      "dim": "social",
+      "text": "Fewer quick domestic remedies, for example in care homes, mental health detention, inquests (Article 2) and immigration cases (Article 8)."
+     }
+    ],
+    "democracy": -8
+   },
+   "amend": [
+    {
+     "id": "bor",
+     "label": "Replace with a domestic bill of rights",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Depends on the drafting. The 2022 Bill of Rights Bill would have weakened the duty to read laws compatibly and limited positive obligations. It was withdrawn in 2023."
+      },
+      {
+       "dim": "diplomatic",
+       "text": "Smaller than outright repeal if the Convention is still given effect, but the Northern Ireland commitments still apply."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Climate Change Act 2008",
+   "summary": "Sets the legally binding target of net zero emissions by 2050 (amended in 2019), five-year carbon budgets, and the Climate Change Committee.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The net zero target, the carbon budgets and the Climate Change Committee would end. Judicial reviews of the government's delivery plans, such as the successful challenges in 2022 and 2024, would lose their basis."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The UK's Paris Agreement pledge would remain an international commitment, but the domestic legal backing for it would go. The UK wrote the first climate framework law, and repealing it would damage its standing in COP negotiations."
+     },
+     {
+      "dim": "fiscal",
+      "text": "No direct saving, because net zero spending is set by policy, not by the Act. Investors would face more policy uncertainty, which can raise the cost of capital for low-carbon projects."
+     },
+     {
+      "dim": "social",
+      "text": "The impact depends on what replaces the policies the Act drives."
+     }
+    ]
+   },
+   "amend": [
+    {
+     "id": "2060",
+     "label": "Move the net zero target to 2060",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Carbon budgets would be reset. The Climate Change Committee would advise on the new path."
+      },
+      {
+       "dim": "diplomatic",
+       "text": "The UK would be seen as backsliding on its Paris commitments, and ambition levels are reviewed at every COP."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Bank of England Act 1998",
+   "summary": "Gives the Bank of England operational independence over interest rates to meet the inflation target the Chancellor sets, through the Monetary Policy Committee.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Monetary policy would return to the Treasury. The Monetary Policy Committee's statutory basis would end."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Investors would expect higher inflation and demand a premium to hold gilts. After the September 2022 mini-budget, long gilt yields rose by more than one percentage point within days. The model assumes a lasting 0.5 point rise in yields."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Central bank independence is standard among G7 economies and expected by the IMF. Ending it would be read as a move towards fiscal dominance."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 0.5,
+      "basis": "assumption"
+     }
+    ]
+   }
+  },
+  {
+   "title": "Budget Responsibility and National Audit Act 2011",
+   "summary": "Created the Office for Budget Responsibility, which produces the official economic and fiscal forecasts, and reformed the National Audit Office.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Official forecasting would go back to the Treasury. The National Audit Office's governance provisions would also need re-enacting."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Markets would treat the loss of independent forecasts as weaker discipline. The model assumes a lasting 0.25 point rise in gilt yields. Bypassing the OBR was part of the September 2022 market reaction."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 0.25,
+      "basis": "assumption"
+     }
+    ],
+    "powers": [
+     {
+      "groups": [
+       "Tax",
+       "Departments (real % change in day-to-day budget)",
+       "Health and care",
+       "Schools and children",
+       "Social security",
+       "Councils and housing",
+       "Justice",
+       "Defence, investment and other spending",
+       "Machinery of government"
+      ],
+      "scale": 1.5,
+      "label": "Without the OBR and the Charter, tax and spending levers can go half as far again (assumption)"
+     }
+    ]
+   }
+  },
+  {
+   "title": "Localism Act 2011",
+   "summary": "Among other things, it inserted the council tax referendum rules: councils must hold a local referendum to raise council tax above the government's limit.",
+   "amend": [
+    {
+     "id": "ctaxref",
+     "label": "Abolish council tax referendum limits",
+     "knock": [
+      {
+       "dim": "fiscal",
+       "text": "Councils could raise council tax freely. The model assumes, on average, 2 points a year more than the limit allows, with the money staying with councils."
+      },
+      {
+       "dim": "social",
+       "text": "Council tax is regressive against property values, which are still based on 1991 bands. Larger rises fall hardest on lower-income households in areas with low property values."
+      }
+     ],
+     "levers": [
+      {
+       "k": "councilTaxPp",
+       "v": 2,
+       "basis": "assumption"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Health and Care Act 2022",
+   "summary": "Abolished clinical commissioning groups, created 42 integrated care boards, merged NHS Improvement into NHS England, and loosened competition rules.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Without replacement, commissioning would revert to the 2012 structures, which no longer exist on the ground. In practice a new reorganisation Act would be needed."
+     },
+     {
+      "dim": "fiscal",
+      "text": "The Department of Health estimated the transition costs of the 2012 reorganisation at about £1.5bn. The model assumes £0.75bn a year for two years."
+     },
+     {
+      "dim": "social",
+      "text": "Reorganisations distract management for years. The evidence on the 2012 reforms finds disruption and little benefit."
+     }
+    ],
+    "levers": [
+     {
+      "k": "otherDept",
+      "v": 0.75,
+      "years": 2,
+      "basis": "assumption"
+     }
+    ]
+   }
+  },
+  {
+   "title": "Health and Social Care Act 2012",
+   "summary": "The Lansley reforms. They created clinical commissioning groups and NHS England, and moved public health to councils. Much of the commissioning structure was replaced in 2022.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Much of it was already replaced by the Health and Care Act 2022. Repealing what remains, including the public health functions moved to councils, would need replacement provisions."
+     },
+     {
+      "dim": "fiscal",
+      "text": "No modelled effect beyond the reorganisation itself."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Children and Families Act 2014",
+   "summary": "Part 3 created education, health and care plans (EHCPs) for children and young people with special educational needs up to age 25. Councils have a legal duty to secure the provision in a plan.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The legal entitlement to the provision in an EHCP would end, and tribunal appeals would end with it. Over 600,000 children and young people have plans."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Demand-led high-needs costs, which drive council deficits, would become discretionary. The atlas models the deficit's growth as a parameter, so no lever moves. Change 'Growth in high-needs (SEND) deficits' in the simulator's Parameters to test it."
+     },
+     {
+      "dim": "social",
+      "text": "Families would lose an enforceable right. Councils would ration support, and parents with fewer resources would be least able to secure it."
+     }
+    ]
+   },
+   "amend": [
+    {
+     "id": "ehcp25",
+     "label": "End EHCPs at 19 rather than 25",
+     "knock": [
+      {
+       "dim": "fiscal",
+       "text": "Reduces post-19 placement costs. Over-19s are a small share of plans but some of the most expensive placements."
+      },
+      {
+       "dim": "social",
+       "text": "Young people aged 19 to 25 would lose support at the transition to adulthood."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Housing Act 1996",
+   "summary": "Part 7 sets councils' homelessness duties. The main duty (s.193) requires them to secure accommodation for eligible households in priority need who are unintentionally homeless.",
+   "amend": [
+    {
+     "id": "part7",
+     "label": "Remove the main homelessness duty (Part 7)",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Councils would no longer have to house families in priority need. Section 17 of the Children Act 1989 would still require them to support children in need."
+      },
+      {
+       "dim": "fiscal",
+       "text": "Temporary accommodation costs over £2bn a year would fall, but social services and NHS costs would rise. The model does not move temporary accommodation numbers for a legal change."
+      },
+      {
+       "dim": "social",
+       "text": "More families and children in unsafe accommodation or on the street, as in the period before 1977, when the statutory duty was created."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "National Minimum Wage Act 1998",
+   "summary": "Sets the national minimum wage (and the National Living Wage), with rates recommended by the Low Pay Commission.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "No statutory wage floor. HMRC enforcement of the minimum wage would end."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Lower wages raise Universal Credit costs and cut income tax and NICs receipts. The net fiscal effect is likely negative, but it is not modelled here."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The labour standards commitments in the Trade and Cooperation Agreement apply."
+     },
+     {
+      "dim": "social",
+      "text": "The Low Pay Commission found no significant job losses from minimum wage rises up to now, and large pay gains for the lowest paid. Repeal would reverse those gains."
+     }
+    ]
+   }
+  },
+  {
+   "title": "European Union (Withdrawal) Act 2018",
+   "summary": "Repealed the European Communities Act 1972 and converted EU law into domestic law, now called assimilated law after the Retained EU Law (Revocation and Reform) Act 2023.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Thousands of rules converted at exit (on product standards, aviation, data, the environment and employment) would lose their legal basis. This is one of the largest legal gaps a single repeal could create."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The Withdrawal Agreement, including the Windsor Framework, is given domestic effect partly through this Act. Repeal would breach the UK's obligations under the Withdrawal Agreement."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Not modelled. Trade would be disrupted at once."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Scotland Act 1998",
+   "summary": "Created the Scottish Parliament and Government. Since 2016, s.63A has said they are a permanent part of the UK's constitution and will not be abolished except after a referendum in Scotland.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Parliament is sovereign and could legally repeal the Act. But s.63A commits to a referendum first, and the Sewel convention (s.28(8)) expects the Scottish Parliament's consent."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "This would be a constitutional crisis and would sharply raise support for independence."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Devolved spending of more than £50bn would return to Whitehall, along with the Barnett mechanism. Not modelled."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Freedom of Information Act 2000",
+   "summary": "Gives a right of access to information held by public authorities, overseen by the Information Commissioner.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The right to request information would end. Environmental information requests would continue under the Environmental Information Regulations 2004, which implement the Aarhus Convention."
+     },
+     {
+      "dim": "fiscal",
+      "text": "There would be modest savings in handling time. No reliable central estimate exists."
+     },
+     {
+      "dim": "social",
+      "text": "Less public scrutiny. Several major disclosures, including the 2009 MPs' expenses scandal, began with freedom of information requests."
+     }
+    ],
+    "democracy": -4
+   }
+  },
+  {
+   "title": "Modern Slavery Act 2015",
+   "summary": "Consolidates slavery and trafficking offences, creates the Independent Anti-slavery Commissioner, and requires large companies to publish supply chain statements (s.54).",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The consolidated offences would go, although some older offences may revive only if the repeal says so. Victim protections would end, including the statutory defence in s.45."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The UK is party to the Council of Europe Convention on Action against Trafficking, which requires victim identification and support."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Town and Country Planning Act 1990",
+   "summary": "The core of the planning system. Most development needs planning permission (s.57), decided by local planning authorities against the development plan.",
+   "amend": [
+    {
+     "id": "zoning",
+     "label": "Move to zoning: permission in principle on allocated land",
+     "knock": [
+      {
+       "dim": "legal",
+       "text": "Planning would become rules-based for allocated sites, as in much of Europe and the US."
+      },
+      {
+       "dim": "fiscal",
+       "text": "More homes and higher residential investment. The model assumes private housebuilding rises 10%, at the low end of estimates for zoning reforms."
+      },
+      {
+       "dim": "social",
+       "text": "Less local say over individual schemes, and faster delivery."
+      }
+     ],
+     "levers": [
+      {
+       "k": "planningPct",
+       "v": 10,
+       "basis": "assumption"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Immigration Act 1971",
+   "summary": "The framework for immigration control: leave to enter and remain, the right of abode, and powers of removal.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Without a replacement there would be no statutory basis for granting or refusing leave, for border control, or for removal. Repeal on its own would not help either restrict or open migration. It would leave a legal vacuum."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Not modelled. Use the migration levers to model changes in flows."
+     }
+    ]
+   }
+  },
+  {
+   "title": "British Nationality Act 1981",
+   "summary": "Defines British citizenship and the other forms of British nationality, how they are acquired, and the limited grounds for deprivation (s.40).",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Existing citizens would keep citizenship already acquired, under Interpretation Act savings, but the rules for acquiring it, by birth, descent or naturalisation, would have no basis until replaced."
+     },
+     {
+      "dim": "legal",
+      "text": "International law limits deprivation. It must not be arbitrary or discriminatory (Universal Declaration of Human Rights, Article 15; ICERD, Article 5) and must not leave people stateless (1961 Convention on the Reduction of Statelessness). No change in this atlas allows deprivation of citizenship or residence by ethnicity."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Repeal would raise questions for the overseas territories and Crown dependencies, whose people's status rests on this Act."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Welfare Reform Act 2012",
+   "summary": "Created Universal Credit and Personal Independence Payment (PIP) and capped household benefits.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Universal Credit and PIP would lose their basis. Legacy benefits have mostly been closed, so this would need a replacement Act."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Not modelled as a repeal. Use the social security levers to change benefit levels."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Homelessness Reduction Act 2017",
+   "summary": "Added prevention and relief duties to Part 7 of the Housing Act 1996, which apply to all eligible households and not just those in priority need.",
+   "repeal": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "The prevention and relief duties would end. The main homelessness duty under the 1996 Act would remain."
+     },
+     {
+      "dim": "social",
+      "text": "Single homeless people would lose most statutory help."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Emergency Powers (Public Finance) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. It gives ministers wide powers to set taxes and spending by order, with Parliament's approval afterwards rather than before. Every lever can go twice as far.",
+   "enact": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Wide 'Henry VIII' powers let ministers change primary legislation by order. Courts would read them narrowly, and the Lords could delay the bill for a year under the Parliament Acts. Tax by order still needs annual confirmation by the Commons under the Provisional Collection of Taxes Act 1968 unless that is amended too."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Markets price in less predictable fiscal policy. The model adds 0.5pp to gilt yields for three years (assumption)."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Ratings agencies and the IMF would comment on weakened fiscal institutions; little direct effect on treaties."
+     },
+     {
+      "dim": "social",
+      "text": "Faster decisions, but less scrutiny of who gains and loses from each measure."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 0.5,
+      "years": 3,
+      "basis": "assumption"
+     }
+    ],
+    "powers": [
+     {
+      "all": true,
+      "scale": 2,
+      "label": "Every lever can go twice as far"
+     }
+    ],
+    "democracy": -5
+   }
+  },
+  {
+   "title": "Taxation (General Powers) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. It lifts the political and procedural limits on tax rates. Tax levers can go three times as far.",
+   "enact": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Tax rates are still set each year by the Finance Act; this Act widens what ministers can propose by Ways and Means resolution."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Large rate changes have uncertain yields because behaviour responds. The model's elasticities were estimated on small changes, so results far outside the usual range are less reliable. Gilt yields +0.25pp for two years (assumption)."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Big corporation tax changes interact with the OECD global minimum tax of 15%."
+     },
+     {
+      "dim": "social",
+      "text": "Depends entirely on which taxes move and for whom."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 0.25,
+      "years": 2,
+      "basis": "assumption"
+     }
+    ],
+    "powers": [
+     {
+      "groups": [
+       "Tax"
+      ],
+      "scale": 3,
+      "label": "Tax levers can go three times as far"
+     }
+    ]
+   }
+  },
+  {
+   "title": "Public Expenditure (Reallocation) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. It lets the Treasury move money between departments and programmes without the usual Estimates limits. Spending levers can go three times as far.",
+   "enact": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Spending still needs Supply and Appropriation Acts, but this Act widens virement between Estimate lines."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Very large cuts or rises run beyond what the model's delivery assumptions were built for: services cannot absorb or recruit at any speed. Treat extreme results as illustrative."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Large defence or aid swings would be noticed by NATO allies and the OECD."
+     },
+     {
+      "dim": "social",
+      "text": "Depends on what is cut and what is funded."
+     }
+    ],
+    "powers": [
+     {
+      "groups": [
+       "Departments (real % change in day-to-day budget)",
+       "Health and care",
+       "Schools and children",
+       "Social security",
+       "Councils and housing",
+       "Justice",
+       "Defence, investment and other spending",
+       "Machinery of government"
+      ],
+      "scale": 3,
+      "label": "Spending levers can go three times as far"
+     }
+    ]
+   }
+  },
+  {
+   "title": "Supreme Executive Powers Act",
+   "new": true,
+   "summary": "A template Act for this atlas, for playing without limits. Every lever can go ten times as far. The model's results far outside the normal ranges are illustrative only.",
+   "enact": {
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Parliament is sovereign, so it can pass this, but courts would read it as narrowly as they could, and the Lords could delay it for a year. Devolved governments would refuse legislative consent."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Investors treat it as a regime change. The model adds 1pp to gilt yields for three years (assumption)."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The Council of Europe and allies would raise rule-of-law concerns; credit ratings would likely fall."
+     },
+     {
+      "dim": "social",
+      "text": "Protest and legal challenge would follow; trust in institutions would fall."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 1,
+      "years": 3,
+      "basis": "assumption"
+     }
+    ],
+    "powers": [
+     {
+      "all": true,
+      "scale": 10,
+      "label": "Every lever can go ten times as far"
+     }
+    ],
+    "democracy": -25
+   }
+  },
+  {
+   "title": "House of Lords (Abolition) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. Abolishes the House of Lords, leaving a single elected chamber with no revising or delaying power over the government's majority.",
+   "enact": {
+    "democracy": -5,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Parliament is sovereign, so the Commons can pass this under the Parliament Acts 1911 and 1949 over the Lords' objection, after a delay of about a year. In R (Jackson) v Attorney General [2005] UKHL 56 the Lords upheld the 1949 Act. Once the Lords is gone, nothing outside the Commons majority can delay legislation, including a bill to extend Parliament's life, which the Parliament Act 1911 (s.2) otherwise lets the Lords veto."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Small direct saving on Lords running costs (about £0.1bn a year); not modelled."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Few direct effects; other democracies with one chamber (New Zealand, Denmark, Sweden) keep other checks such as proportional representation or entrenched constitutions."
+     },
+     {
+      "dim": "social",
+      "text": "Removes the main brake on a government with a large Commons majority. Its effect on democracy depends on what else changes."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Judicial Review (Ouster) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. Ousts judicial review of ministers' decisions, so the courts can no longer quash them as unlawful, irrational or unfair.",
+   "enact": {
+    "democracy": -15,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Courts cannot strike down an Act of Parliament, but they read ouster clauses as narrowly as they can: Anisminic v FCC [1969] and R (Privacy International) v IPT [2019] UKSC 22. Three Law Lords suggested in Jackson (2005) that courts might refuse to apply an Act abolishing judicial review altogether; this has never been tested. Express, unambiguous words give the best chance of effect."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Faster decisions on planning, benefits and prisons, as legal challenge falls away. The model lets planning, sentencing, benefit and civil service levers go twice as far (assumption)."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Breaches Article 13 of the ECHR (effective remedy) and invites cases at Strasbourg; the Council of Europe's Venice Commission would report."
+     },
+     {
+      "dim": "social",
+      "text": "People wronged by the state lose their main remedy. Trust in fair treatment falls, most among those who deal with the state most: claimants, migrants, prisoners."
+     }
+    ],
+    "powers": [
+     {
+      "k": "planningPct",
+      "scale": 2
+     },
+     {
+      "k": "sentencingPct",
+      "scale": 2
+     },
+     {
+      "k": "healthBenefitsPct",
+      "scale": 2
+     },
+     {
+      "k": "civilServicePct",
+      "scale": 2
+     }
+    ]
+   }
+  },
+  {
+   "title": "Public Order (Emergency Restrictions) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. Lets the Home Secretary ban any protest, march or strike action by order, with long sentences for breach.",
+   "enact": {
+    "democracy": -10,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Builds on powers the Public Order Act 1986, the Police, Crime, Sentencing and Courts Act 2022 and the Public Order Act 2023 already give. Bans would engage Articles 10 and 11 ECHR; under the Human Rights Act courts could only issue a declaration of incompatibility, which does not stop the law working."
+     },
+     {
+      "dim": "fiscal",
+      "text": "More policing and prosecutions; not modelled unless you add Home Office or Justice spending."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "Criticism from the UN Special Rapporteur on freedom of assembly and the OSCE."
+     },
+     {
+      "dim": "social",
+      "text": "Fewer visible protests and strikes in the short run; grievances move to other channels. Civil disobedience and prosecutions rise."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Media (State Oversight) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. Puts newspapers and broadcasters under a licensing regulator appointed and directed by ministers, and lets the government appoint the BBC's editorial leadership.",
+   "enact": {
+    "democracy": -12,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Replaces independent regulation (IPSO, IMPRESS and Ofcom's independence under the Communications Act 2003) with ministerial direction. Licensing the press was abolished in 1695; this reverses that. Engages Article 10 ECHR."
+     },
+     {
+      "dim": "fiscal",
+      "text": "No significant direct fiscal effect."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The UK would fall sharply in press freedom rankings (RSF, Freedom House); allies would comment."
+     },
+     {
+      "dim": "social",
+      "text": "Less scrutiny of government. Audiences shift to foreign and online sources, which are harder to regulate."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Electoral Administration (Ministerial Control) Act",
+   "new": true,
+   "summary": "A template Act for this atlas. Moves control of the Electoral Commission and the Boundary Commissions to ministers, and lets them set constituency boundaries and the rules on candidates and campaign spending.",
+   "enact": {
+    "democracy": -12,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Extends the Elections Act 2022, which already lets ministers issue a strategy and policy statement to the Electoral Commission. Boundaries are now drawn by independent commissions under the Parliamentary Constituencies Act 1986."
+     },
+     {
+      "dim": "fiscal",
+      "text": "No significant direct fiscal effect."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "OSCE election observers would likely judge later elections 'not fully free and fair'."
+     },
+     {
+      "dim": "social",
+      "text": "Opposition parties and voters lose confidence that elections can change the government."
+     }
+    ]
+   }
+  },
+  {
+   "title": "Elections (Postponement) Act",
+   "new": true,
+   "requires": [
+    "House of Lords (Abolition) Act"
+   ],
+   "summary": "A template Act for this atlas. Extends the life of Parliament beyond five years and postpones the next general election indefinitely.",
+   "enact": {
+    "democracy": -30,
+    "knock": [
+     {
+      "dim": "legal",
+      "text": "Parliament has done this before: the Parliament and Registration Act 1916 and the Prolongation of Parliament Acts 1940 to 1944 extended Parliament in both world wars, with cross-party consent. The five-year limit comes from the Septennial Act 1715 as amended in 1911. The Parliament Acts do not apply to a bill extending Parliament's life (s.2(1) of the 1911 Act), so the Lords can veto it: in this atlas the House of Lords (Abolition) Act must be in force first."
+     },
+     {
+      "dim": "fiscal",
+      "text": "Markets price in political risk. The model adds 0.75pp to gilt yields for three years (assumption)."
+     },
+     {
+      "dim": "diplomatic",
+      "text": "The Council of Europe would likely suspend the UK (Article 3 of Protocol 1 ECHR guarantees free elections at reasonable intervals). Commonwealth suspension under the Harare Declaration is likely. Allies would review intelligence and trade ties."
+     },
+     {
+      "dim": "social",
+      "text": "Without the prospect of an election, protest, strikes and civil disobedience are the remaining routes. Scottish, Welsh and Northern Irish institutions would likely refuse to cooperate."
+     }
+    ],
+    "levers": [
+     {
+      "k": "giltShock",
+      "v": 0.75,
+      "years": 3,
+      "basis": "assumption"
+     }
+    ]
+   }
+  }
+ ],
+ "democracy": {
+  "note": "Democratic standing starts at 100 and falls with each backsliding Act in force; repealing that Act restores it. Bands follow the Economist Intelligence Unit's regime types. The points and the consequences in campaigns are game mechanics chosen for this atlas, not measurements.",
+  "bands": [
+   [
+    85,
+    "Full democracy"
+   ],
+   [
+    65,
+    "Flawed democracy"
+   ],
+   [
+    40,
+    "Hybrid regime"
+   ],
+   [
+    0,
+    "Authoritarian regime"
+   ]
+  ]
+ }
 }

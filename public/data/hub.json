@@ -677,25 +677,26 @@
 },
 {
 "file": "law_effects",
-"bytes": 26881,
+"bytes": 34285,
 "source": null,
 "url": null,
 "more_sources": [],
-"note": "Knock-ons of repealing, amending or restoring Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. Effects on the simulator may only move existing fiscal and service levers. No law change creates new powers, and none can unlock measures that strip citizenship or residence by ethnicity or that enable sterilisation or eugenics.",
+"note": "Knock-ons of repealing, amending, restoring or enacting Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. A law change can move any simulator lever and can grant powers, which widen how far levers go. You can add your own effects and powers to any change. No law in the atlas models stripping citizenship or residence by ethnicity, or sterilisation or eugenics.",
 "tables": [
 {
 "name": "generic",
-"n": 3,
+"n": 4,
 "fields": [
 "repeal",
 "amend",
-"restore"
+"restore",
+"enact"
 ],
 "keyed": true
 },
 {
 "name": "acts",
-"n": 28,
+"n": 32,
 "fields": [
 "title",
 "summary",

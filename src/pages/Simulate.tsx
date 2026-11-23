@@ -4,8 +4,8 @@ import { fmt, useData } from "../lib";
 import { Card, Loading, Page, Seg, Source } from "../ui";
 import { Baseline, buildBaseline, LAST_FORECAST, LEVERS, Levers, PRESETS, Result, RULE_YEAR, simulate, YEARS, ZERO } from "../sim/engine";
 import { defaultParams, PARAMS, ParamValues } from "../sim/params";
-import { runWithLaws, useBook, useLawEffects } from "../law/statute";
-import { LawChanges } from "../law/LawUI";
+import { boundsAt, runWithLaws, useBook, useLawEffects } from "../law/statute";
+import { DemocracyMeter, LawChanges } from "../law/LawUI";
 
 type Scenario = { name: string; levers: Levers; params: Partial<ParamValues>; notes?: string };
 const LS = "atlas-scenarios";
@@ -37,6 +37,8 @@ export default function Simulate() {
   const P = useMemo(() => ({ ...defaultParams(), ...over }) as ParamValues, [over]);
   const LE = useLawEffects();
   const [book] = useBook();
+  // Powers granted by laws in your statute book widen the sliders (the widest range any year allows)
+  const bnd = useMemo(() => { const fs = YEARS.map((_, t) => boundsAt(book, t, LE?.E, LE?.find)); return (l: (typeof LEVERS)[number]) => fs.reduce((m, f) => { const b = f(l); return { min: Math.min(m.min, b.min), max: Math.max(m.max, b.max) }; }, { min: l.min, max: l.max }); }, [book, LE]);
   const R = useMemo(() => B && (book.length && LE ? runWithLaws(B, [{ t: L.start, levers: L }], P, book, LE.E, LE.find) : simulate(B, L, P)), [B, L, P, book, LE]);
   if (!B || !R) return <Loading />;
   const set = (k: keyof Levers, v: number) => setL((x) => ({ ...x, [k]: v }));
@@ -66,7 +68,7 @@ export default function Simulate() {
           {head && <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, [g]: !o[g] }))} aria-expanded={!!open[g]}><span>{open[g] ? "▾" : "▸"} {g}</span>{n > 0 && <span className="pill">{n}</span>}</button>}
           {open[g] && <div className={`lever ${L[l.k] ? "on" : ""}`} title={l.help}>
             <div className="lever-head"><span>{l.label}</span><span className="lever-v">{sign(L[l.k], l.step < 1 ? (l.step < 0.5 ? 2 : 1) : 0)}{l.unit === "£bn" ? "bn" : ` ${l.unit}`}</span></div>
-            <input type="range" min={l.min} max={l.max} step={l.step} value={L[l.k]} onChange={(e) => set(l.k, +e.target.value)} onDoubleClick={() => set(l.k, 0)} aria-label={l.label} />
+            <input type="range" min={bnd(l).min} max={bnd(l).max} step={l.step} value={L[l.k]} onChange={(e) => set(l.k, +e.target.value)} onDoubleClick={() => set(l.k, 0)} aria-label={l.label} />
             {l.help && <div className="muted lever-help">{l.help}</div>}
           </div>}
         </React.Fragment>; })}
@@ -77,7 +79,7 @@ export default function Simulate() {
 
       <div className="sim-out">
         <Headline R={R} B={B} yr={yr} />
-        {book.length > 0 && LE && <Card title={`Law changes in force (${book.length})`} sub={<>From your statute book, applied on top of the levers. <a href="#/laws?tab=book">Change them on the Laws page</a>.</>} style={{ marginTop: 14 }}><LawChanges book={book} E={LE.E} find={LE.find} editable={false} /></Card>}
+        {book.length > 0 && LE && <Card title={`Law changes in force (${book.length})`} sub={<>From your statute book, applied on top of the levers. <a href="#/laws?tab=book">Change them on the Laws page</a>.</>} style={{ marginTop: 14 }}><DemocracyMeter book={book} t={99} E={LE.E} find={LE.find} compact /><LawChanges book={book} E={LE.E} find={LE.find} editable={false} /></Card>}
         <div className="controls" style={{ marginTop: 14 }}>
           <Seg v={tab} set={setTab} opts={[["overview", "Scorecard and events"], ["system", "How it spreads"], ["charts", "Charts"], ["channels", "Year by year"], ["params", `Parameters${Object.keys(over).length ? ` (${Object.keys(over).length} edited)` : ""}`]]} />
           {(tab === "system") && <label className="muted" style={{ marginLeft: "auto" }}>Year <select value={yr} onChange={(e) => setYr(+e.target.value)}>{YEARS.map((y, i) => <option key={y} value={i}>{y}{i > LAST_FORECAST ? " (extrapolated)" : ""}</option>)}</select></label>}

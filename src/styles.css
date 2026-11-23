@@ -185,3 +185,5 @@ input[type=number], input[type=text] { background: var(--panel); color: var(--in
 .law-restore, .law-inforce { background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); }
 .law-row { border-bottom: 1px solid var(--soft); }
 .drawer h4 { margin: 12px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.law-enact { background: color-mix(in srgb, var(--c1) 18%, transparent); color: var(--c1); }
+.law-notlaw { background: var(--soft); }

@@ -3,7 +3,7 @@ import { Area, Bar, CartesianGrid, ComposedChart, Legend, ResponsiveContainer, T
 import { fmt, useData } from "../lib";
 import { Card, Drawer, Loading, Page, Seg, Source, Stat, Table } from "../ui";
 import { useBook, useLawEffects, statusAt } from "../law/statute";
-import { LawChanges, LawEditor, StatusPill } from "../law/LawUI";
+import { DemocracyMeter, LawChanges, LawEditor, NewLaw, StatusPill } from "../law/LawUI";
 
 type Act = { u?: string | null; t: string; y: number; n: number | string; d: string | null; s: string; a: string[] };
 type Landmark = { t: string; area: string; era: string; context: string; did: string; effects: string; links?: string[]; sim?: string[] };
@@ -85,10 +85,12 @@ export default function Laws() {
         <Area yAxisId="b" dataKey="si" name="Statutory instruments (right)" fill="var(--c8)" fillOpacity={0.25} stroke="var(--c8)" /><Bar yAxisId="a" dataKey="acts" name="UK Acts" stackId="x" fill="var(--c1)" /><Bar yAxisId="a" dataKey="dev" name="Devolved Acts" stackId="x" fill="var(--c2)" /></ComposedChart></ResponsiveContainer>
       <Source s={L.source} />
     </Card>}
-    {tab === "book" && <Card title="My statute book" sub="Acts you have repealed, amended or restored, and from which year. These changes apply in the policy simulator. Sandbox games keep their own statute book, changed year by year inside the game.">
+    {tab === "book" && <div className="grid g2" style={{ alignItems: "start" }}><Card title="My statute book" sub="Acts you have repealed, amended, restored or passed, and from which year. These changes apply in the policy simulator, and any powers they grant widen its sliders. Sandbox games keep their own statute book, changed year by year inside the game.">
+      <DemocracyMeter book={book} t={99} E={LE.E} find={LE.find} />
       <LawChanges book={book} E={LE.E} find={LE.find} setBook={setBook} />
       <p className="muted" style={{ fontSize: 12.5, marginTop: 10 }}>{LE.E.note}</p>
-    </Card>}
+    </Card>
+    <Card title="Pass a new Act" sub="Write your own law and set what it does in the model: lever moves, and powers that let levers go further than normal. Or start from a template Act."><NewLaw E={LE.E} book={book} setBook={setBook} onTemplate={setSel} /></Card></div>}
     {sel && <Drawer onClose={() => setSel(null)}><LawEditor key={sel + book.length} title={sel} url={selAct ? actUrl(selAct) : undefined} E={LE.E} fx={LE.find(sel)} book={book} setBook={setBook} /></Drawer>}
   </Page>;
 }
