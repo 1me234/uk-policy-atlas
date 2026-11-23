@@ -147,3 +147,7 @@ input[type=number], input[type=text] { background: var(--panel); color: var(--in
 .lever-group { display: flex; justify-content: space-between; align-items: center; width: 100%; background: none; border: 0; border-top: 1px solid var(--line); padding: 10px 0 6px; font: 600 11.5px/1.3 inherit; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); cursor: pointer; text-align: left; }
 .lever-group:hover { color: var(--accent); }
 .lever-help { font-size: 11.5px; line-height: 1.35; margin-top: 2px; }
+.yearbar { display: flex; gap: 3px; margin: 0 0 12px; }
+.yearbar span { flex: 1; text-align: center; font-size: 11px; padding: 3px 0; border-radius: 4px; background: var(--soft); color: var(--muted); font-variant-numeric: tabular-nums; }
+.yearbar span.done { background: color-mix(in srgb, var(--accent) 25%, var(--soft)); color: var(--ink); }
+.yearbar span.on { background: var(--accent); color: #fff; font-weight: 600; }
