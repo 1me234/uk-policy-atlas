@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { fmt, useData } from "../lib";
-import { Card, Loading, Page, Seg } from "../ui";
+import { Card, Drawer, Loading, Page, Seg } from "../ui";
 import { assess, Baseline, buildBaseline, Event, LAST_FORECAST, LEVERS, Levers, NumKey, Result, RULE_YEAR, Score, simulate, YEARS, ZERO } from "../sim/engine";
 import { simulateSchedule, Turn } from "../sim/campaign";
 import { defaultParams, ParamValues } from "../sim/params";
 import { Charts, ProjectPicker } from "./Simulate";
+import { actUrl, useActs } from "./Laws";
+import { ACTION_LABEL, effectOf, LawChange, runWithLaws, useLawEffects } from "../law/statute";
+import { ActSearch, LawChanges, LawEditor } from "../law/LawUI";
 
 // ---------- Saved games ----------
 type News = { t: number; tone: Event["tone"]; text: string };
@@ -16,6 +19,7 @@ export type Game = {
   shocks: Record<number, Partial<Levers>>; // world events in force from each year (cumulative)
   news: News[]; done: boolean;
   draft?: Levers; // an undone budget, offered back as the starting point
+  laws?: LawChange[]; // this game's own statute book: Acts repealed, amended or restored, by year
 };
 const LS = "atlas-campaigns";
 const readGames = (): Game[] => { try { return JSON.parse(localStorage.getItem(LS) || "[]"); } catch { return []; } };
@@ -113,23 +117,30 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
   const [open, setOpen] = useState<Record<string, boolean>>({ Tax: true });
   const turnsBefore = g.turns.filter((x) => x.t < t);
   const levers = (L: Levers): Levers => ({ ...playerLevers(L), ...(g.world ? shocks : { demandShock: L.demandShock, giltShock: L.giltShock, netMigration: L.netMigration }) } as Levers);
-  const R = useMemo(() => g.done ? simulateSchedule(B, g.turns, P, base) : simulateSchedule(B, [...turnsBefore, { t, levers: levers(draft) }], P, base), [g, draft]);
-  const Rstay = useMemo(() => simulateSchedule(B, [...turnsBefore, { t, levers: levers(prev) }], P, base), [g]);
+  const LE = useLawEffects();
+  const actsD = useActs();
+  const [lawSel, setLawSel] = useState<string | null>(null);
+  const laws = g.laws ?? [];
+  const setLaws = (f: (b: LawChange[]) => LawChange[]) => save({ ...g, laws: f(g.laws ?? []) });
+  const run = (turns: Turn[], book: LawChange[]) => LE ? runWithLaws(B, turns, P, book, LE.E, LE.find, base) : simulateSchedule(B, turns, P, base);
+  const R = useMemo(() => g.done ? run(g.turns, laws) : run([...turnsBefore, { t, levers: levers(draft) }], laws), [g, draft, LE]);
+  const Rstay = useMemo(() => run([...turnsBefore, { t, levers: levers(prev) }], laws.filter((c) => c.t < t)), [g, LE]);
   const now = useMemo(() => assess(B, R, t), [R, t]);
-  const changes = describe(prev, levers(draft), B, g.world);
+  const lawsNow = laws.filter((c) => c.t === t);
+  const changes = [...describe(prev, levers(draft), B, g.world), ...(LE ? lawsNow.map((c) => `${ACTION_LABEL[c.action]}: ${c.act}${c.action === "amend" ? ` (${effectOf(c, LE.E, LE.find(c.act)).label})` : ""}`) : [])];
   const set = (k: keyof Levers, v: number) => setDraft((x) => ({ ...x, [k]: v }));
 
   const enact = () => {
     const turns = [...turnsBefore, { t, levers: levers(draft), note: changes.length ? undefined : "No change" }];
     const x: Game = { ...g, turns, draft: undefined };
     if (t >= YEARS.length - 1) { save({ ...x, done: true }); return; }
-    if (g.world) { const Rn = simulateSchedule(B, turns, P, base); const w = rollWorld(x, t + 1, Rn, B); x.shocks = { ...g.shocks, [t + 1]: w.shocks }; x.news = [...g.news.filter((n) => n.t <= t), ...w.news]; }
+    if (g.world) { const Rn = run(turns, laws); const w = rollWorld(x, t + 1, Rn, B); x.shocks = { ...g.shocks, [t + 1]: w.shocks }; x.news = [...g.news.filter((n) => n.t <= t), ...w.news]; }
     save({ ...x, t: t + 1 });
   };
   const undo = () => {
     const last = [...g.turns].sort((a, b) => b.t - a.t)[0]; if (!last) return;
     const keep = Object.fromEntries(Object.entries(g.shocks).filter(([k]) => +k <= last.t));
-    save({ ...g, done: false, t: last.t, turns: g.turns.filter((x) => x !== last), draft: last.levers, shocks: keep, news: g.news.filter((n) => n.t <= last.t) });
+    save({ ...g, done: false, t: last.t, turns: g.turns.filter((x) => x !== last), draft: last.levers, laws: laws.filter((c) => c.t <= last.t), shocks: keep, news: g.news.filter((n) => n.t <= last.t) });
   };
 
   let group = "";
@@ -142,7 +153,7 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
     <div className="yearbar">{YEARS.map((y, i) => <span key={y} className={i < t || g.done ? "done" : i === t ? "on" : ""} title={y}>{y.slice(2)}</span>)}</div>
     <div className="sim">
       {!g.done ? <aside className="card sim-levers">
-        <div className="controls" style={{ justifyContent: "space-between", margin: "0 0 6px" }}><b>Budget for {YEARS[t]}</b>{changes.length > 0 && <button className="seg" onClick={() => setDraft(playerLevers(prev))}>Clear changes</button>}</div>
+        <div className="controls" style={{ justifyContent: "space-between", margin: "0 0 6px" }}><b>Budget for {YEARS[t]}</b>{changes.length > 0 && <button className="seg" onClick={() => { setDraft(playerLevers(prev)); if (lawsNow.length) setLaws((b) => b.filter((c) => c.t !== t)); }}>Clear changes</button>}</div>
         <button className="seg on" style={{ width: "100%", padding: "9px 10px" }} onClick={enact}>{t === YEARS.length - 1 ? "Enact final budget and finish" : `Enact and move to ${YEARS[t + 1]}`}</button>
         <div className="muted" style={{ fontSize: 12, margin: "6px 0" }}>{changes.length ? `${changes.length} change${changes.length === 1 ? "" : "s"} this year` : "No changes: policy carries on as it is."}</div>
         {LEVERS.map((l) => { if (g.world && SHOCK_KEYS.includes(l.k)) return null; const head = l.group !== group && (group = l.group); const gr = l.group; const n = nChanged(gr);
@@ -155,6 +166,13 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
           </React.Fragment>; })}
         <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, projects: !o.projects }))} aria-expanded={!!open.projects}><span>{open.projects ? "▾" : "▸"} Major projects</span>{Object.keys(draft.projects ?? {}).length > 0 && <span className="pill">{Object.keys(draft.projects ?? {}).length}</span>}</button>
         {open.projects && <ProjectPicker B={B} L={draft} setL={setDraft} />}
+        <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, laws: !o.laws }))} aria-expanded={!!open.laws}><span>{open.laws ? "▾" : "▸"} Laws: repeal, amend, restore</span>{lawsNow.length > 0 && <span className="pill">{lawsNow.length}</span>}</button>
+        {open.laws && LE && actsD && <div style={{ fontSize: 12.5 }}>
+          <div className="muted" style={{ margin: "4px 0 6px" }}>Change any Act of Parliament from {YEARS[t]}. Each change shows its legal, fiscal, diplomatic and social knock-ons. A few Acts with a clear fiscal channel also move levers.</div>
+          <ActSearch acts={actsD.acts} onPick={setLawSel} />
+          {["Equality Act 2010", "Human Rights Act 1998", "Climate Change Act 2008", "Bank of England Act 1998"].map((x) => <button key={x} className="seg" style={{ fontSize: 11.5, padding: "2px 7px", margin: "4px 4px 0 0" }} onClick={() => setLawSel(x)}>{x}</button>)}
+          {laws.length > 0 && <div style={{ marginTop: 8 }}><LawChanges book={laws} E={LE.E} find={LE.find} setBook={setLaws} editable={(c) => c.t === t} /></div>}
+        </div>}
         <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>Levers are levels relative to today's plans, not changes on last year. Double-click a slider to put it back where it was last year.{g.world ? " Shocks are set by world events, not by you." : ""}</div>
       </aside> : <aside className="card sim-levers"><b>Final verdict</b><Verdict R={R} /><button className="seg" style={{ marginTop: 10 }} onClick={undo}>Go back a year</button></aside>}
 
@@ -185,6 +203,7 @@ function Play({ g, B, P, base, save, quit }: { g: Game; B: Baseline; P: ParamVal
         {tab === "record" && <Record g={g} B={B} />}
       </div>
     </div>
+    {lawSel && LE && <Drawer onClose={() => setLawSel(null)}><LawEditor key={lawSel + laws.length} title={lawSel} url={(() => { const a = actsD?.acts.find((x) => x.t === lawSel); return a ? actUrl(a) : undefined; })()} E={LE.E} fx={LE.find(lawSel)} book={laws} setBook={setLaws} fixedYear={t} onDone={() => setLawSel(null)} /></Drawer>}
   </Page>;
 }
 
@@ -231,12 +250,15 @@ function Verdict({ R }: { R: Result }) {
 }
 
 function Record({ g, B }: { g: Game; B: Baseline }) {
+  const LE = useLawEffects();
   const turns = [...g.turns].sort((a, b) => a.t - b.t);
   if (!turns.length) return <Card><div className="muted">No budgets enacted yet.</div></Card>;
   let prev: Levers = { ...ZERO };
   return <Card title="Record of government" sub="Every budget you enacted, and what it changed from the year before.">
     <div className="timeline">{turns.map((x) => { const c = describe(prev, { ...ZERO, ...x.levers }, B, g.world); prev = { ...ZERO, ...x.levers };
       const news = g.news.filter((n) => n.t === x.t);
+      const lc = LE ? (g.laws ?? []).filter((l) => l.t === x.t).map((l) => `${ACTION_LABEL[l.action]}: ${l.act}${l.action === "amend" ? ` (${effectOf(l, LE.E, LE.find(l.act)).label})` : ""}`) : [];
+      c.push(...lc);
       return <div key={x.t} className="tl-item" style={{ marginBottom: 12 }}>
         <b>{YEARS[x.t]}</b>
         {news.map((n, i) => <div key={i} className={`flag ${n.tone === "good" ? "good" : n.tone === "info" ? "gap" : ""}`} style={{ margin: "4px 0", fontSize: 12.5 }}>{n.text}</div>)}

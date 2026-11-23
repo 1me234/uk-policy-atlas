@@ -7,11 +7,11 @@ import { actUrl } from "./Laws";
 import { scenarioLink } from "./Simulate";
 
 // ---------- The index ----------
-type Kind = "dataset" | "page" | "model" | "lever" | "param" | "preset" | "act" | "bill" | "project" | "org" | "research" | "history" | "backlog" | "draft" | "scenario" | "campaign" | "mine";
+type Kind = "dataset" | "page" | "model" | "lever" | "param" | "preset" | "act" | "bill" | "project" | "org" | "research" | "history" | "backlog" | "draft" | "scenario" | "campaign" | "law" | "mine";
 const KINDS: [Kind, string][] = [
   ["dataset", "Datasets"], ["page", "Atlas pages"], ["model", "Models"], ["lever", "Simulator levers"], ["param", "Model parameters"], ["preset", "Preset scenarios"],
   ["act", "Acts"], ["bill", "Bills"], ["project", "Major projects"], ["org", "Government bodies"], ["research", "Research and scrutiny"], ["history", "Policy history"],
-  ["backlog", "Data still to add"], ["draft", "My drafts"], ["scenario", "My scenarios"], ["campaign", "My campaigns"], ["mine", "My own items"],
+  ["backlog", "Data still to add"], ["draft", "My drafts"], ["scenario", "My scenarios"], ["campaign", "My campaigns"], ["law", "My law changes"], ["mine", "My own items"],
 ];
 const ORDER = Object.fromEntries(KINDS.map(([k], i) => [k, i])) as Record<Kind, number>;
 const KIND_LABEL = Object.fromEntries(KINDS.map(([k, l]) => [k, l.replace(/s$/, "").replace(/^My /, "")])) as Record<Kind, string>;
@@ -85,8 +85,10 @@ export default function Hub() {
     PRESETS.forEach((p, i) => push({ key: `preset:${i}`, kind: "preset", title: p.name, sub: p.note, href: scenarioLink({ name: p.name, levers: { ...ZERO, ...p.levers }, params: {} }), links: ["model:simulate", ...Object.keys(p.levers).map((k) => `lever:${k}`)] }));
     // Law
     const mark: Record<string, any> = Object.fromEntries((marks as any[]).map((m) => [m.t, m]));
+    const book = read("atlas-statute", []) as any[];
+    const lastChange: Record<string, any> = {}; for (const c of [...book].sort((a, b) => a.t - b.t)) lastChange[c.act] = c;
     for (const a of leg.acts) { const m = mark[a.t];
-      push({ key: `act:${a.u ?? `${a.y}/${a.n}`}`, kind: "act", title: a.t, sub: `${a.y} c. ${a.n}${a.a?.length ? ` · ${a.a.join(", ")}` : ""}${m ? " · landmark" : ""}`, ext: actUrl(a), href: `#/laws?tab=all&q=${encodeURIComponent(a.t)}`, year: a.y, subjects: a.a ?? [], extra: m ? `${m.context} ${m.did} ${m.effects ?? ""}` : "",
+      push({ key: `act:${a.u ?? `${a.y}/${a.n}`}`, kind: "act", title: a.t, sub: `${a.y} c. ${a.n}${a.a?.length ? ` · ${a.a.join(", ")}` : ""}${m ? " · landmark" : ""}${lastChange[a.t.replace(/\s*\(repealed\)$/i, "")] ? ` · ${{ repeal: "repealed", amend: "amended", restore: "restored" }[lastChange[a.t.replace(/\s*\(repealed\)$/i, "")].action as string]} in your statute book` : ""}`, ext: actUrl(a), href: `#/laws?tab=all&q=${encodeURIComponent(a.t)}`, year: a.y, subjects: a.a ?? [], extra: m ? `${m.context} ${m.did} ${m.effects ?? ""}` : "",
         body: m ? <><p><b>Context.</b> {m.context}</p><p><b>What it did.</b> {m.did}</p>{m.effects && <p><b>Effects.</b> {m.effects}</p>}</> : undefined }); }
     for (const b of leg.bills) push({ key: `bill:${b.id}`, kind: "bill", title: b.t, sub: `${b.type} bill · ${b.stage} (${b.house}) · updated ${b.updated}`, ext: `https://bills.parliament.uk/bills/${b.id}`, href: `#/laws?tab=bills&q=${encodeURIComponent(b.t)}`, subjects: b.a ?? [] });
     // The state
@@ -96,11 +98,15 @@ export default function Hub() {
     for (const p of hist.policies) push({ key: `history:${p.year}:${p.title}`, kind: "history", title: `${p.title} (${p.year})`, sub: p.context, href: "#/history", year: p.year, subjects: subj([p.domain]), extra: `${p.change ?? ""} ${p.effect ?? ""}` });
     for (const b of back.datasets) push({ key: `backlog:${b.name}`, kind: "backlog", title: b.name, sub: `${b.publisher} · ${b.status}`, ext: b.url, href: "#/sources", subjects: subj([b.domain]), extra: b.note, body: b.note ? <p>{b.note}</p> : undefined });
     // The user's own work, kept in this browser
-    const actByTitle: Record<string, string> = Object.fromEntries(leg.acts.map((a: any) => [a.t, `act:${a.u ?? `${a.y}/${a.n}`}`]));
+    const actByTitle: Record<string, string> = Object.fromEntries(leg.acts.flatMap((a: any) => [[a.t, `act:${a.u ?? `${a.y}/${a.n}`}`], [a.t.replace(/\s*\(repealed\)$/i, ""), `act:${a.u ?? `${a.y}/${a.n}`}`]]));
+    const YRS = ["2026-27", "2027-28", "2028-29", "2029-30", "2030-31", "2031-32", "2032-33", "2033-34", "2034-35", "2035-36"];
+    const lawItem = (c: any, where: string, href: string, id: string) => push({ key: `law:${id}`, kind: "law", title: `${{ repeal: "Repeal", amend: "Amend", restore: "Restore" }[c.action as string]}: ${c.act}`, sub: `${where} · from ${YRS[c.t]}${c.text ? ` · ${c.text}` : c.option ? ` · ${c.option}` : ""}`, href, links: [actByTitle[c.act]].filter(Boolean), subjects: [], extra: c.text });
+    book.forEach((c, i) => lawItem(c, "Statute book for the simulator", "#/laws?tab=book", `book:${i}:${c.act}`));
     for (const x of read("atlas-drafts", []) as any[]) push({ key: `draft:${x.id}`, kind: "draft", title: x.title, sub: `${x.kind} · ${x.stage}${x.area ? ` · ${x.area}` : ""}`, href: `#/draft?open=${x.id}`, subjects: x.area ? [x.area] : [], extra: `${x.problem} ${x.objectives} ${x.notes}`,
       links: [...(x.amends ?? []).map((t: string) => actByTitle[t]).filter(Boolean), ...[...new Set((x.clauses ?? []).map((c: any) => c.lever).filter(Boolean))].map((k) => `lever:${k}`)] });
     for (const x of read("atlas-scenarios", []) as any[]) push({ key: `scenario:${x.name}`, kind: "scenario", title: x.name, sub: "Saved simulator scenario", href: scenarioLink(x), links: ["model:simulate", ...LEVERS.filter((l) => x.levers?.[l.k]).map((l) => `lever:${l.k}`)] });
     for (const x of read("atlas-campaigns", []) as any[]) { const L = x.turns?.at(-1)?.levers ?? {};
+      (x.laws ?? []).forEach((c: any, i: number) => lawItem(c, `Campaign “${x.name}”`, `#/sandbox?g=${x.id}`, `${x.id}:${i}:${c.act}`));
       push({ key: `campaign:${x.id}`, kind: "campaign", title: x.name, sub: `${x.done ? "Finished" : "In progress"} · ${x.turns?.length ?? 0} budgets`, href: `#/sandbox?g=${x.id}`, links: ["model:sandbox", ...LEVERS.filter((l) => L[l.k]).map((l) => `lever:${l.k}`)] }); }
     return out;
   }, [d]);
