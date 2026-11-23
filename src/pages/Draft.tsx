@@ -100,8 +100,8 @@ export default function DraftPage() {
               <button className="seg" style={{ padding: "1px 7px" }} onClick={() => up((d) => { d.clauses.splice(i, 1); })}>×</button></div>
             <textarea rows={4} value={c.text} onChange={(e) => up((d) => { d.clauses[i].text = e.target.value; })} placeholder="(1) …" />
             <div className="controls" style={{ margin: 0 }}><span className="muted">Effect:</span>
-              <select value={c.lever || ""} onChange={(e) => up((d) => { d.clauses[i].lever = e.target.value as any; d.clauses[i].value = d.clauses[i].value || 0; })}><option value="">None (not modelled)</option>{LEVERS.map((l) => <option key={l.k} value={l.k}>{l.group.split(" (")[0]}: {l.label} ({l.unit})</option>)}</select>
-              {c.lever && <input type="number" value={c.value ?? 0} step={LEVERS.find((l) => l.k === c.lever)?.step ?? 1} onChange={(e) => up((d) => { d.clauses[i].value = +e.target.value; })} style={{ width: 90 }} />}
+              <select value={c.lever || ""} onChange={(e) => up((d) => { d.clauses[i].lever = e.target.value as any; d.clauses[i].value = d.clauses[i].value || 0; })}><option value="">None (not modelled)</option>{LEVERS.map((l) => <option key={l.k} value={l.k}>{l.group.split(" (")[0]}: {l.label}{l.unit ? ` (${l.unit})` : ""}</option>)}</select>
+              {c.lever && (LEVERS.find((l) => l.k === c.lever)?.opts ? <select value={c.value ?? 0} onChange={(e) => up((d) => { d.clauses[i].value = +e.target.value; })}>{LEVERS.find((l) => l.k === c.lever)!.opts!.map((o, j) => <option key={j} value={j}>{o}</option>)}</select> : <input type="number" value={c.value ?? 0} step={LEVERS.find((l) => l.k === c.lever)?.step ?? 1} onChange={(e) => up((d) => { d.clauses[i].value = +e.target.value; })} style={{ width: 90 }} />)}
             </div>
           </div>)}
           <button className="seg" onClick={() => up((d) => { d.clauses.push({ id: Date.now(), heading: "", text: "" }); })}>Add clause</button>

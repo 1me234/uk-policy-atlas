@@ -469,6 +469,76 @@
 ]
 },
 {
+"file": "eugenics_history",
+"bytes": 11197,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Historical and analytical content only. The atlas does not model eugenic policy or sterilisation as options. Figures are the commonly cited scholarly estimates; follow the sources for detail and debate.",
+"tables": [
+{
+"name": "uk",
+"n": 8,
+"fields": [
+"year",
+"title",
+"text"
+]
+},
+{
+"name": "abroad",
+"n": 7,
+"fields": [
+"country",
+"period",
+"scale",
+"text",
+"source"
+]
+},
+{
+"name": "effects",
+"n": 4,
+"fields": []
+},
+{
+"name": "abandoned",
+"n": 4,
+"fields": [
+"title",
+"text"
+]
+},
+{
+"name": "law_now",
+"n": 8,
+"fields": [
+"law",
+"text"
+]
+},
+{
+"name": "sources",
+"n": 5,
+"fields": [
+"name",
+"url"
+]
+}
+],
+"domains": [
+"history",
+"law"
+],
+"pages": [
+{
+"key": "eugenics",
+"label": "Eugenics & sterilisation",
+"group": "Explore"
+}
+]
+},
+{
 "file": "fiscal",
 "bytes": 46429,
 "source": "Office for Budget Responsibility, Public finances databank (October 2026 Economic and fiscal outlook)",
@@ -677,11 +747,11 @@
 },
 {
 "file": "law_effects",
-"bytes": 34285,
+"bytes": 43022,
 "source": null,
 "url": null,
 "more_sources": [],
-"note": "Knock-ons of repealing, amending, restoring or enacting Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. A law change can move any simulator lever and can grant powers, which widen how far levers go. You can add your own effects and powers to any change. No law in the atlas models stripping citizenship or residence by ethnicity, or sterilisation or eugenics.",
+"note": "Knock-ons of repealing, amending, restoring or enacting Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. A law change can move any simulator lever and can grant powers, which widen how far levers go. Some Acts lower the UK's democratic standing, which has consequences of its own in a campaign. You can add your own effects and powers to any change. No law in the atlas models stripping citizenship or residence by ethnicity, or sterilisation or eugenics. Under parliamentary sovereignty no court can strike down an Act of Parliament, so the limits on these Acts are political and procedural: the Lords, the Parliament Acts, devolved consent, treaties, markets and the public.",
 "tables": [
 {
 "name": "generic",
@@ -696,7 +766,7 @@
 },
 {
 "name": "acts",
-"n": 32,
+"n": 38,
 "fields": [
 "title",
 "summary",
@@ -970,6 +1040,112 @@
 "key": "simulate",
 "label": "Policy simulator",
 "group": "Simulate"
+}
+]
+},
+{
+"file": "migration",
+"bytes": 36670,
+"source": "Home Office, Immigration system statistics data tables (year ending June 2026)",
+"url": "https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables",
+"more_sources": [],
+"note": null,
+"tables": [
+{
+"name": "boats_monthly",
+"n": 102,
+"fields": [
+"y",
+"m",
+"arrivals",
+"boats"
+]
+},
+{
+"name": "small_boat_returns",
+"n": 9,
+"fields": [
+"y",
+"n"
+]
+}
+],
+"domains": [
+"migration",
+"justice"
+],
+"pages": [
+{
+"key": "migration",
+"label": "Borders, asylum & removals",
+"group": "Machinery"
+}
+]
+},
+{
+"file": "migration_context",
+"bytes": 21435,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Curated context for the irregular migration and removals section. Numbers are from the Home Office statistics in migration.json unless a source is given. Summaries are short and conservative; follow the sources for detail.",
+"tables": [
+{
+"name": "costs",
+"n": 5,
+"fields": [
+"label",
+"value",
+"detail",
+"source"
+]
+},
+{
+"name": "timeline",
+"n": 14,
+"fields": [
+"year",
+"title",
+"text"
+]
+},
+{
+"name": "constraints",
+"n": 8,
+"fields": [
+"title",
+"law",
+"effect"
+]
+},
+{
+"name": "law_levers",
+"n": 6,
+"fields": [
+"id",
+"title",
+"options",
+"notes"
+]
+},
+{
+"name": "sources",
+"n": 7,
+"fields": [
+"name",
+"url"
+]
+}
+],
+"domains": [
+"migration",
+"law"
+],
+"pages": [
+{
+"key": "migration",
+"label": "Borders, asylum & removals",
+"group": "Machinery"
 }
 ]
 },
@@ -1863,6 +2039,11 @@
 "group": "Explore"
 },
 {
+"key": "eugenics",
+"label": "Eugenics & sterilisation",
+"group": "Explore"
+},
+{
 "key": "simulate",
 "label": "Policy simulator",
 "group": "Simulate"
@@ -1910,6 +2091,11 @@
 {
 "key": "foreign",
 "label": "Foreign affairs & defence",
+"group": "Machinery"
+},
+{
+"key": "migration",
+"label": "Borders, asylum & removals",
 "group": "Machinery"
 },
 {

@@ -81,11 +81,15 @@ export function democracyAt(book: LawChange[], t: number, E: LawEffects, find: (
   return { score, band };
 }
 
+const NO_POWER: string[] = ["deprivation"];
+
 /** Lever limits at year t, after the powers granted by laws in force. */
 export function boundsAt(book: LawChange[], t: number, E?: LawEffects, find?: (t: string) => ActEffects | undefined): (l: LeverDef) => { min: number; max: number } {
   const ps = E ? liveAt(book, t).flatMap((c) => effectOf(c, E, find?.(c.act)).powers) : [];
   return (l) => {
     let min = l.min, max = l.max;
+    // Choice levers (a fixed list of options) and citizenship deprivation keep their limits whatever the law says
+    if ((l as { opts?: string[] }).opts || NO_POWER.includes(l.k)) return { min, max };
     for (const p of ps) {
       if (!(p.all || p.k === l.k || p.groups?.includes(l.group))) continue;
       if (p.scale && p.scale > 1) { min = Math.min(min, l.min * p.scale); max = Math.max(max, l.max * p.scale); }

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { CartesianGrid, Legend, Line, LineChart, ReferenceArea, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fmt, useData } from "../lib";
 import { Card, Loading, Page, Seg, Source } from "../ui";
-import { Baseline, buildBaseline, LAST_FORECAST, LEVERS, Levers, PRESETS, Result, RULE_YEAR, simulate, YEARS, ZERO } from "../sim/engine";
+import { Baseline, buildBaseline, LAST_FORECAST, leverText, LEVERS, Levers, PRESETS, Result, RULE_YEAR, simulate, YEARS, ZERO } from "../sim/engine";
 import { defaultParams, PARAMS, ParamValues } from "../sim/params";
 import { boundsAt, runWithLaws, useBook, useLawEffects } from "../law/statute";
 import { DemocracyMeter, LawChanges } from "../law/LawUI";
@@ -67,7 +67,7 @@ export default function Simulate() {
           return <React.Fragment key={l.k}>
           {head && <button className="lever-group" onClick={() => setOpen((o) => ({ ...o, [g]: !o[g] }))} aria-expanded={!!open[g]}><span>{open[g] ? "▾" : "▸"} {g}</span>{n > 0 && <span className="pill">{n}</span>}</button>}
           {open[g] && <div className={`lever ${L[l.k] ? "on" : ""}`} title={l.help}>
-            <div className="lever-head"><span>{l.label}</span><span className="lever-v">{sign(L[l.k], l.step < 1 ? (l.step < 0.5 ? 2 : 1) : 0)}{l.unit === "£bn" ? "bn" : ` ${l.unit}`}</span></div>
+            <div className="lever-head"><span>{l.label}</span><span className="lever-v">{leverText(l, L[l.k])}</span></div>
             <input type="range" min={bnd(l).min} max={bnd(l).max} step={l.step} value={L[l.k]} onChange={(e) => set(l.k, +e.target.value)} onDoubleClick={() => set(l.k, 0)} aria-label={l.label} />
             {l.help && <div className="muted lever-help">{l.help}</div>}
           </div>}
@@ -233,7 +233,9 @@ export function Charts({ R, B, now }: { R: Result; B: Baseline; now?: number }) 
   const rows = YEARS.map((y, t) => ({ y, psnb: f(R.psnb[t], 1), psnbB: f(B.psnb[t], 1), debt: f(R.psndPct[t]), debtB: f((B.psnd[t] / B.gdp[t]) * 100), gdp: f(R.gdpPct[t], 3), dem: f(R.demand[t], 3), sup: f(R.supply[t], 3),
     w: f(R.waiting[t] / 1e6, 3), wB: f(R.waitingBase[t] / 1e6, 3), la: f(R.laReserves[t]), laB: f(R.laReservesBase[t]), dsg: f(R.dsgDeficit[t]), dsgB: f(R.dsgDeficitBase[t]),
     emp: f(R.employmentK[t], 1), lab: f(S.labour[t], 1), pov: f(S.childPov[t] * 1000, 0), povB: f(SB.childPov[t] * 1000, 0), homes: f(S.homes[t], 1), homesB: f(SB.homes[t], 1),
-    ta: f(S.ta[t], 1), taB: f(SB.ta[t], 1), pp: f(S.prisonPop[t], 1), pc: f(S.prisonCap[t], 1), ppB: f(SB.prisonPop[t], 1), pcB: f(SB.prisonCap[t], 1) }));
+    ta: f(S.ta[t], 1), taB: f(SB.ta[t], 1), pp: f(S.prisonPop[t], 1), pc: f(S.prisonCap[t], 1), ppB: f(SB.prisonPop[t], 1), pcB: f(SB.prisonCap[t], 1),
+    arr: f(S.asyArrivals[t], 1), arrB: f(SB.asyArrivals[t], 1), aw: f(S.asyAwaiting[t] + S.asyAppeals[t], 1), awB: f(SB.asyAwaiting[t] + SB.asyAppeals[t], 1), asup: f(S.asySupported[t], 1), asupB: f(SB.asySupported[t], 1), hot: f(S.asyHotels[t], 1), hotB: f(SB.asyHotels[t], 1),
+    ret: f(S.asyReturns[t], 1), retB: f(SB.asyReturns[t], 1), lim: f(S.asyLimbo[t], 1), ref: f(S.asyRefused[t], 1), refB: f(SB.asyRefused[t], 1), risk: f(S.legalRisk[t], 1), riskB: f(SB.legalRisk[t], 1), dip: f(S.diplomatic[t], 1), dipB: f(SB.diplomatic[t], 1) }));
   const C = ({ title, sub, lines }: { title: string; sub: string; lines: [string, string, string, boolean?][] }) => <Card title={title} sub={sub}>
     <ResponsiveContainer width="100%" height={230}><LineChart data={rows} margin={{ left: -12, right: 8 }}><CartesianGrid vertical={false} /><XAxis dataKey="y" interval={1} tick={{ fontSize: 11 }} /><YAxis domain={["auto", "auto"]} /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
       <ReferenceArea x1={YEARS[LAST_FORECAST]} x2={YEARS.at(-1)} fill="var(--soft)" />
@@ -253,6 +255,11 @@ export function Charts({ R, B, now }: { R: Result; B: Baseline; now?: number }) 
       <C title="Prisons" sub="thousands, England and Wales" lines={[["pp", "Population", "var(--c4)"], ["pc", "Capacity", "var(--c1)"], ["ppB", "Population, baseline", "var(--muted)", true]]} />
       <C title="Council usable reserves" sub="£bn, unallocated plus budget stabilisation reserves, England" lines={[["la", "Scenario", "var(--c1)"], ["laB", "Baseline", "var(--muted)", true]]} />
       <C title="High-needs (SEND) deficit" sub="£bn, England" lines={[["dsg", "Scenario", "var(--c4)"], ["dsgB", "Baseline", "var(--muted)", true]]} />
+      <C title="Small boat arrivals" sub="thousands a year" lines={[["arr", "Scenario", "var(--c1)"], ["arrB", "Baseline", "var(--muted)", true]]} />
+      <C title="Asylum backlogs" sub="thousands awaiting an initial decision or an appeal" lines={[["aw", "Scenario", "var(--c4)"], ["awB", "Baseline", "var(--muted)", true]]} />
+      <C title="People in asylum support" sub="thousands" lines={[["asup", "All", "var(--c1)"], ["hot", "In hotels", "var(--c4)"], ["asupB", "All, baseline", "var(--muted)", true], ["hotB", "Hotels, baseline", "var(--muted)", true]]} />
+      <C title="Returns and people without status" sub="thousands" lines={[["ret", "Asylum-related returns a year", "var(--c2)"], ["retB", "Returns, baseline", "var(--muted)", true], ["ref", "Refused, still in the UK", "var(--c4)"], ["refB", "Refused, baseline", "var(--muted)", true], ["lim", "Inadmissible, not removed", "var(--c5)"]]} />
+      <C title="Legal and diplomatic risk" sub="index, 0 to 10" lines={[["risk", "Legal challenge", "var(--c4)"], ["riskB", "Legal, baseline", "var(--muted)", true], ["dip", "Diplomatic friction", "var(--c1)"], ["dipB", "Diplomatic, baseline", "var(--muted)", true]]} />
     </div>
   </>;
 }

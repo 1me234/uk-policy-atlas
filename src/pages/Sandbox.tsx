@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { fmt, useData } from "../lib";
 import { Card, Drawer, Loading, Page, Seg } from "../ui";
-import { assess, Baseline, buildBaseline, Event, LAST_FORECAST, LEVERS, Levers, NumKey, Result, RULE_YEAR, Score, simulate, YEARS, ZERO } from "../sim/engine";
+import { assess, Baseline, buildBaseline, Event, LAST_FORECAST, leverText, LEVERS, Levers, NumKey, Result, RULE_YEAR, Score, simulate, YEARS, ZERO } from "../sim/engine";
 import { simulateSchedule, Turn } from "../sim/campaign";
 import { defaultParams, ParamValues } from "../sim/params";
 import { Charts, ProjectPicker } from "./Simulate";
@@ -53,7 +53,7 @@ function rollWorld(g: Game, t: number, R: Result, B: Baseline, dem?: Dem): { sho
 
 // ---------- Helpers ----------
 const sign = (v: number, d = 1) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(d)}`;
-const lv = (l: (typeof LEVERS)[number], v: number) => `${sign(v, l.step < 1 ? (l.step < 0.5 ? 2 : 1) : 0)}${l.unit === "£bn" ? "bn" : ` ${l.unit}`}`;
+const lv = (l: (typeof LEVERS)[number], v: number) => leverText(l, v);
 const playerLevers = (L: Levers): Levers => { const x = { ...ZERO, ...L }; SHOCK_KEYS.forEach((k) => ((x as any)[k] = 0)); return x; };
 const inForce = (g: Game, t: number): Levers => { const p = [...g.turns].filter((x) => x.t < t).sort((a, b) => b.t - a.t)[0]; return p ? { ...ZERO, ...p.levers } : { ...ZERO }; };
 function describe(prev: Levers, L: Levers, B: Baseline, world: boolean): string[] {
