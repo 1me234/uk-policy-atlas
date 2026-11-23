@@ -8,4 +8,5 @@ for s in spending orgs civil_service projects boundaries lookup councils populat
   echo "== $s"; python3 pipeline/build_$s.py
 done
 cp pipeline/curated/*.json public/data/
+python3 pipeline/build_hub.py
 echo "Done."

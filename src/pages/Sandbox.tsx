@@ -64,7 +64,7 @@ export default function Sandbox() {
   const P = useMemo(() => defaultParams() as ParamValues, []);
   const base = useMemo(() => B && simulate(B, ZERO, P), [B, P]);
   const [games, setGames] = useState<Game[]>(readGames);
-  const [id, setId] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(() => (location.hash.match(/[?&]g=([\w]+)/) || [])[1] ?? null);
   useEffect(() => { try { localStorage.setItem(LS, JSON.stringify(games)); } catch {} }, [games]);
   if (!B || !base) return <Loading />;
   const g = games.find((x) => x.id === id);

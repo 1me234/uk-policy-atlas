@@ -19,10 +19,12 @@ import Lab from "./pages/Lab";
 import Laws from "./pages/Laws";
 import Draft from "./pages/Draft";
 import Sandbox from "./pages/Sandbox";
+import Hub from "./pages/Hub";
 
 const NAV: [string, string, string, React.FC][] = [
   ["Explore", "overview", "Overview", Overview],
   ["Explore", "findings", "Findings & plan", Findings],
+  ["Explore", "hub", "Data hub", Hub],
   ["Explore", "history", "Policy history", History],
   ["Simulate", "simulate", "Policy simulator", Simulate],
   ["Simulate", "sandbox", "Sandbox campaign", Sandbox],
