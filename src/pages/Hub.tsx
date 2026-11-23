@@ -22,16 +22,17 @@ const AREAS = ["Health and care", "Education and skills", "Social security and p
 const SUBJ: Record<string, string> = {
   nhs: AREAS[0], "public-health": AREAS[0], "social-care": AREAS[0], education: AREAS[1], children: AREAS[1], "social-mobility": AREAS[1],
   welfare: AREAS[2], poverty: AREAS[2], "living-standards": AREAS[2], spending: AREAS[3], fiscal: AREAS[3], tax: AREAS[3], economy: AREAS[3], audit: AREAS[3], contracts: AREAS[3], procurement: AREAS[3],
-  councils: AREAS[4], housing: AREAS[5], infrastructure: AREAS[6], transport: AREAS[6], projects: AREAS[6], water: AREAS[7], justice: AREAS[8],
+  councils: AREAS[4], housing: AREAS[5], infrastructure: AREAS[6], transport: AREAS[6], projects: AREAS[6], water: AREAS[7], justice: AREAS[8], migration: AREAS[9], immigration: AREAS[9], asylum: AREAS[9], borders: AREAS[9],
   defence: AREAS[10], foreign: AREAS[10], "foreign-affairs": AREAS[10], aid: AREAS[10], employment: AREAS[11], "civil-service": AREAS[12], integrity: AREAS[12],
   geography: "Places and population", population: "Places and population", charities: "Charities and civil society", ngo: "Charities and civil society",
 };
 const subj = (xs: string[]) => [...new Set(xs.map((x) => SUBJ[x] ?? (AREAS.includes(x) ? x : "")).filter(Boolean))];
-const LEVER_SUBJ: Record<string, string[]> = { Tax: [AREAS[3]], "Health and care": [AREAS[0]], "Schools and children": [AREAS[1]], "Social security": [AREAS[2]], "Councils and housing": [AREAS[4], AREAS[5]], Justice: [AREAS[8]], "Defence, investment and other spending": [AREAS[10], AREAS[6]], "Machinery of government": [AREAS[12]], "Shocks and population": [AREAS[3], AREAS[9]] };
+const LEVER_SUBJ: Record<string, string[]> = { "Asylum and borders": [AREAS[9]], "Immigration and nationality law": [AREAS[9], AREAS[12]], Tax: [AREAS[3]], "Health and care": [AREAS[0]], "Schools and children": [AREAS[1]], "Social security": [AREAS[2]], "Councils and housing": [AREAS[4], AREAS[5]], Justice: [AREAS[8]], "Defence, investment and other spending": [AREAS[10], AREAS[6]], "Machinery of government": [AREAS[12]], "Shocks and population": [AREAS[3], AREAS[9]] };
 const projSubj = (c: string) => /military|defen/i.test(c) ? [AREAS[10]] : /infra|construct/i.test(c) ? [AREAS[6]] : [AREAS[12]];
 const MODELS = [
   { id: "simulate", title: "Policy simulator", href: "#/simulate", sub: "Ten-year model of tax, spending, services, the economy and the public finances", subjects: [AREAS[3], AREAS[0], AREAS[1], AREAS[2]], data: ["fiscal", "spending", "nhs_performance", "welfare", "civil_service", "councils", "sim_params", "major_projects"] },
   { id: "sandbox", title: "Sandbox campaign", href: "#/sandbox", sub: "Play ten years from today's data, setting policy each year", subjects: [AREAS[3]], data: ["fiscal", "spending", "nhs_performance", "welfare", "civil_service", "councils", "sim_params", "major_projects"] },
+  { id: "migration", title: "Asylum, removals and immigration law", href: "#/migration?tab=levers", sub: "Asylum stock and flow model with enforcement, ECHR, settlement, citizenship deprivation, entry and sentencing levers, inside the policy simulator", subjects: [AREAS[9], AREAS[8], AREAS[12]], data: ["migration"] },
   { id: "cycle", title: "Bubble, seizure and relocation cycle", href: "#/lab?m=cycle", sub: "Model lab: a state-orchestrated cycle across sectors", subjects: [AREAS[11], AREAS[3]], data: [] },
   { id: "reorg", title: "Civil service reorganisation", href: "#/lab?m=reorg", sub: "Model lab: mergers, relocation, spans of control and automation, as a Monte Carlo", subjects: [AREAS[12]], data: ["civil_service"] },
   { id: "structure", title: "Management structure", href: "#/lab?m=structure", sub: "Model lab: spans and layers of management", subjects: [AREAS[12]], data: ["civil_service"] },

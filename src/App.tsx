@@ -20,12 +20,15 @@ import Laws from "./pages/Laws";
 import Draft from "./pages/Draft";
 import Sandbox from "./pages/Sandbox";
 import Hub from "./pages/Hub";
+import Migration from "./pages/Migration";
+import Eugenics from "./pages/Eugenics";
 
 const NAV: [string, string, string, React.FC][] = [
   ["Explore", "overview", "Overview", Overview],
   ["Explore", "findings", "Findings & plan", Findings],
   ["Explore", "hub", "Data hub", Hub],
   ["Explore", "history", "Policy history", History],
+  ["Explore", "eugenics", "Eugenics & sterilisation", Eugenics],
   ["Simulate", "simulate", "Policy simulator", Simulate],
   ["Simulate", "sandbox", "Sandbox campaign", Sandbox],
   ["Simulate", "lab", "Model lab", Lab],
@@ -36,6 +39,7 @@ const NAV: [string, string, string, React.FC][] = [
   ["Machinery", "departments", "Departments & civil service", Departments],
   ["Machinery", "projects", "Major projects", Projects],
   ["Machinery", "foreign", "Foreign affairs & defence", Foreign],
+  ["Machinery", "migration", "Borders, asylum & removals", Migration],
   ["Places", "map", "Infrastructure map", InfraMap],
   ["Places", "councils", "Councils", Councils],
   ["Services", "nhs", "NHS", NHS],
