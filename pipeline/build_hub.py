@@ -18,7 +18,7 @@ DOMAINS = {
     "major_projects": ["projects", "infrastructure"], "nhs_performance": ["nhs"], "oda": ["foreign", "spending"], "organisations": ["civil-service"],
     "organisations_catalogue": ["meta", "research"], "policy_history": ["history"], "population": ["population", "geography"],
     "schools": ["education"], "send": ["education", "councils"], "sim_params": ["spending", "tax", "model"], "spending": ["spending"],
-    "stations": ["transport", "infrastructure"], "welfare": ["welfare"], "migration": ["migration", "justice"], "migration_context": ["migration", "law"], "eugenics_history": ["history", "law"], "welfare_la": ["welfare", "councils"], "hub": ["meta"],
+    "stations": ["transport", "infrastructure"], "welfare": ["welfare"], "migration": ["migration", "justice"], "migration_context": ["migration", "law"], "eugenics_history": ["history", "law"], "welfare_la": ["welfare", "councils"], "hub": ["meta"], "law_effects": ["law", "model"],
 }
 
 

@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { Area, Bar, CartesianGrid, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fmt, useData } from "../lib";
-import { Card, Loading, Page, Seg, Source, Stat, Table } from "../ui";
+import { Card, Drawer, Loading, Page, Seg, Source, Stat, Table } from "../ui";
+import { useBook, useLawEffects, statusAt } from "../law/statute";
+import { LawChanges, LawEditor, StatusPill } from "../law/LawUI";
 
 type Act = { u?: string | null; t: string; y: number; n: number | string; d: string | null; s: string; a: string[] };
 type Landmark = { t: string; area: string; era: string; context: string; did: string; effects: string; links?: string[]; sim?: string[] };
@@ -26,12 +28,17 @@ export default function Laws() {
   const D = useActs();
   // Deep links from the data hub: #/laws?tab=all&q=Housing%20Act%201988
   const hp = (k: string) => decodeURIComponent((location.hash.match(new RegExp(`[?&]${k}=([^&]+)`)) || [])[1] || "");
-  const [tab, setTab] = useState<"landmarks" | "all" | "bills" | "volume">(() => (["landmarks", "all", "bills", "volume"].includes(hp("tab")) ? hp("tab") : "landmarks") as any);
+  const [tab, setTab] = useState<"landmarks" | "all" | "bills" | "volume" | "book">(() => (["landmarks", "all", "bills", "volume", "book"].includes(hp("tab")) ? hp("tab") : "landmarks") as any);
   const [area, setArea] = useState("");
   const [q, setQ] = useState(() => hp("q"));
   const [from, setFrom] = useState(1945);
-  if (!D) return <Loading />;
+  const LE = useLawEffects();
+  const [book, setBook] = useBook();
+  const [sel, setSel] = useState<string | null>(null);
+  if (!D || !LE) return <Loading />;
   const { L, acts, landmarks, bills } = D;
+  const st = (t: string) => statusAt(t, book, 99, LE.find(t));
+  const selAct = sel ? acts.find((a) => a.t === sel) : null;
   const areas: string[] = L.areas;
   const match = (t: string, a: string[]) => (!area || a.includes(area)) && (!q || t.toLowerCase().includes(q.toLowerCase()));
   const vol = Object.keys(L.volume.ukpga).map(Number).filter((y) => y >= 1945).sort().map((y) => ({ y, acts: L.volume.ukpga[y] || 0, si: L.volume.uksi[y] || 0, dev: (L.volume.asp[y] || 0) + (L.volume.asc[y] || 0) + (L.volume.nia[y] || 0) }));
@@ -45,8 +52,8 @@ export default function Laws() {
       <Stat v={landmarks.length} l="Landmark Acts with context and effects" d="linked to the data sections" />
     </div>
     <div className="controls" style={{ marginTop: 14 }}>
-      <Seg v={tab} set={setTab} opts={[["landmarks", "Landmark Acts"], ["all", "Every Act since 1945"], ["bills", "Bills in Parliament now"], ["volume", "Volume of law"]]} />
-      {tab !== "volume" && <><select value={area} onChange={(e) => setArea(e.target.value)}><option value="">All policy areas</option>{areas.map((a) => <option key={a}>{a}</option>)}</select>
+      <Seg v={tab} set={setTab} opts={[["landmarks", "Landmark Acts"], ["all", "Every Act since 1945"], ["bills", "Bills in Parliament now"], ["volume", "Volume of law"], ["book", `My statute book${book.length ? ` (${book.length})` : ""}`]]} />
+      {tab !== "volume" && tab !== "book" && <><select value={area} onChange={(e) => setArea(e.target.value)}><option value="">All policy areas</option>{areas.map((a) => <option key={a}>{a}</option>)}</select>
         <input type="search" placeholder="Search titles" value={q} onChange={(e) => setQ(e.target.value)} /></>}
       {tab === "all" && <label className="muted">From <select value={from} onChange={(e) => setFrom(+e.target.value)}>{[1945, 1979, 1997, 2010, 2020, 2024].map((y) => <option key={y}>{y}</option>)}</select></label>}
     </div>
@@ -57,12 +64,13 @@ export default function Laws() {
         <span className="muted" style={{ fontSize: 12 }}>{m.area} · {m.era}{m.act?.d ? ` · Royal Assent ${m.act.d}` : ""}</span></div>
       <div className="kv" style={{ gridTemplateColumns: "110px 1fr" }}><div>Context</div><div>{m.context}</div><div>What it did</div><div>{m.did}</div><div>What followed</div><div>{m.effects}</div></div>
       <div className="controls" style={{ margin: 0 }}>{(m.links || []).map((l) => <a key={l} className="pill" href={l}>{LINK_LABEL[l] ?? l}</a>)}
-        <a className="pill" href={`#/draft?amend=${encodeURIComponent(m.t)}`}>Draft an amendment</a></div>
+        <a className="pill" href={`#/draft?amend=${encodeURIComponent(m.t)}`}>Draft an amendment</a>
+        <button className="pill" style={{ cursor: "pointer", border: 0 }} onClick={() => setSel(m.act?.t ?? m.t)}>Repeal or amend</button>{st(m.act?.t ?? m.t) !== "in force" && <StatusPill s={st(m.act?.t ?? m.t)} />}</div>
     </div>)}</div>}
 
-    {tab === "all" && <Card title="Every UK Public General Act" sub="Click a row to open the Act on legislation.gov.uk. The long title says what the Act is for.">
-      <Table rows={acts.filter((a) => a.y >= from && match(a.t + " " + a.s, a.a))} initial="y" max={300} onRow={(a) => window.open(actUrl(a), "_blank")}
-        cols={[{ k: "y", h: "Year", v: (a) => a.y * 1000 + (+a.n || 0), f: (a) => `${a.y} c.${a.n}`, w: 90 }, { k: "t", h: "Act", v: (a) => a.t, f: (a) => <><b>{a.t}</b><div className="muted" style={{ fontSize: 12 }}>{a.s.slice(0, 220)}{a.s.length > 220 ? "…" : ""}</div></> }, { k: "a", h: "Policy area", v: (a) => a.a.join(", "), w: 200 }]} />
+    {tab === "all" && <Card title="Every UK Public General Act" sub="Click a row to repeal, amend or restore the Act in your statute book, see what would follow, or read it on legislation.gov.uk. The long title says what the Act is for.">
+      <Table rows={acts.filter((a) => a.y >= from && match(a.t + " " + a.s, a.a))} initial="y" max={300} onRow={(a) => setSel(a.t)}
+        cols={[{ k: "y", h: "Year", v: (a) => a.y * 1000 + (+a.n || 0), f: (a) => `${a.y} c.${a.n}`, w: 90 }, { k: "t", h: "Act", v: (a) => a.t, f: (a) => <><b>{a.t}</b><div className="muted" style={{ fontSize: 12 }}>{a.s.slice(0, 220)}{a.s.length > 220 ? "…" : ""}</div></> }, { k: "a", h: "Policy area", v: (a) => a.a.join(", "), w: 200 }, { k: "st", h: "Status", v: (a) => st(a.t), f: (a) => { const s = st(a.t); return s === "in force" ? <span className="muted" style={{ fontSize: 12 }}>in force</span> : <StatusPill s={s} />; }, w: 90 }]} />
       <Source s={L.source} />
     </Card>}
 
@@ -77,5 +85,10 @@ export default function Laws() {
         <Area yAxisId="b" dataKey="si" name="Statutory instruments (right)" fill="var(--c8)" fillOpacity={0.25} stroke="var(--c8)" /><Bar yAxisId="a" dataKey="acts" name="UK Acts" stackId="x" fill="var(--c1)" /><Bar yAxisId="a" dataKey="dev" name="Devolved Acts" stackId="x" fill="var(--c2)" /></ComposedChart></ResponsiveContainer>
       <Source s={L.source} />
     </Card>}
+    {tab === "book" && <Card title="My statute book" sub="Acts you have repealed, amended or restored, and from which year. These changes apply in the policy simulator. Sandbox games keep their own statute book, changed year by year inside the game.">
+      <LawChanges book={book} E={LE.E} find={LE.find} setBook={setBook} />
+      <p className="muted" style={{ fontSize: 12.5, marginTop: 10 }}>{LE.E.note}</p>
+    </Card>}
+    {sel && <Drawer onClose={() => setSel(null)}><LawEditor key={sel + book.length} title={sel} url={selAct ? actUrl(selAct) : undefined} E={LE.E} fx={LE.find(sel)} book={book} setBook={setBook} /></Drawer>}
   </Page>;
 }
