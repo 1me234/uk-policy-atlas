@@ -676,6 +676,41 @@
 ]
 },
 {
+"file": "law_effects",
+"bytes": 26881,
+"source": null,
+"url": null,
+"more_sources": [],
+"note": "Knock-ons of repealing, amending or restoring Acts, by dimension. Written for this atlas from the statutes themselves and the sources named; 'assumption' marks a number chosen for the model rather than taken from an official estimate. Effects on the simulator may only move existing fiscal and service levers. No law change creates new powers, and none can unlock measures that strip citizenship or residence by ethnicity or that enable sterilisation or eugenics.",
+"tables": [
+{
+"name": "generic",
+"n": 3,
+"fields": [
+"repeal",
+"amend",
+"restore"
+],
+"keyed": true
+},
+{
+"name": "acts",
+"n": 28,
+"fields": [
+"title",
+"summary",
+"repeal",
+"amend"
+]
+}
+],
+"domains": [
+"law",
+"model"
+],
+"pages": []
+},
+{
 "file": "legislation",
 "bytes": 1353351,
 "source": "legislation.gov.uk (The National Archives) and UK Parliament Bills API",

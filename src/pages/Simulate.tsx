@@ -4,6 +4,8 @@ import { fmt, useData } from "../lib";
 import { Card, Loading, Page, Seg, Source } from "../ui";
 import { Baseline, buildBaseline, LAST_FORECAST, LEVERS, Levers, PRESETS, Result, RULE_YEAR, simulate, YEARS, ZERO } from "../sim/engine";
 import { defaultParams, PARAMS, ParamValues } from "../sim/params";
+import { runWithLaws, useBook, useLawEffects } from "../law/statute";
+import { LawChanges } from "../law/LawUI";
 
 type Scenario = { name: string; levers: Levers; params: Partial<ParamValues>; notes?: string };
 const LS = "atlas-scenarios";
@@ -33,7 +35,9 @@ export default function Simulate() {
   useEffect(() => { try { localStorage.setItem(LS, JSON.stringify(saved)); } catch {} }, [saved]);
   const B = useMemo(() => d && buildBaseline(...(d as [any, any, any, any, any, any, any, any])), [d]);
   const P = useMemo(() => ({ ...defaultParams(), ...over }) as ParamValues, [over]);
-  const R = useMemo(() => B && simulate(B, L, P), [B, L, P]);
+  const LE = useLawEffects();
+  const [book] = useBook();
+  const R = useMemo(() => B && (book.length && LE ? runWithLaws(B, [{ t: L.start, levers: L }], P, book, LE.E, LE.find) : simulate(B, L, P)), [B, L, P, book, LE]);
   if (!B || !R) return <Loading />;
   const set = (k: keyof Levers, v: number) => setL((x) => ({ ...x, [k]: v }));
   const scen: Scenario = { name, levers: L, params: over };
@@ -73,6 +77,7 @@ export default function Simulate() {
 
       <div className="sim-out">
         <Headline R={R} B={B} yr={yr} />
+        {book.length > 0 && LE && <Card title={`Law changes in force (${book.length})`} sub={<>From your statute book, applied on top of the levers. <a href="#/laws?tab=book">Change them on the Laws page</a>.</>} style={{ marginTop: 14 }}><LawChanges book={book} E={LE.E} find={LE.find} editable={false} /></Card>}
         <div className="controls" style={{ marginTop: 14 }}>
           <Seg v={tab} set={setTab} opts={[["overview", "Scorecard and events"], ["system", "How it spreads"], ["charts", "Charts"], ["channels", "Year by year"], ["params", `Parameters${Object.keys(over).length ? ` (${Object.keys(over).length} edited)` : ""}`]]} />
           {(tab === "system") && <label className="muted" style={{ marginLeft: "auto" }}>Year <select value={yr} onChange={(e) => setYr(+e.target.value)}>{YEARS.map((y, i) => <option key={y} value={i}>{y}{i > LAST_FORECAST ? " (extrapolated)" : ""}</option>)}</select></label>}
